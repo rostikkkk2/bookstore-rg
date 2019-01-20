@@ -38,12 +38,9 @@
           %li.dropdown
             %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
             %ul.dropdown-menu
-              %li
-                %a{href: "/categories"} Mobile development
-              %li
-                %a{href: "#"} Photo
-              %li
-                %a{href: "#"} Web design
+              - @categories.each do |category|
+                %li
+                  = link_to category.name, categories_path(category_id: category.id)
               -# %li.divider{role: "separator"}
               -# %li
               -#   %a{href: "#"} Log out
