@@ -12,19 +12,25 @@
           %li
             %a{href: "#"} Popular first
           %li
-            %a{href: "#"} Price: Low to hight
+            = link_to 'Price: Low to hight', categories_path(sort_price: true, category_id: params[:category_id])
           %li
-            %a{href: "#"} Price: Hight to low
+            = link_to 'Price: Hight to low', categories_path(sort_price_desk: true, category_id: params[:category_id])
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         %a.filter-link{href: "#"}
           %div
-            = link_to 'All', categories_path(category_id: 'all_categories'), class: "filter-link"
+            - if params[:category_id] == 'all_categories'
+              = link_to 'All', categories_path(category_id: 'all_categories'), class: "filter-link hover_category_color def-color-chosen-category"
+            - else
+              = link_to 'All', categories_path(category_id: 'all_categories'), class: "filter-link hover_category_color"
             %span.category-count-books.badge= @books.count
       - @categories.each do |category|
         %li.mr-35
           %div
-            = link_to category.name, categories_path(category_id: category.id), class: "filter-link"
+            - if params[:category_id].to_i == category.id
+              = link_to category.name, categories_path(category_id: category.id), class: "filter-link hover_category_color def-color-chosen-category"
+            - else
+              = link_to category.name, categories_path(category_id: category.id), class: "filter-link hover_category_color"
             %span.category-count-books.badge= @books.where(category_id: category.id).count
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10 Filter by category

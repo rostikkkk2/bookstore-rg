@@ -58,6 +58,17 @@
 .relative {
   position: relative;
 }
+.def-color-chosen-category {
+  color: #c59c71;
+}
+.lol {
+  color: #c59c71;
+}
+.hover_category_color {
+  &:hover {
+    color: #c59c71;
+  }
+}
 .mt-0 {
   margin-top: 0;
 }
