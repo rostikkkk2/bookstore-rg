@@ -1,0 +1,20 @@
+default: &default
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: rostik
+  password: rostik
+
+
+development:
+  <<: *default
+  database: book_store
+
+test:
+  <<: *default
+  database: test_bookstore
+
+production:
+  <<: *default
+  database: book_store_production
