@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 2019_01_20_133745) do
     t.string "photo"
     t.string "author"
     t.integer "published_year"
+    t.float "heigth"
+    t.float "width"
+    t.float "depth"
+    t.string "material"
     t.decimal "price"
     t.bigint "category_id"
     t.datetime "created_at", null: false

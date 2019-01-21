@@ -6,6 +6,10 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.string :photo
       t.string :author
       t.integer :published_year
+      t.float :heigth
+      t.float :width
+      t.float :depth
+      t.string :material
       t.decimal :price
       t.references :category, foreign_key: true
       t.timestamps

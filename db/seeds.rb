@@ -8,11 +8,16 @@ end
 def generate_book
   user = Book.new(
     name: FFaker::Book.title,
-    description: 'cool book',
+    description: FFaker::Book.description(6),
     author: FFaker::Name.name,
     photo: "javascript-and-jquery-book-cover.png",
     price: rand(30.20...99.99).round(2),
-    category_id: rand(1..3)
+    category_id: rand(1..3),
+    published_year: 2015,
+    heigth: 6.4,
+    width: 0.9,
+    depth: 5.0,
+    material: 'Hardcove, glossy paper'
   )
   user.save!
 end
@@ -24,5 +29,5 @@ def generate_categories
 end
 
 # 4.times { generate_user }
-# generate_categories
-10.times { generate_book }
+generate_categories
+15.times { generate_book }
