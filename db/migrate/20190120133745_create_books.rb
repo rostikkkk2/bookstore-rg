@@ -4,7 +4,6 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :description
       t.string :photo
-      t.string :author
       t.integer :published_year
       t.float :heigth
       t.float :width

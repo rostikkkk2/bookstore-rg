@@ -1,6 +1,8 @@
 .row
   .col-sm-6
     .product-gallery
+      -@current_book.authors.each do |a|
+        = a.name
       .mb-20
         = image_tag 'https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg', class: 'img-responsive'
       .images.clearfix

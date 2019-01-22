@@ -9,7 +9,7 @@ def generate_book
   user = Book.new(
     name: FFaker::Book.title,
     description: FFaker::Book.description(6),
-    author: FFaker::Name.name,
+    # author: FFaker::Name.name,
     photo: "javascript-and-jquery-book-cover.png",
     price: rand(30.20...99.99).round(2),
     category_id: rand(1..3),
