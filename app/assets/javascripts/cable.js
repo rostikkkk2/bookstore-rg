@@ -9,13 +9,5 @@
   this.App || (this.App = {});
 
   App.cable = ActionCable.createConsumer();
-  // function plus() {
-  //   alert('lol')
-  // }
-  // alert('lol')
-
-  // document.getElementById("11").onClick = function(){
-  //   alert('lol');
-  // };
 
 }).call(this);

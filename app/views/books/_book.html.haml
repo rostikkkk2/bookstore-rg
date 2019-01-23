@@ -1,37 +1,34 @@
 .row
   .col-sm-6
     .product-gallery
-      -@current_book.authors.each do |a|
-        = a.name
       .mb-20
-        = image_tag 'https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg', class: 'img-responsive'
+        = image_tag(@current_book.photo, class: "img-responsive", alt: "design-book")
+        -# = image_tag 'https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg', class: 'img-responsive'
       .images.clearfix
-        %a.img-link{href: "#"}
-          = image_tag @current_book.photo, class: 'img-link'
-        %a.img-link{href: "#"}
-          %img{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
-        %a.img-link{href: "#"}
-          %img{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+        %a.img-link
+          = image_tag(@current_book.photo, class: 'img-responsive', alt: "design-book")
+        %a.img-link
+          = image_tag(@current_book.photo, class: "img-responsive", alt: "design-book")
+        %a.img-link
+          = image_tag(@current_book.photo, class: "img-responsive", alt: "design-book")
   .col-sm-6
     %h1.mt-res-0= @current_book.name
-    %p.lead.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
+    %p.lead.small
+      - @current_book.authors.each do |author|
+        = author.name
     .row
-      .col-xs-12.col-md-4
-        %p.h1.in-gold-500.mt-10= @current_book.price
-      .col-xs-5.col-md-3
-        .input-group.general-position
-          %a.input-link{href: "#"}
-            %i.fa.fa-minus.line-height-40
-          %input.form-control.quantity-input{type: "text"}
-          %a.input-link{href: "#"}
-            %i.fa.fa-plus.line-height-40
-      .col-xs-7.col-md-5
-        %button.btn.btn-default.pull-right.general-position Add to Cart
+      = render partial: 'books/form_book'
     .general-info-wrap.divider-lg
       %p Description
       %p.lead.small.line-height-2
-        = @current_book.description
-        %a.in-gold-500.ml-10{href: "#"} Read More
+        %span#short_text
+          = @current_book.description[0..100]
+        - if @current_book.description.length > 100
+          %span#dots ...
+          %span#more_text.d-n
+            = @current_book.description[0..@current_book.description.length]
+          %a.b-n.in-gold-500.ml-10#btn_read_more Read More
+          %a.b-n.in-gold-500.ml-10#hide_read_more.d-n Hide Read More
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left Year of publication

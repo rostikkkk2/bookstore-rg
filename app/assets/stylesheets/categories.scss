@@ -1,3 +1,11 @@
 // Place all the styles related to the Categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.btn_get_start {
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+  text-decoration: none;
+  color: white;
+}

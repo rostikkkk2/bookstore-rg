@@ -9,7 +9,6 @@ def generate_book
   user = Book.new(
     name: FFaker::Book.title,
     description: FFaker::Book.description(6),
-    # author: FFaker::Name.name,
     photo: "javascript-and-jquery-book-cover.png",
     price: rand(30.20...99.99).round(2),
     category_id: rand(1..3),
@@ -22,12 +21,27 @@ def generate_book
   user.save!
 end
 
+def generate_authors
+  Author.create(name: FFaker::Name.name)
+end
+
+def generate_authors_books
+  books = Book.all
+  authors = Author.all
+  authors_id = authors.map do |author| author.id end
+  books.each do |book|
+    BookAuthor.create(book_id: book.id, author_id: authors_id[rand(authors_id.length)])
+  end
+end
+
 def generate_categories
   Category.new(id: 1, name: 'Mobile development').save!
   Category.new(id: 2, name: 'Photo').save!
   Category.new(id: 3, name: 'Web disign').save!
 end
 
+# generate_authors_books
 # 4.times { generate_user }
-generate_categories
-15.times { generate_book }
+# 15.times { generate_authors }
+# generate_categories
+# 15.times { generate_book }

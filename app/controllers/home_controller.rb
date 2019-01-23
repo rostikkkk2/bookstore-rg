@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
   def index
-    @top_books = Book.all.first(4)
+    books = Book.all
+    @top_books = books.first(4)
+    @new_books = books.last(3)
   end
+
 end

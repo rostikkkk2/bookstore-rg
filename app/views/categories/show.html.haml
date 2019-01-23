@@ -77,6 +77,8 @@
             %p.title= book.name
             %p.font-16.in-gold-500= book.price
             %span.divider-sm
-            %p.lead.small Bass Jobsen, David Cochran, Ian Whitley
+            %p.lead.small
+              - book.authors.each do |author|
+                = author.name
     .text-center
       %button.btn.btn-primary View More

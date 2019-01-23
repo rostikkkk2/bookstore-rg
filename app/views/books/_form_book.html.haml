@@ -1,0 +1,11 @@
+.col-xs-12.col-md-4
+  %p.h1.in-gold-500.mt-10= @current_book.price
+.col-xs-5.col-md-3
+  .input-group.general-position
+    %a.input-link.b-n.pt-7#minus
+      %i.fa.fa-minus.line-height-40
+    %input.form-control.quantity-input.input-count-book{:type=>"text", :required => true, :value => 1, :disabled => true}
+    %a.b-n.input-link#plus
+      %i.fa.fa-plus.line-height-40
+.col-xs-7.col-md-5
+  %button.btn.btn-default.pull-right.general-position Add to Cart
