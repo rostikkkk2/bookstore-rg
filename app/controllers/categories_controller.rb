@@ -1,5 +1,14 @@
 class CategoriesController < ApplicationController
 
+  SORT_BOOKS = {
+    asc_title: 'Title: A - Z',
+    desc_title: 'Title: Z - A',
+    asc_price: 'Price: Low to hight',
+    desc_price: 'Price: Hight to low',
+    newest_first: 'Newest first',
+    popular_books: 'Popular first'
+  }
+
   def show
     @books = Book.all
     @categories = Category.all
@@ -8,8 +17,15 @@ class CategoriesController < ApplicationController
   end
 
   def sort_books
-    @books_category = @books_category.order(:price) if params[:sort_price]
-    @books_category = @books_category.order(price: :desc) if params[:sort_price_desk]
+    order_by('name DESC', SORT_BOOKS[:desc_title])
+    order_by('price ASC', SORT_BOOKS[:asc_price])
+    order_by('price DESC', SORT_BOOKS[:desc_price])
+    order_by('id DESC', SORT_BOOKS[:newest_first])
+    @books_category = @books_category.order(:name)
+  end
+
+  def order_by(by, kind_books)
+    @books_category = @books_category.order(by) if params[:sort_by] == kind_books
   end
 
   def select_books_by_category

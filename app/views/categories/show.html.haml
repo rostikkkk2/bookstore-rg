@@ -3,18 +3,7 @@
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
-        %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-          Newest first
-          %i.fa.fa-angle-down.dropdown-icon.pull-right
-        %ul.dropdown-menu
-          %li
-            %a{href: "#"} Newest first
-          %li
-            %a{href: "#"} Popular first
-          %li
-            = link_to 'Price: Low to hight', category_path(sort_price: true)
-          %li
-            = link_to 'Price: Hight to low', category_path(sort_price_desk: true)
+        = render partial: 'categories/dropdown_sort_filters'
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         %div
@@ -62,23 +51,6 @@
           %a{href: "#"} Price: Hight to low
   .mb-120
     .row
-      - @books_category.each do |book|
-        .col-xs-6.col-sm-3
-          .general-thumb-wrap
-            .thumbnail.general-thumbnail
-              = image_tag(book.photo, class: "img-shadow general-thumbnail-img", alt: "design-book")
-              .thumb-hover
-                .general-thumb-link-wrap
-                  = link_to book_path(book), class: 'thumb-hover-link' do
-                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-shopping-cart.thumb-icon
-          .general-thumb-info
-            %p.title= book.name
-            %p.font-16.in-gold-500= book.price
-            %span.divider-sm
-            %p.lead.small
-              - book.authors.each do |author|
-                = author.name
+      = render partial: 'categories/show_books_by_category'
     .text-center
       %button.btn.btn-primary View More

@@ -9,10 +9,10 @@
         .row
           .col-sm-5
             .general-img-wrap
-              = image_tag(book.photo, class: "img-shadow general-thumbnail-img", alt: "design-book")
+              = link_to image_tag(book.photo, class: "img-shadow general-thumbnail-img", alt: "design-book"), book_path(book)
           .col-sm-7
             .mb-60
-              %h1= book.name
+              %h1= link_to book.name, book_path(book)
               %p.lead= book.description
               %p.lead.small
                 - book.authors.each do |author|
