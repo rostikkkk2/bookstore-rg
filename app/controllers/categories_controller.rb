@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  include Pagy::Backend
 
   SORT_BOOKS = {
     asc_title: 'Title: A - Z',
@@ -12,7 +13,7 @@ class CategoriesController < ApplicationController
   def show
     @books = Book.all
     @categories = Category.all
-    @books_category = select_books_by_category
+    @pagy, @books_category = pagy(select_books_by_category, items: 12)
     sort_books
   end
 
