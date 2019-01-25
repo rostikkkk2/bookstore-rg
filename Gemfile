@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
 gem 'ffaker'
+gem 'carrierwave', '~> 1.0'
 # gem 'mini_racer', platforms: :ruby
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

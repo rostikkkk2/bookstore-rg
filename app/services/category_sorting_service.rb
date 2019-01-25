@@ -1,4 +1,4 @@
-class CategorySortingService
+class CategorySortingService < ApplicationController
 
   attr_reader :params, :books
 
@@ -11,6 +11,7 @@ class CategorySortingService
     # popular_books: ->(instance) { instance.popular_sort },
   }.freeze
 
+
   def initialize(books, params)
     @books = books
     @params = params
@@ -22,12 +23,9 @@ class CategorySortingService
   end
 
   def sort_books
-    sort_param = if params[:sort_by] && SORT_BOOKS.include?(params[:sort_by].to_sym)
-      params[:sort_by].to_sym
-    else
-      params[:sort_by] = :asc_title
-    end
-    @books_category = SORT_BOOKS[sort_param].call(self)
+    params[:sort_by] = :asc_title unless params[:sort_by]
+    return not_fount unless SORT_BOOKS.include?(params[:sort_by].to_sym)
+    @books_category = SORT_BOOKS[params[:sort_by].to_sym].call(self)
   end
 
   def order_by(by)

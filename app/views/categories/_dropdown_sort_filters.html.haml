@@ -1,10 +1,10 @@
 %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-  - if !params[:sort_by]
-    = t('sort_books.asc_title')
-  - else
+  - if params[:sort_by]
     = t("sort_books.#{params[:sort_by]}")
+  - else
+    = t('sort_books.asc_title')
   %i.fa.fa-angle-down.dropdown-icon.pull-right
 %ul.dropdown-menu
   - CategorySortingService::SORT_BOOKS.each do |key, value|
     %li
-      = link_to t("sort_books.#{key}"), category_path(sort_by: key, page: @pagy.page)
+      = link_to t("sort_books.#{key}"), category_path(sort_by: key)

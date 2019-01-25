@@ -7,18 +7,12 @@
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         %div
-          - if params[:id] == 'all_books'
-            = link_to 'All', category_path('all_books'), class: "filter-link hover_category_color def-color-chosen-category"
-          - else
-            = link_to 'All', category_path('all_books'), class: "filter-link hover_category_color"
+          = link_to 'All', category_path('all_books'), class: "filter-link hover_category_color #{'def-color-chosen-category' if params[:id] == 'all_books'}"
           %span.category-count-books.badge= @books.count
       - @categories.each do |category|
         %li.mr-35
           %div
-            - if params[:id].to_i == category.id
-              = link_to category.name, category_path(category), class: "filter-link hover_category_color def-color-chosen-category"
-            - else
-              = link_to category.name, category_path(category), class: "filter-link hover_category_color"
+            = link_to category.name, category_path(category), class: "filter-link hover_category_color #{'def-color-chosen-category' if params[:id].to_i == category.id}"
             %span.category-count-books.badge= @books.where(category_id: category.id).count
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10 Filter by category
