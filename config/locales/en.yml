@@ -42,3 +42,10 @@ en:
     about_books: We pore through hundreds of new books each month and select the five best we can find to share with our members.
     get_started: Get Started
     best_sellers: Best Sellers
+  sort_books:
+    asc_title: 'Title: A - Z'
+    desc_title: 'Title: Z - A'
+    asc_price: 'Price: Low to hight'
+    desc_price: 'Price: Hight to low'
+    newest_first: 'Newest first'
+    popular_books: 'Popular first'
