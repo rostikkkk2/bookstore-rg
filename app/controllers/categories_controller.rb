@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   def show
     @books = Book.all
     @categories = Category.all
-    result = CategorySortingService.call(@books)
+    result = CategorySortingService.new(@books, params).call
     @pagy, @books_category = pagy(result, items: 12)
   end
 

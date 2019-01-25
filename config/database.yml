@@ -17,4 +17,5 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
   database: book_store_production

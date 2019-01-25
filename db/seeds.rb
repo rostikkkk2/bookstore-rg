@@ -40,8 +40,8 @@ def generate_categories
   Category.new(id: 3, name: 'Web disign').save!
 end
 
-# generate_authors_books
 # 4.times { generate_user }
-# 15.times { generate_authors }
-# generate_categories
-# 15.times { generate_book }
+generate_categories
+15.times { generate_book }
+15.times { generate_authors }
+generate_authors_books
