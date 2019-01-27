@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{href: "/"}= t('title')
+      %a.navbar-brand{href: "/"}= t('header.title')
       %a.shop-link.pull-right.visible-xs{href: "#"}
         %span.shop-icon
           %span.shop-quantity 3
@@ -19,22 +19,20 @@
           %span{'aria-hidden': "true"} &times;
         %ul.nav.navbar-nav
           %li
-            %a{href: "/"} Home
+            %a{href: "/"}= t('header.home')
           %li
             %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-              %li
-                %a.collapse-link{href: "#"} Mobile development
-              %li
-                %a.collapse-link{href: "#"} Photo
-              %li
-                %a.collapse-link{href: "#"} Web design
+              = link_to 'All books', category_path('all_books'), class: 'collapse-link'
+              - @categories.each do |category|
+                %li
+                  = link_to category.name, category_path(category), class: 'collapse-link'
           %li
-            %a{href: "#"} My account
+            %a{href: "#"}= t('header.my_account')
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            %a{href: "/"} Home
+            %a{href: "/"}= t('header.home')
           %li.dropdown
             %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
             %ul.dropdown-menu
@@ -45,6 +43,6 @@
                   = link_to category.name, category_path(category)
               -# %li.divider{role: "separator"}
               -# %li
-              -#   %a{href: "#"} Log out
+              -#   %a{href: "#"}= t('header.log_out')
           %li
-            %a{href: "#"} My account
+            %a{href: "#"}= t('header.my_account')

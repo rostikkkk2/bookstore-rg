@@ -2,6 +2,6 @@
   %main.container
     = link_to url_for(:back), class: 'general-back-link' do
       %i.fa.fa-long-arrow-left.mr-15
-      Back to results
+      = t('book_page.back_to_result')
     = render partial: 'books/book'
     = render partial: 'books/comments'

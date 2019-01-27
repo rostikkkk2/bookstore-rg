@@ -1,5 +1,5 @@
 %main.container
-  %h1.general-title-margin Сatalog
+  %h1.general-title-margin= t('categories.title_catalog')
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
@@ -15,34 +15,20 @@
             = link_to category.name, category_path(category), class: "filter-link hover_category_color #{'def-color-chosen-category' if params[:id].to_i == category.id}"
             %span.category-count-books.badge= @books.where(category_id: category.id).count
   .dropdowns.mb-25.visible-xs
-    %p.lead.small.mb-10 Filter by category
+    %p.lead.small.mb-10= t('categories.filter_by_category')
     .dropdown
       %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-        Newest first
+        = params[:id] == 'all_books' ? 'All books' : @categories.where(id: params[:id]).first.name
         %i.fa.fa-angle-down.dropdown-icon.pull-right
       %ul.dropdown-menu
         %li
-          %a{href: "#"} Newest first
-        %li
-          %a{href: "#"} Popular first
-        %li
-          %a{href: "#"} Price: Low to hight
-        %li
-          %a{href: "#"} Price: Hight to low
-    %p.lead.small.mb-10 Sort by
+          = link_to 'All books', category_path('all_books')
+        - @categories.each do |category|
+          %li
+            = link_to category.name, category_path(category)
+    %p.lead.small.mb-10= t('categories.sort_by')
     .dropdown
-      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-        Newest first
-        %i.fa.fa-angle-down.dropdown-icon.pull-right
-      %ul.dropdown-menu
-        %li
-          %a{href: "#"} Newest first
-        %li
-          %a{href: "#"} Popular first
-        %li
-          %a{href: "#"} Price: Low to hight
-        %li
-          %a{href: "#"} Price: Hight to low
+      = render partial: 'categories/dropdown_sort_filters'
   .mb-120
     .row
       = render partial: 'categories/show_books_by_category'

@@ -9,7 +9,6 @@ def generate_book
   user = Book.new(
     name: FFaker::Book.title,
     description: FFaker::Book.description(6),
-    photo: "javascript-and-jquery-book-cover.png",
     price: rand(30.20...99.99).round(2),
     category_id: rand(1..3),
     published_year: 2015,
@@ -18,6 +17,9 @@ def generate_book
     depth: 5.0,
     material: 'Hardcove, glossy paper'
   )
+  File.open("public/img/#{rand(1..14)}.jpg") do |f|
+    user.photo = f
+  end
   user.save!
 end
 

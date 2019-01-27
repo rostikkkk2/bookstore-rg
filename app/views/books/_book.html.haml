@@ -2,14 +2,11 @@
   .col-sm-6
     .product-gallery
       .mb-20
-        = image_tag(@current_book.photo, class: "img-responsive", alt: "design-book")
+        = image_tag @current_book.photo_url(:w550), alt: "design-book", class: 'img-responsive'
       .images.clearfix
-        %a.img-link
-          = image_tag(@current_book.photo, class: 'img-responsive', alt: "design-book")
-        %a.img-link
-          = image_tag(@current_book.photo, class: "img-responsive", alt: "design-book")
-        %a.img-link
-          = image_tag(@current_book.photo, class: "img-responsive", alt: "design-book")
+        - 3.times do
+          %a.img-link
+            = image_tag(@current_book.photo_url(:w170), class: 'img-responsive', alt: "design-book")
   .col-sm-6
     %h1.mt-res-0= @current_book.name
     %p.lead.small
@@ -18,7 +15,7 @@
     .row
       = render partial: 'books/form_book'
     .general-info-wrap.divider-lg
-      %p Description
+      %p= t('book_page.description')
       %p.lead.small.line-height-2
         %span#short_text
           = @current_book.description[0..100]
@@ -26,17 +23,17 @@
           %span#dots ...
           %span#more_text.d-n
             = @current_book.description[0..@current_book.description.length]
-          %a.b-n.in-gold-500.ml-10#btn_read_more Read More
-          %a.b-n.in-gold-500.ml-10#hide_read_more.d-n Hide Read More
+          %a.b-n.in-gold-500.ml-10#btn_read_more= t('book_page.read_more')
+          %a.b-n.in-gold-500.ml-10#hide_read_more.d-n= t('book_page.hide_read_more')
     .general-info-wrap.divider-lg
       .clearfix
-        %p.pull-left Year of publication
+        %p.pull-left= t('book_page.year_publishing')
         %p.lead.small.pull-right= @current_book.published_year
     .general-info-wrap.divider-lg
       .clearfix
-        %p.pull-left Dimensions
+        %p.pull-left= t('book_page.dimensions')
         %p.lead.small.pull-right= "H:#{@current_book.heigth}\" x W: #{@current_book.width}\" x D: #{@current_book.depth}"
     .general-info-wrap.divider-lg
       .clearfix
-        %p.pull-left Materials
+        %p.pull-left= t('book_page.materials')
         %p.lead.small.pull-right= @current_book.material

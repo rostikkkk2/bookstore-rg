@@ -30,7 +30,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  title: 'Bookstore'
+  header:
+    title: Bookstore
+    home: Home
+    my_account: My account
+    log_out: Log out
+  footer:
+    home: Home
+    shop: Shop
+    orders: Orders
+    settings: Settings
   home_page:
     name_categories: Real-Life Responsive Web Design
     text_about_projects: Smart front-end techniques and design patterns derived from real-life responsive projects
@@ -49,3 +58,16 @@ en:
     desc_price: 'Price: Hight to low'
     newest_first: 'Newest first'
     popular_books: 'Popular first'
+  categories:
+    title_catalog: Сatalog
+    filter_by_category: Filter by category
+    sort_by: Sort by
+  book_page:
+    description: Description
+    year_publishing: Year of publication
+    dimensions: Dimensions
+    materials: Materials
+    read_more: Read More
+    hide_read_more: Hide Read More
+    add_to_card: Add to Cart
+    back_to_result: Back to results
