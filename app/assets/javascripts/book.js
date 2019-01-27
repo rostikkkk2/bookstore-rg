@@ -2,7 +2,7 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready(function () {
+$(document).on('turbolinks:load', function(){
   $('#minus').click(function(e){
     var current_value = $('.input-count-book').val();
     if (current_value >= 2) {
