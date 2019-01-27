@@ -6,6 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require 'carrierwave/orm/activerecord'
 
 module BookStore
   class Application < Rails::Application

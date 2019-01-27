@@ -50,6 +50,10 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (9.4.5)
       execjs
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bindex (0.5.0)
     bootsnap (1.3.2)
       msgpack (~> 1.0)
@@ -75,6 +79,8 @@ GEM
     chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -84,6 +90,9 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.4)
     crass (1.0.4)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
+    equalizer (0.0.11)
     erubi (1.8.0)
     execjs (2.7.0)
     ffaker (2.10.0)
@@ -97,6 +106,7 @@ GEM
       tilt
     i18n (1.5.2)
       concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
     io-like (0.3.0)
     jaro_winkler (1.5.2)
     jbuilder (2.8.0)
@@ -171,6 +181,12 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    rectify (0.13.0)
+      activemodel (>= 4.1.0)
+      activerecord (>= 4.1.0)
+      activesupport (>= 4.1.0)
+      virtus (~> 1.0.5)
+      wisper (>= 1.6.1)
     regexp_parser (1.3.0)
     rubocop (0.63.0)
       jaro_winkler (~> 1.5.1)
@@ -223,6 +239,11 @@ GEM
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.1)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -231,6 +252,7 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    wisper (2.0.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -256,6 +278,7 @@ DEPENDENCIES
   pg
   puma (~> 3.11)
   rails (~> 5.2.2)
+  rectify
   rubocop-rspec
   sass-rails (~> 5.0)
   selenium-webdriver

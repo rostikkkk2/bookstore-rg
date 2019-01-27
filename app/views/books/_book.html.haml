@@ -2,11 +2,11 @@
   .col-sm-6
     .product-gallery
       .mb-20
-        = image_tag @current_book.photo_url(:w550), alt: "design-book", class: 'img-responsive'
+        = @presenter.show_img_or_default(:w550)
       .images.clearfix
         - 3.times do
           %a.img-link
-            = image_tag(@current_book.photo_url(:w170), class: 'img-responsive', alt: "design-book")
+            = @presenter.show_img_or_default(:w170)
   .col-sm-6
     %h1.mt-res-0= @current_book.name
     %p.lead.small
@@ -19,10 +19,10 @@
       %p.lead.small.line-height-2
         %span#short_text
           = @current_book.description[0..100]
-        - if @current_book.description.length > 100
+        - if @presenter.desctiption_length_valid?(100)
           %span#dots ...
           %span#more_text.d-n
-            = @current_book.description[0..@current_book.description.length]
+            = @presenter.show_all_description_text
           %a.b-n.in-gold-500.ml-10#btn_read_more= t('book_page.read_more')
           %a.b-n.in-gold-500.ml-10#hide_read_more.d-n= t('book_page.hide_read_more')
     .general-info-wrap.divider-lg
