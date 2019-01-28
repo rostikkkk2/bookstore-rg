@@ -21,6 +21,7 @@ gem 'ffaker'
 gem 'carrierwave', '~> 1.0'
 gem "rectify"
 gem 'rspec-rails'
+gem 'devise'
 # gem 'mini_racer', platforms: :ruby
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

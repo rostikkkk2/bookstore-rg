@@ -9,5 +9,12 @@
   = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render partial: 'layouts/header/header'
+
+    - flash.each do |name, msg|
+      %div.mt-60{id: "flash-#{name}"}
+        .alert.alert-dismissible.show{:role => "alert", class: "alert-#{name == 'alert' ? 'warning' : 'success'}"}
+          = msg
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} &#215;
     = yield
     = render partial: 'layouts/footer/footer'
