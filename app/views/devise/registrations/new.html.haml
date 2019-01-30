@@ -2,7 +2,10 @@
   .text-center
     %h3.general-login-title Sign up
     %a.general-login-icon{href: "#"}
-      %i.fa.fa-facebook-official
+      - if devise_mapping.omniauthable?
+        - resource_class.omniauth_providers.each do |provider|
+          = link_to omniauth_authorize_path(resource_name, provider) do
+            %i.fa.fa-facebook-official.facebook-icon
     %p.general-login-text or
   %div.general-form
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
