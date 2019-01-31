@@ -35,10 +35,6 @@ class CategoryPresenter < Rectify::Presenter
   end
 
   def show_img_or_default(size, book)
-    if book.photo_url.present?
-      image_tag book.photo_url(size), alt: "design-book", class: 'img-shadow general-thumbnail-img'
-    else
-      image_tag('w550_default.jpg', alt: "design-book", class: 'img-shadow general-thumbnail-img')
-    end
+    image_tag book.photo_url ? book.photo_url(size) : 'default.png', class: 'img-shadow general-thumbnail-img'
   end
 end

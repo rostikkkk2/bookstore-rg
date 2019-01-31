@@ -9,7 +9,7 @@
         .row
           .col-sm-5
             .general-img-wrap
-              = link_to image_tag(book.photo_url, class: "img-shadow general-thumbnail-img", alt: "design-book"), book_path(book)
+              = link_to image_tag(book.photo_url ? book.photo_url(:w210) : 'default.png', alt: "design-book", class: 'img-shadow general-thumbnail-img'), book_path(book)
           .col-sm-7
             .mb-60
               %h1= link_to book.name, book_path(book)

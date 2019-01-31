@@ -2,7 +2,7 @@
   .col-xs-6.col-sm-3
     .general-thumb-wrap
       .thumbnail.general-thumbnail
-        = image_tag(book.photo_url(:w210), class: "img-shadow general-thumbnail-img", alt: "design-book")
+        = image_tag (book.photo_url ? book.photo_url(:w210) : 'default.png'), alt: "design-book", class: 'img-shadow general-thumbnail-img'
         .thumb-hover
           .general-thumb-link-wrap
             = link_to book_path(book, category_id: params[:id]), class: 'thumb-hover-link' do

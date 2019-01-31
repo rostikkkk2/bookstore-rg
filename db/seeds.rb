@@ -17,9 +17,9 @@ def generate_book
     depth: 5.0,
     material: 'Hardcove, glossy paper'
   )
-  File.open("public/img/#{rand(1..14)}.jpg") do |f|
-    user.photo = f
-  end
+  # File.open("public/img/#{rand(1..14)}.jpg") do |f|
+  #   user.photo = f
+  # end
   user.save!
 end
 
@@ -30,7 +30,7 @@ end
 def generate_authors_books
   books = Book.all
   authors = Author.all
-  authors_id = authors.map do |author| author.id end
+  authors_id = authors.map { |author| author.id }
   books.each do |book|
     BookAuthor.create(book_id: book.id, author_id: authors_id[rand(authors_id.length)])
   end
@@ -42,7 +42,6 @@ def generate_categories
   Category.new(id: 3, name: 'Web disign').save!
 end
 
-# 4.times { generate_user }
 generate_categories
 15.times { generate_book }
 15.times { generate_authors }

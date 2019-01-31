@@ -20,13 +20,10 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process resize_to_fit: [550, nil]
   end
 
-  # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url(*args)
-    return ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.jpg"].compact.join('_'))
+    return ActionController::Base.helpers.asset_path([version_name].compact.join('_')) if version_name
   end
 
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
   def extension_whitelist
     %w(jpg jpeg gif png)
   end

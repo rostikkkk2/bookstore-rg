@@ -11,11 +11,7 @@ class BookPresenter < Rectify::Presenter
   end
 
   def show_img_or_default(size)
-    if @current_book.photo_url.present?
-      image_tag @current_book.photo_url(size), alt: "design-book", class: 'img-responsive'
-    else
-      image_tag('w550_default.jpg', alt: "design-book", class: 'img-responsive')
-    end
+    image_tag @current_book.photo_url ? @current_book.photo_url(size) : 'default.png', class: 'img-responsive'
   end
 
 end

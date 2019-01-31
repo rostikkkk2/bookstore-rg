@@ -22,6 +22,18 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  ActionMailer::Base.smtp_settings = {
+    :user_name => 'Rostik',
+    :password => 'rostik12345',
+    # :user_name => Rails.application.credentials.prod[:user_name],
+    # :password => Rails.application.credentials.prod[:password],
+    :domain => 'yourdomain.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
   config.action_mailer.default_url_options = { host: 'https://bookstore-rostik.herokuapp.com/' }
 
   # Compress JavaScripts and CSS.
