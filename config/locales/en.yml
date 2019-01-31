@@ -71,3 +71,18 @@ en:
     hide_read_more: Hide Read More
     add_to_card: Add to Cart
     back_to_result: Back to results
+  devise:
+    resend_confirmation: Resend confirmation instructions
+    set_new_password: Set new password
+    type_new_password: Type a new Password
+    confirm_password: Confirm Password
+    forgot_password: Forgot your password?
+    cancel: Cancel
+    email_instruction: We'll email you instructions on how to reset it
+    sign_up: Sign up
+    do_not_have_account: Don’t have an Account?
+    log_in: Log In
+    enter_email: Enter Email
+    enter_password: Password
+    did_not_reseive_conf_instructions: Didn't receive confirmation instructions?
+    did_not_reseive_unlock_instructions: Didn't receive unlock instructions?

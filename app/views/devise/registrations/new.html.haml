@@ -1,6 +1,6 @@
 %main.container.general-main-wrap
   .text-center
-    %h3.general-login-title Sign up
+    %h3.general-login-title= t('devise.sign_up')
     %a.general-login-icon{href: "#"}
       - if devise_mapping.omniauthable?
         - resource_class.omniauth_providers.each do |provider|
@@ -23,6 +23,6 @@
         %button.btn.btn-default.mb-20
           = f.submit "Sign Up", class: 'btn-submit-login-sign-up'
     %p.general-sign-text.text-center
-      Don’t have an Account?
+      = t('devise.do_not_have_account')
       %a.in-gold-500
         = render "devise/shared/link_login"
