@@ -17,9 +17,9 @@ def generate_book
     depth: 5.0,
     material: 'Hardcove, glossy paper'
   )
-  # File.open("public/img/#{rand(1..14)}.jpg") do |f|
-  #   user.photo = f
-  # end
+  File.open("public/img/#{rand(1..14)}.jpg") do |f|
+    user.photo = f
+  end
   user.save!
 end
 
