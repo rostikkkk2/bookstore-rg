@@ -1,4 +1,4 @@
-class CategorySortingService < ApplicationController
+class SortingService < ApplicationController
 
   attr_reader :params, :books
 
@@ -33,8 +33,8 @@ class CategorySortingService < ApplicationController
   end
 
   def select_books_by_category
-    books_chosen_category = books.where(category_id: params[:id].to_i)
-    return (params[:id] == 'all_books') ? books : books_chosen_category
+    books_chosen_category = books.where(category_id: params[:category_id].to_i)
+    return !params[:category_id] ? books : books_chosen_category
   end
 
 end

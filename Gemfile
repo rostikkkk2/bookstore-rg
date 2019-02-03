@@ -23,10 +23,10 @@ gem "rectify"
 gem 'rspec-rails'
 gem 'devise'
 gem 'omniauth-facebook'
-gem 'pry-rails'
 gem 'mini_magick', '~> 4.8'
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 

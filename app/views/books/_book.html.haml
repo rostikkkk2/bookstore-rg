@@ -2,11 +2,11 @@
   .col-sm-6
     .product-gallery
       .mb-20
-        = @presenter.show_img_or_default(:w550)
+        = @presenter.show_current_img_or_default(:w550)
       .images.clearfix
         - 3.times do
           %a.img-link
-            = @presenter.show_img_or_default(:w170)
+            = @presenter.show_current_img_or_default(:w170)
   .col-sm-6
     %h1.mt-res-0= @current_book.name
     %p.lead.small
@@ -18,8 +18,8 @@
       %p= t('book_page.description')
       %p.lead.small.line-height-2
         %span#short_text
-          = @current_book.description[0..100]
-        - if @presenter.desctiption_length_valid?(100)
+          = @presenter.show_description
+        - if @presenter.desctiption_length_valid?
           %span#dots ...
           %span#more_text.d-n
             = @presenter.show_all_description_text
@@ -32,7 +32,7 @@
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left= t('book_page.dimensions')
-        %p.lead.small.pull-right= "H:#{@current_book.heigth}\" x W: #{@current_book.width}\" x D: #{@current_book.depth}"
+        %p.lead.small.pull-right= @presenter.show_params_current_book
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left= t('book_page.materials')

@@ -1,9 +1,15 @@
 class BooksController < ApplicationController
+  include Pagy::Backend
+  COUNT_PAGE_BOOKS = 12
 
   def show
-    @books = Book.all
-    @current_book = @books.find_by(id: params[:id].to_i)
-    @presenter = BookPresenter.new(:current_book => @current_book, :books => @books).attach_controller(self)
+    @current_book = Book.all.find_by(id: params[:id].to_i)
+    @presenter = CurrentBookPresenter.new(current_book: @current_book).attach_controller(self)
+  end
+
+  def index
+    @sorted_books = SortingService.new(Book.all, params).call
+    @pagy, @books_category = pagy(@sorted_books, items: COUNT_PAGE_BOOKS)
   end
 
 end

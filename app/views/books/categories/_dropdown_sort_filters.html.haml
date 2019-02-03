@@ -2,6 +2,6 @@
   = @presenter.show_sort_type
   %i.fa.fa-angle-down.dropdown-icon.pull-right
 %ul.dropdown-menu
-  - CategorySortingService::SORT_BOOKS.each do |key, value|
+  - SortingService::SORT_BOOKS.each do |key, value|
     %li
-      = @presenter.types_sort_filter(key)
+      = @presenter.sort_books(key)

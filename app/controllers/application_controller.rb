@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
-  before_action :application
+  before_action :home_page
 
-  def application
-    @categories = Category.all
+  def home_page
+    @presenter = BooksPresenter.new.attach_controller(self)
   end
 
   def not_fount
