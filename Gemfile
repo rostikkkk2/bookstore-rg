@@ -26,6 +26,9 @@ gem 'omniauth-facebook'
 gem 'mini_magick', '~> 4.8'
 
 group :development, :test do
+  gem 'factory_bot_rails'
+  gem 'poltergeist'
+  gem 'simplecov'
   gem 'pry-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -39,6 +42,7 @@ group :development do
 end
 
 group :test do
+  gem 'database_cleaner'
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'

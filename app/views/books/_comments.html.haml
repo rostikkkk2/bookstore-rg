@@ -7,17 +7,29 @@
     %i.fa.fa-star.rate-empty
     %i.fa.fa-star.rate-empty
     %i.fa.fa-star.rate-empty
-  %form.row
-    .col-md-8
-      .mb-40
-        .form-group
-          %label.control-label.input-label.in-grey-600{for: "title"} Title
-          %input#title.form-control{name:"title", type: "text"}
-        .form-group
-          %label.control-label.input-label.in-grey-600{for: "review"} Review
-          %textarea#review.form-control{name:"review", type: "text"}
-      .text-right
-        %button.btn.disabled.mb-20 Post
+  .row
+    = form_tag comments_path, method: :post do
+      = hidden_field_tag current_user.id
+      .col-md-8
+        .mb-40
+          .form-group
+            %label.control-label.input-label.in-grey-600{for: "title"} Title
+            -# %input#title.form-control{name:"title", type: "text"}
+            = text_field_tag "accountName", "", class: 'form-control'
+          .form-group
+            %label.control-label.input-label.in-grey-600{for: "review"} Review
+            = text_area_tag "accountName", "", class: 'form-control'
+            -# %textarea#review.form-control{name:"review", type: "text"}
+        .text-right
+          = submit_tag "Post", class: 'btn mb-20'
+          -# %button.btn.disabled.mb-20 Post
+
+
+
+
+
+
+
 .mb-80
   %h3.in-gold-500.mb-25 Reviews (3)
   .general-message-wrap.divider-lg
@@ -52,3 +64,23 @@
           %i.fa.fa-star.rate-star
           %i.fa.fa-star.rate-star.rate-empty
         %p If ‘Get a better job’ had landed on my desk a year ago, I might have been dismissive of it. Instead I was prepared to be open-minded. There have been many occasions where I turned to career books with practical activities to look for some inspiration when developing education activities for learners or assessment.
+
+
+
+
+      -# = form_for @comment, url: {action: "create"} do |f|
+      -# -# = form_tag new_comment_path, :method => :post do
+      -# = f.hidden_field current_user.id
+      -# .col-md-8
+      -#   .mb-40
+      -#     .form-group
+      -#       %label.control-label.input-label.in-grey-600{for: "title"} Title
+      -#       -# %input#title.form-control{name:"title", type: "text"}
+      -#       = f.text_field "accountName", "", class: 'form-control'
+      -#     .form-group
+      -#       %label.control-label.input-label.in-grey-600{for: "review"} Review
+      -#       = f.text_area "accountName", "", class: 'form-control'
+      -#       -# %textarea#review.form-control{name:"review", type: "text"}
+      -#   .text-right
+      -#     = f.submit "Post", class: 'btn mb-20'
+      -#     -# %button.btn.disabled.mb-20 Post
