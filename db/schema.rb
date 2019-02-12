@@ -53,12 +53,15 @@ ActiveRecord::Schema.define(version: 2019_02_07_140640) do
   end
 
   create_table "comments", force: :cascade do |t|
+    t.string "title"
     t.text "text_comment"
-    t.integer "rating"
+    t.integer "rating", default: 0
     t.boolean "is_verified", default: false
     t.bigint "user_id"
+    t.bigint "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_comments_on_book_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -82,5 +85,6 @@ ActiveRecord::Schema.define(version: 2019_02_07_140640) do
   end
 
   add_foreign_key "books", "categories"
+  add_foreign_key "comments", "books"
   add_foreign_key "comments", "users"
 end

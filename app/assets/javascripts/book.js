@@ -33,5 +33,18 @@ $(document).on('turbolinks:load', function(){
     $('#hide_read_more').css('display', 'none');
     $('#more_text').css('display', 'none');
     $('#short_text').css('display', 'inline');
-  })
+  });
+
+  $('.submit-comment').click(function(){
+    var title_comment = $('.title-comment').val();
+    var body_comment = $('.body-comment').val();
+
+    if (check_length_and_empty(title_comment, 100) && check_length_and_empty(body_comment, 500)) {
+      $('#comment').css('pointer-events', "none");
+    }
+  });
+
+  function check_length_and_empty(value, range) {
+    return (value.length < range && value.length != 0)
+  }
 })

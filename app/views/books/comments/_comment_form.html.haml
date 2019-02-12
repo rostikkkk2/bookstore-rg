@@ -1,0 +1,30 @@
+.mb-80
+  %h3
+    = t('book_page.comment.write_a_review')
+  %p.general-info-text
+    = t('book_page.comment.score')
+  = form_tag comments_path, method: :post do
+    .row
+      .col-md-12
+        %fieldset.rating
+          - (CommentPresenter::COUNT_STARS).downto(CommentPresenter::MIN_STARS).each do |star_num|
+            %input{:name => "rating", id: "star#{star_num}", :type => "radio", :value => "#{star_num}"}
+            %label.full{:for => "star#{star_num}"}
+      = hidden_field_tag 'current_user', current_user.id
+      = hidden_field_tag 'current_book', @current_book.id
+    .row
+      .col-md-8
+        .mb-40
+          -# - p @comment_errors
+          -# - if @comment_errors
+          -#   = @comment_errors
+          .form-group
+            %label.control-label.input-label.in-grey-600{for: "title"}
+              = t('book_page.comment.title')
+            = text_field_tag "title", "", class: 'form-control title-comment'
+          .form-group
+            %label.control-label.input-label.in-grey-600{for: "review"}
+              = t('book_page.comment.review')
+            = text_area_tag "text_comment", "", class: 'form-control body-comment'
+        .text-right
+          = submit_tag t('book_page.comment.post') , id: 'comment', class: 'btn mb-20 submit-comment', data: { disable_with: false }

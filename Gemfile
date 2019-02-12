@@ -24,6 +24,7 @@ gem 'rspec-rails'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'mini_magick', '~> 4.8'
+gem 'virtus'
 
 group :development, :test do
   gem 'factory_bot_rails'
