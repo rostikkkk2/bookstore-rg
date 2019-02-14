@@ -25,6 +25,7 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'mini_magick', '~> 4.8'
 gem 'virtus'
+gem 'cancancan', '~> 2.0'
 
 group :development, :test do
   gem 'factory_bot_rails'

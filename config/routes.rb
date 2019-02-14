@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :books, only: [:show, :index]
 
+  # get '/comments', to: 'books#show'
+
   resources :comments
 
   resources :categories do
