@@ -1,11 +1,16 @@
-.col-xs-12.col-md-4
-  %p.h1.in-gold-500.mt-10= @current_book.price
-.col-xs-5.col-md-3
-  .input-group.general-position
-    %a.input-link.b-n.pt-7#minus
-      %i.fa.fa-minus.line-height-40
-    %input.form-control.quantity-input.input-count-book{:type=>"text", :required => true, :value => 1, :disabled => true}
-    %a.b-n.input-link#plus
-      %i.fa.fa-plus.line-height-40
-.col-xs-7.col-md-5
-  %button.btn.btn-default.pull-right.general-position= t('book_page.add_to_card')
+= form_tag carts_path, method: :post do
+  - if user_signed_in?
+    = hidden_field_tag 'current_user', current_user.id
+  = hidden_field_tag 'current_book', @current_book.id
+  .col-xs-12.col-md-4
+    %p.h1.in-gold-500.mt-10
+      = @current_book.price
+  .col-xs-5.col-md-3
+    .input-group.general-position
+      %a.input-link.b-n.pt-7#minus
+        %i.fa.fa-minus.line-height-40
+      = text_field_tag "count_books", "", class: 'form-control quantity-input input-count-book', value: 1
+      %a.b-n.input-link#plus
+        %i.fa.fa-plus.line-height-40
+  .col-xs-7.col-md-5
+    = submit_tag t('book_page.add_to_card'), class: 'btn btn-default pull-right general-position'

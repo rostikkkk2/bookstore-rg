@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   # get '/comments', to: 'books#show'
 
   resources :comments
+  resources :orders
+  resources :line_items
+  # get '/card/:id', to: 'cards#show', as: 'card'
+  resources :carts
+
 
   resources :categories do
     resources :books, :index

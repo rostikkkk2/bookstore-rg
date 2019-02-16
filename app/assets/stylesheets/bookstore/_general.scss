@@ -16,6 +16,7 @@ img {
 .input-count-book {
   background-color: white !important;
   cursor: unset !important;
+  pointer-events: none;
 }
 .col-pic {
   width: 11.5%;
@@ -273,7 +274,6 @@ img {
     margin-top: 15px;
   }
   .general-img-wrap-table {
-    max-width: 80px;
     margin-right: 0;
     margin-left: 0;
   }

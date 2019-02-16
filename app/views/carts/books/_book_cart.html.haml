@@ -1,0 +1,24 @@
+- @books_cart.each do |book|
+  %tr
+    %td
+      .general-img-wrap-table
+        = @presenter.show_img_or_default(:w210, book)
+    %td
+      %p.title
+        = book.name
+    %td
+      %span.font-16.in-gold-500
+        = "€#{book.price}"
+    %td
+      .input-group
+        %a.input-link{href: "#"}
+          %i.fa.fa-minus.line-heaght-40
+        %input.form-control.quantity-input{type: "text", value: "#{LineItem.find_by(book_id: book.id).quantity}"}
+        %a.input-link{href: "#"}
+          %i.fa.fa-plus.line-heaght-40
+    %td
+      %span.font-16.in-gold-500
+        = @cart_presenter.subtotal_prise_book(book)
+    %td
+      %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
+        %span{'aria-hidden': "true"} &times;
