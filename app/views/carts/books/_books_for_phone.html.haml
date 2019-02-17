@@ -3,14 +3,16 @@
     %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
       %span{'aria-hidden': "true"} &times;
     .general-img-wrap-table
-      %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    %p.title Android Programming for Beginners
+      = link_to @presenter.show_img_or_default(:w210, book), book_path(book)
+    %p.title
+      = link_to book.name, book_path(book)
     %table.table
       %tr
         %td
           %span.in-grey-600 Price
         %td
-          %span.font-16.in-gold-500 €28.50
+          %span.font-16.in-gold-500
+            = "€#{book.price}"
       %tr
         %td.vertical-middle
           %span.in-grey-600 Quantity
@@ -18,11 +20,12 @@
           .input-group
             %a.input-link{href: "#"}
               %i.fa.fa-minus.line-heaght-40
-            %input.form-control.quantity-input{type: "text"}
+            %input.form-control.quantity-input{type: "text", value: "#{@cart_presenter.count_same_books(book)}"}
             %a.input-link{href: "#"}
               %i.fa.fa-plus.line-heaght-40
       %tr
         %td
           %span.in-grey-600 SubTotal
         %td
-          %span.font-16.in-gold-500 €32.90
+          %span.font-16.in-gold-500
+            = @cart_presenter.subtotal_prise_book(book)
