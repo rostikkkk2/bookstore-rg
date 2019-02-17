@@ -14,7 +14,7 @@
     = link_to cart_path(current_user.id), class: 'shop-link pull-right hidden-xs' do
       %span.shop-icon
         %span.shop-quantity
-          = @presenter.count_books_in_cart
+          = @header_presenter.count_books_in_cart
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
       .visible-xs
         %button.close{type: "button", 'aria-label': "Close"}

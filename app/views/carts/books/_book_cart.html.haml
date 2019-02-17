@@ -20,5 +20,7 @@
       %span.font-16.in-gold-500
         = "€#{@cart_presenter.subtotal_prise_book(book)}"
     %td
-      %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
-        %span{'aria-hidden': "true"} &times;
+      = form_tag cart_path, method: :delete do
+        = hidden_field_tag 'book_to_destroy', book.id
+        = button_tag(type: "submit", class: 'close general-cart-close', 'aria-label': "Close") do
+          %span{'aria-hidden': "true"} &times;
