@@ -9,13 +9,15 @@
     %table.table
       %tr
         %td
-          %span.in-grey-600 Price
+          %span.in-grey-600
+            = t('cart.price')
         %td
           %span.font-16.in-gold-500
             = "€#{book.price}"
       %tr
         %td.vertical-middle
-          %span.in-grey-600 Quantity
+          %span.in-grey-600
+            = t('cart.quantity')
         %td
           .input-group
             %a.input-link{href: "#"}
@@ -25,7 +27,8 @@
               %i.fa.fa-plus.line-heaght-40
       %tr
         %td
-          %span.in-grey-600 SubTotal
+          %span.in-grey-600
+            = t('cart.subtotal')
         %td
           %span.font-16.in-gold-500
             = @cart_presenter.subtotal_prise_book(book)

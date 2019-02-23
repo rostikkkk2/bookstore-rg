@@ -7,10 +7,16 @@
           .general-thumb-link-wrap
             = link_to book_path(book), class: 'thumb-hover-link' do
               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-            %a.thumb-hover-link{href: "#"}
-              %i.fa.fa-shopping-cart.thumb-icon
+            = form_tag carts_path, method: :post, class: 'display-ib' do
+              - if user_signed_in?
+                = hidden_field_tag 'current_user', current_user.id
+              = hidden_field_tag 'current_book', book.id
+              = hidden_field_tag "count_books", "", value: 1
+              = button_tag :submit, class: 'button-add-to-cart-from-category thumb-hover-link' do
+                %i.fa.fa-shopping-cart.thumb-icon
     .general-thumb-info
-      %p.title= book.name
+      %p.title
+        = book.name
       %p.font-16.in-gold-500= "€ #{book.price}"
       %span.divider-sm
       %p.lead.small

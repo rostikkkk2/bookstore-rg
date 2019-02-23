@@ -2,8 +2,24 @@ en:
   header:
     title: Bookstore
     home: Home
+    shop: Shop
     my_account: My account
     log_out: Log out
+    log_in: Log in
+    sign_up: Sign up
+  cart:
+    title_cart: Cart
+    pruduct: Product
+    price: Price
+    quantity: Quantity
+    subtotal: SubTotal
+    enter_coupon_code: Enter Your Coupon Code
+    apply_coupon: Apply Coupon
+    order_summary: Order Summary
+    subtotal_order: "Subtotal:"
+    coupon: "Coupon:"
+    order_total: "Order Total:"
+    checkout: Checkout
   footer:
     home: Home
     shop: Shop

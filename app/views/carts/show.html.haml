@@ -1,50 +1,63 @@
 %main.container.general-main-wrap
-  %h1.general-title-margin Cart
-  - if @cart_presenter.order_current_user
+  %h1.general-title-margin
+    = t('cart.title_cart')
+  - if @cart_presenter.current_order
     .visible-xs
       = render partial: 'carts/books/books_for_phone'
     .hidden-xs
       %table.table.table-hover
         %tr.no-hover
           %th.col-pic.pl-0
-            %span.in-grey-600 Product
+            %span.in-grey-600
+              = t('cart.pruduct')
           %th.col-title
           %th.col-price
-            %span.in-grey-600 Price
+            %span.in-grey-600
+              = t('cart.price')
           %th.col-quantity
-            %span.in-grey-600 Quantity
+            %span.in-grey-600
+              = t('cart.quantity')
           %th.col-total
-            %span.in-grey-600 SubTotal
+            %span.in-grey-600
+              = t('cart.subtotal')
           %th.col-close
         = render partial: 'carts/books/book_cart'
     .general-order-wrap
       .row
         .col-sm-4
           .input-group.general-input-group
-            %label.input-label Enter Your Coupon Code
+            %label.input-label
+              = t('cart.enter_coupon_code')
             %input.form-control.mb-30{type: "text", placeholder: "Enter Your Coupon Code "}
             %div
-              %button.btn.btn-primary.mr-5.mb-15 Apply Coupon
+              %button.btn.btn-primary.mr-5.mb-15
+                = t('cart.apply_coupon')
         .col-sm-8
           .res-mr-200.text-center.general-text-right
-            %p.in-gold-500.font-18 Order Summary
+            %p.in-gold-500.font-18
+              = t('cart.order_summary')
             %table.general-summary-table.general-summary-table-right.general-text-right
               %tr
                 %td
-                  %p.font-16 Subtotal:
+                  %p.font-16
+                    = t('cart.subtotal_order')
                 %td
                   %p.font-16
                     = "€#{@cart_presenter.order_summary_price}"
               %tr
                 %td
-                  %p.font-16 Coupon:
+                  %p.font-16
+                    = t('cart.coupon')
                 %td
                   %p.font-16 €0.00
               %tr
                 %td
-                  %strong.font-18 Order Total:
+                  %strong.font-18
+                    = t('cart.order_total')
                 %td
                   %strong.font-18
                     = "€#{@cart_presenter.order_total_price_with_coupon}"
-            %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
-    %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+            %button.btn.btn-default.mb-20.visible-xs-inline-block
+              = t('cart.checkout')
+    %button.btn.btn-default.mb-20.hidden-xs.center-block
+      = t('cart.checkout')

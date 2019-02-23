@@ -1,14 +1,12 @@
 class CartPresenter < Rectify::Presenter
-  def subtotal_prise_book(book)
-    book.price * LineItem.find_by(book_id: book.id).quantity
-  end
+  attribute :current_order
 
-  def order_current_user
-    Order.find_by(user_id: current_user.id)
+  def subtotal_prise_book(book)
+    book.price * LineItem.find_by(book_id: book.id, order_id: current_order).quantity
   end
 
   def current_line_items
-    LineItem.where(order_id: order_current_user)
+    LineItem.where(order_id: current_order.id)
   end
 
   def take_book_price_from_item(item)
@@ -16,9 +14,7 @@ class CartPresenter < Rectify::Presenter
   end
 
   def order_summary_price
-    item_quantities = current_line_items.map do |item|
-      item.quantity * take_book_price_from_item(item)
-    end
+    item_quantities = current_line_items.map { |item| item.quantity * take_book_price_from_item(item) }
     item_quantities.sum
   end
 
@@ -27,7 +23,6 @@ class CartPresenter < Rectify::Presenter
   end
 
   def count_same_books(book)
-    LineItem.find_by(book_id: book.id).quantity
+    LineItem.find_by(book_id: book.id, order_id: current_order.id).quantity
   end
-
 end

@@ -18,7 +18,12 @@
                 - book.authors.each do |author|
                   = author.name
               .general-align
-                %button.btn.btn-primary= t('home_page.buy_now')
+                = form_tag carts_path, method: :post, class: 'display-ib' do
+                  - if user_signed_in?
+                    = hidden_field_tag 'current_user', current_user.id
+                  = hidden_field_tag 'current_book', book.id
+                  = hidden_field_tag "count_books", "", value: 1
+                  = submit_tag t('home_page.buy_now'), class: 'btn btn-primary'
   %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
     %span.icon-prev{'aria-hidden': "true"}
     %span.sr-only= t('home_page.previous')
