@@ -21,14 +21,10 @@ class CartForm
 
   private
 
-  def exist_order_for_user
-    Order.find_by(user_id: current_user)
-  end
-
-  def create_line_item(order_session_id = nil)
+  def create_line_item(order_id)
     new_line_item = LineItem.new(
       book_id: current_book,
-      order_id: order_session_id || exist_order_for_user.id,
+      order_id: order_id,
       quantity: count_books
     )
     new_line_item.save
