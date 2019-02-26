@@ -12,12 +12,15 @@
       .form-group.mb-30
         %label.control-label.input-label{for: "email"} Enter Email
         = f.email_field :email, autofocus: true, autocomplete: "email", id: 'email', class: 'form-control', placeholder: "Enter Email"
+        = resource.errors.messages[:email].to_sentence
       .form-group.mb-30
         %label.control-label.input-label{for: "password"} Password
         = f.password_field :password, autocomplete: "password", id: 'password', class: 'form-control', placeholder: "Password"
+        = resource.errors.messages[:password].to_sentence
       .form-group.mb-30
         %label.control-label.input-label{for: "password_confirm"} Confirm Password
         = f.password_field :password_confirmation, autocomplete: "password_confirm", class: 'form-control', placeholder: "Confirm Password"
+        = resource.errors.messages[:password_confirmation].to_sentence
       .text-center
       .form-group.checkbox.text-center.mb-30
         %button.btn.btn-default.mb-20
