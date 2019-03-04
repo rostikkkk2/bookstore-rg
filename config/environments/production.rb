@@ -23,10 +23,8 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   ActionMailer::Base.smtp_settings = {
-    :user_name => 'Rostik',
-    :password => 'rostik12345',
-    # :user_name => Rails.application.credentials.prod[:name_sendgrid],
-    # :password => Rails.application.credentials.prod[:password_sendgrid],
+    :user_name => Rails.application.credentials.prod[:name_sendgrid],
+    :password => Rails.application.credentials.prod[:password_sendgrid],
     :domain => 'yourdomain.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,

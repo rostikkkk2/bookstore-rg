@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  load_and_authorize_resource
+
   include Pagy::Backend
   COUNT_PAGE_BOOKS = 12
 
@@ -12,5 +14,4 @@ class BooksController < ApplicationController
     @sorted_books = SortingService.new(Book.all, params).call
     @pagy, @books_category = pagy(@sorted_books, items: COUNT_PAGE_BOOKS)
   end
-
 end
