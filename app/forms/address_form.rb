@@ -25,12 +25,6 @@ class AddressForm
   validates :zip, length: { maximum: 10 }, format: { with: VALIDATE_ZIP, message: 'wrong number' }
   validates :phone, length: { minimum: 10, maximum: 15 }, format: { with: VALIDATE_PHONE, message: 'have to start with +' }
 
-  def save
-    create_address if valid?
-  end
-
-  private
-
   def create_address
     new_address = Address.new(
       first_name: first_name,
@@ -40,7 +34,7 @@ class AddressForm
       zip: zip,
       country: country,
       phone: phone,
-      address_type: address_type.to_sym
+      address_type: address_type
     )
     if order_id
       new_address.resource = order_id
@@ -48,7 +42,18 @@ class AddressForm
       user = User.find_by(id: user_id)
       new_address.resource = user
     end
-
     new_address.save
+  end
+
+  def update_address(current_address)
+    current_address.update(
+      first_name: first_name,
+      last_name: last_name,
+      address: address,
+      city: city,
+      zip: zip,
+      country: country,
+      phone: phone
+    )
   end
 end

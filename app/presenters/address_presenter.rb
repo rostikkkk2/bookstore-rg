@@ -15,8 +15,12 @@ class AddressPresenter < Rectify::Presenter
     errors && !errors[type].empty?
   end
 
+  def exists_user_address(type)
+    Address.find_by(resource_id: current_user.id, resource_type: 'User', address_type: type)
+  end
+
   def current_value(value, type)
-    current_address = Address.find_by(resource_id: current_user.id, resource_type: 'User', address_type: type)
+    current_address = exists_user_address(type)
     return current_address[value] if current_address
 
     params[type][value] if params && params[type]

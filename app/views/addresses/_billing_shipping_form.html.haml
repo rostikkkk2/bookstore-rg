@@ -5,7 +5,7 @@
   -# = f.hidden_field :address_type, value: address_type
   .form-group{class: "#{@address_presenter.add_class_error(:first_name, address_type)}"}
     %label.control-label.input-label First Name
-    = f.text_field :first_name, id: 'firstName', class: 'form-control', placeholder: "First Name", value: @address_presenter.current_value(:first_name, address_type)
+    = f.text_field :first_name, class: 'form-control', placeholder: "First Name", value: @address_presenter.current_value(:first_name, address_type)
     %span.color-red= @address_presenter.show_errors(:first_name, address_type)
 
   .form-group{class: "#{@address_presenter.add_class_error(:last_name, address_type)}"}
@@ -28,9 +28,10 @@
     = f.text_field :zip, id: 'zip', class: 'form-control', placeholder: "Zip", value: @address_presenter.current_value(:zip, address_type)
     %span.color-red= @address_presenter.show_errors(:zip, address_type)
 
-  .form-group.input-select-country
+  .form-group.input-select-country{class: "#{@address_presenter.add_class_error(:country, address_type)}"}
     %label.control-label.input-label Country
-    = f.select :country, ISO3166::Country.all, class: '', placeholder: "Select a country", value: @address_presenter.current_value(:country, address_type)
+    = f.select :country, ISO3166::Country.all, prompt: "#{@address_presenter.current_value(:country, address_type) || 'Select Country'}"
+    %span.color-red= @address_presenter.show_errors(:country, address_type)
 
   .form-group.mb-60{class: "#{@address_presenter.add_class_error(:phone, address_type)}"}
     %label.control-label.input-label Phone

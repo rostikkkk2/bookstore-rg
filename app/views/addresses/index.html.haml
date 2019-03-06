@@ -18,6 +18,7 @@
           .visible-xs.visible-sm
             %h3.general-subtitle.mt-0 Billing Address
           = form_for @address_form, url: addresses_path, method: :post do |f|
+            = hidden_field_tag :address_type, 'billing'
             = render partial: 'addresses/billing_shipping_form', locals: {address_type: 'billing'}
             .text-center.general-text-align
               = f.submit 'Save', class: 'btn'
@@ -25,6 +26,7 @@
           .visible-xs.visible-sm
             %h3.general-subtitle.mt-0 Shipping Address
           = form_for @address_form, url: addresses_path, method: :post do |f|
+            = hidden_field_tag :address_type, 'shipping'
             = render partial: 'addresses/billing_shipping_form', locals: {address_type: 'shipping'}
             .text-center.general-text-align
               = submit_tag 'Save', class: 'btn'

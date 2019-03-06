@@ -9,7 +9,7 @@ main {
 img {
   max-width: 100%;
 }
-.input-select-country  select{
+.input-select-country select{
   display: block;
   background: none;
   width: 100%;
@@ -18,6 +18,9 @@ img {
   line-height: 1.5;
   color: #555555;
   border: 1px solid #ccc;
+}
+.has-error select{
+  border: 1px solid red !important;
 }
 .category-count-books {
   margin: 0 -4px 10px;
