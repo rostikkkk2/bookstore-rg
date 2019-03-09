@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :home_page, :check_order_on_merge
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, alert: exception.message
+    redirect_to root_path, alert: exception.message
   end
 
   def home_page

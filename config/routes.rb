@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :line_items
   resources :carts
   resources :addresses
+  resources :settings_emails
+  resources :accounts
+  resources :settings
 
   resources :categories do
     resources :books, :index

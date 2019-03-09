@@ -1,18 +1,9 @@
 class AddressPresenter < Rectify::Presenter
-  attribute :errors
   attribute :params
   attribute :current_user, User
 
   def add_class_error(type, form)
-    'has-error' if exists_error?(type) && params[form]
-  end
-
-  def show_errors(type, form)
-    errors[type].join(', ').capitalize if exists_error?(type) && params[form]
-  end
-
-  def exists_error?(type)
-    errors && !errors[type].empty?
+    'has-error' unless form.errors[type].empty?
   end
 
   def exists_user_address(type)
@@ -23,6 +14,12 @@ class AddressPresenter < Rectify::Presenter
     current_address = exists_user_address(type)
     return current_address[value] if current_address
 
-    params[type][value] if params && params[type]
+    params["#{type}_form"][value] if params && params["#{type}_form"]
+  end
+
+  def current_country(type)
+    countries = ISO3166::Country.all
+    current_address = exists_user_address(type)
+    current_address ? countries.unshift(current_address.country) : countries
   end
 end
