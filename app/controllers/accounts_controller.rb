@@ -7,8 +7,7 @@ class AccountsController < ApplicationController
 
   def destroy
     account_delete = User.find_by(id: current_user.id).delete
-    flash[:error] = ERROR_DELETED_ACCOUNT unless account_delete
-    flash[:success] = DELETED_ACCOUNT
+    account_delete ? flash[:success] = DELETED_ACCOUNT : flash[:error] = ERROR_DELETED_ACCOUNT
     redirect_to root_path
   end
 

@@ -36,12 +36,7 @@ class AddressForm
       phone: phone,
       address_type: address_type
     )
-    if order_id
-      new_address.resource = order_id
-    else
-      user = User.find_by(id: user_id)
-      new_address.resource = user
-    end
+    new_address.resource = order_id || User.find_by(id: user_id)
     new_address.save
   end
 

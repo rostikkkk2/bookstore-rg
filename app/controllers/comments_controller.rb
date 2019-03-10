@@ -3,10 +3,12 @@ class CommentsController < ApplicationController
 
   def create
     @comment_form = CommentForm.new(comments_form_params)
-    return redirect_to request.referrer if @comment_form.save
-
-    flash[:error] = @comment_form.errors.full_messages.to_sentence
+    show_errors_comment(@comment_form) unless @comment_form.save
     redirect_to request.referrer
+  end
+
+  def show_errors_comment(form)
+    flash[:error] = form.errors.full_messages.to_sentence
   end
 
   private

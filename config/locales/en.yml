@@ -80,3 +80,24 @@ en:
     enter_password: Password
     did_not_reseive_conf_instructions: Didn't receive confirmation instructions?
     did_not_reseive_unlock_instructions: Didn't receive unlock instructions?
+  settings:
+    title: Settings
+    address: Address
+    prevacy: Privacy
+    billing_address: Billing Address
+    shippint_address: Shipping Address
+    email: Email
+    enter_email: Enter Email
+    password: Password
+    old_password: Old Password
+    new_password: New Password
+    confirm_password: Confirm Password
+    remove_account: Remove Account
+    understand_user_detele: I understand that all data will be lost
+    first_name: First Name
+    last_name: Last Name
+    address: Address
+    city: City
+    zip: Zip
+    country: Country
+    phone: Phone
