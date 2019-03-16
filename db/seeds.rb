@@ -44,6 +44,8 @@ def generate_categories
 end
 
 # generate_categories
-15.times { generate_book }
+generate_authors_books
+# 15.times { generate_book }
 # 15.times { generate_authors }
 # generate_authors_books
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

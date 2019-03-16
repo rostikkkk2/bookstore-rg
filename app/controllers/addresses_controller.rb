@@ -5,7 +5,7 @@ class AddressesController < ApplicationController
 
     @shipping = @address_service.shipping
     @billing = @address_service.billing
-    render_with_presenter
+    return render_with_presenter
   end
 
   def render_with_presenter

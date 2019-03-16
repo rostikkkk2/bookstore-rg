@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
   SUCCESS_CHANGE_PASSWORD = 'Successfuly changed password'.freeze
 
   def destroy
-    account_delete = User.find_by(id: current_user.id).delete
+    account_delete = User.find_by(id: current_user.id).destroy
     account_delete ? flash[:success] = DELETED_ACCOUNT : flash[:error] = ERROR_DELETED_ACCOUNT
     redirect_to root_path
   end

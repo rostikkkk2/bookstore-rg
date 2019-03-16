@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   has_many :orders, dependent: :destroy
 
-  has_many :addresses, as: :resource
+  has_many :addresses, as: :resource, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
