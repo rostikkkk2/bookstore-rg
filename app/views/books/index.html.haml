@@ -7,13 +7,13 @@
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         %div
-          = @presenter.btn_all_books
-          %span.category-count-books.badge= @presenter.all_books.count
-      - @presenter.all_categories.each do |category|
+          = @books_presenter.btn_all_books
+          %span.category-count-books.badge= @books_presenter.all_books.count
+      - @books_presenter.all_categories.each do |category|
         %li.mr-35
           %div
-            = @presenter.btn_categories(category)
-            %span.category-count-books.badge= @presenter.count_books_category(category)
+            = @books_presenter.btn_categories(category)
+            %span.category-count-books.badge= @books_presenter.count_books_category(category)
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10= t('categories.filter_by_category')
     .dropdown
@@ -23,7 +23,7 @@
       %ul.dropdown-menu
         %li
           = link_to t('categories.all_books'), books_path
-        - @presenter.all_categories.each do |category|
+        - @books_presenter.all_categories.each do |category|
           %li
             = link_to category.name, category_books_path(category)
     %p.lead.small.mb-10= t('categories.sort_by')

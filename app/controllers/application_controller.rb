@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def home_page
     @header_presenter = HeaderPresenter.new(current_order: current_order).attach_controller(self)
-    @presenter = BooksPresenter.new.attach_controller(self)
+    @books_presenter = BooksPresenter.new.attach_controller(self)
   end
 
   def not_fount

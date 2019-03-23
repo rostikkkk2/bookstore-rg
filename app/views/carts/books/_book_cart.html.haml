@@ -2,7 +2,7 @@
   %tr
     %td
       .general-img-wrap-table
-        = link_to @presenter.show_img_or_default(:w210, book), book_path(book)
+        = link_to @books_presenter.show_img_or_default(:w210, book), book_path(book)
     %td
       %p.title
         = link_to book.name, book_path(book)

@@ -2,7 +2,7 @@
   .col-xs-6.col-sm-3
     .general-thumb-wrap
       .thumbnail.general-thumbnail
-        = @presenter.show_img_or_default(:w210, book)
+        = @books_presenter.show_img_or_default(:w210, book)
         .thumb-hover
           .general-thumb-link-wrap
             = link_to book_path(book), class: 'thumb-hover-link' do

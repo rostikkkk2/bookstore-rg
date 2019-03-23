@@ -1,6 +1,7 @@
 class AddressPresenter < Rectify::Presenter
   attribute :params
   attribute :current_user, User
+  attribute :current_order
 
   def add_class_error(type, form)
     'has-error' unless form.errors[type].empty?

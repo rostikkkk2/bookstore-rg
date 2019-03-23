@@ -1,0 +1,64 @@
+%main.container
+  %h1.general-title-margin Checkout
+  %ul.steps.list-inline
+    %li.step.active
+      %span.step-number 1
+      %span.step-text.hidden-xs Address
+    %li.step-divider
+    %li.step
+      %span.step-number 2
+      %span.step-text.hidden-xs Delivery
+    %li.step-divider
+    %li.step
+      %span.step-number 3
+      %span.step-text.hidden-xs Payment
+    %li.step-divider
+    %li.step
+      %span.step-number 4
+      %span.step-text.hidden-xs Confirm
+    %li.step-divider
+    %li.step
+      %span.step-number 5
+      %span.step-text.hidden-xs Complete
+  = form_for @billing && @billing, url: checkout_path, method: :put, class: 'res-mb-100' do |form|
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle Billing Address
+          %p.general-info-text all fields are required
+          = fields_for :billing_form, @billing do |f|
+            = render partial: 'addresses/inputs_form', locals: {f: f,address_form: @billing, address_type: 'billing', order_form: true}
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle Shipping Address
+          %p.general-info-text.invisible all fields are required
+          = fields_for :shipping_form, @shipping do |f|
+            = render partial: 'addresses/inputs_form', locals: {f: f, address_form: @shipping, address_type: 'shipping', order_form: true}
+    .row
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle Billing Address
+        -# = render partial: 'addresses/address_form', locals: {address_type: 'billing', address_form: @billing }
+      .col-md-5.col-md-offset-1.mb-60
+        .visible-xs.visible-sm
+          %h3.general-subtitle Shipping Address
+        -# = render partial: 'addresses/address_form', locals: {address_type: 'shipping', address_form: @shipping}
+        .form-group.checkbox
+          %label.checkbox-label
+            %input.checkbox-input{type: "checkbox", hidden: "true"}
+            %span.checkbox-icon
+              %i.fa.fa-check
+            %span.checkbox-text Use Billing Adress
+    .general-text-align.mb-60
+      %p.in-gold-500.font-18 Order Summary
+      %table.general-summary-table
+        %tr
+          %td
+            %p.font-16 Item Total:
+          %td
+            %p.font-16 €117.69
+        %tr
+          %td
+            %p.font-16 Order Total:
+          %td
+            %p.font-16 €117.69
+      = form.submit 'Save and Continue', class: 'btn center-block mb-20'

@@ -4,7 +4,7 @@
     %li{'data-target': "#slider", 'data-slide-to': "1"}
     %li{'data-target': "#slider", 'data-slide-to': "2"}
   .carousel-inner{role: "listbox"}
-    - @presenter.new_books_slider.each_with_index do |book, index|
+    - @books_presenter.new_books_slider.each_with_index do |book, index|
       .item{:class => "#{'active' if index == 0}"}
         .row
           .col-sm-5

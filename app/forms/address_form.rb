@@ -36,7 +36,7 @@ class AddressForm
       phone: phone,
       address_type: address_type
     )
-    new_address.resource = order_id || User.find_by(id: user_id)
+    new_address.resource = Order.find_by(id: order_id) || User.find_by(id: user_id)
     new_address.save
   end
 
