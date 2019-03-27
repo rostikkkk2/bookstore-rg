@@ -15,5 +15,6 @@
 //= require activestorage
 //= require turbolinks
 //= require account
+//= require checkout
 //= require bootstrap-sprockets
 //= require_tree .

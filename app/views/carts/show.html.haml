@@ -59,4 +59,4 @@
                     = "€#{@cart_presenter.order_total_price_with_coupon}"
             %button.btn.btn-default.mb-20.visible-xs-inline-block
               = t('cart.checkout')
-    = link_to t('cart.checkout'), checkout_path(), class: 'btn btn-default w-190 mb-20 hidden-xs center-block'
+    = link_to t('cart.checkout'), checkout_path(step: :address), class: 'btn btn-default w-190 mb-20 hidden-xs center-block'

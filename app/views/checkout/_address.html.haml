@@ -20,19 +20,26 @@
     %li.step
       %span.step-number 5
       %span.step-text.hidden-xs Complete
-  = form_for @billing && @billing, url: checkout_path, method: :put, class: 'res-mb-100' do |form|
+  = form_for @presenter.billing, url: checkout_path, method: :put, class: 'res-mb-100' do |form|
     .hidden-xs.hidden-sm
       .row
         .col-md-5
           %h3.general-subtitle Billing Address
           %p.general-info-text all fields are required
-          = fields_for :billing_form, @billing do |f|
-            = render partial: 'addresses/inputs_form', locals: {f: f,address_form: @billing, address_type: 'billing', order_form: true}
+          = fields_for :billing_form, @presenter.billing do |f|
+            = render partial: 'addresses/inputs_form', locals: {f: f,address_form: @presenter.billing, address_type: 'billing', order_form: true}
         .col-md-5.col-md-offset-1
           %h3.general-subtitle Shipping Address
           %p.general-info-text.invisible all fields are required
-          = fields_for :shipping_form, @shipping do |f|
-            = render partial: 'addresses/inputs_form', locals: {f: f, address_form: @shipping, address_type: 'shipping', order_form: true}
+          %div.shipping-form
+            = fields_for :shipping_form, @presenter.shipping do |f|
+              = render partial: 'addresses/inputs_form', locals: {f: f, address_form: @presenter.shipping, address_type: 'shipping', order_form: true}
+          .form-group.checkbox
+            %label.checkbox-label
+              %input.checkbox-input.check-box-shipping{type: "checkbox", hidden: "true", name: 'hidden_shipping_form', id: 'hide_shipping_form'}
+              %span.checkbox-icon
+                %i.fa.fa-check
+              %span.checkbox-text Use Billing Address
     .row
       .col-md-5.mb-40
         .visible-xs.visible-sm
@@ -42,12 +49,12 @@
         .visible-xs.visible-sm
           %h3.general-subtitle Shipping Address
         -# = render partial: 'addresses/address_form', locals: {address_type: 'shipping', address_form: @shipping}
-        .form-group.checkbox
-          %label.checkbox-label
-            %input.checkbox-input{type: "checkbox", hidden: "true"}
-            %span.checkbox-icon
-              %i.fa.fa-check
-            %span.checkbox-text Use Billing Adress
+        -# .form-group.checkbox
+        -#   %label.checkbox-label
+        -#     %input.checkbox-input.check-box-shipping{type: "checkbox", hidden: "true"}
+        -#     %span.checkbox-icon
+        -#       %i.fa.fa-check
+        -#     %span.checkbox-text Use Billing Adress
     .general-text-align.mb-60
       %p.in-gold-500.font-18 Order Summary
       %table.general-summary-table

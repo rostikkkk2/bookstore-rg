@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :settings_emails
   resources :accounts
   resources :settings
-  resources :checkout
+  resources :checkout, param: :step
 
   resources :categories do
     resources :books, :index

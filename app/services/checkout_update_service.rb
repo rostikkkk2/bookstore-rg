@@ -1,5 +1,5 @@
 class CheckoutUpdateService
-  attr_reader :params, :current_order, :current_user, :billing_form, :shipping_form
+  attr_reader :params, :current_order, :current_user, :billing_form, :shipping_form, :form
 
   def initialize(params, current_order, current_user)
     @params = params
@@ -8,21 +8,27 @@ class CheckoutUpdateService
   end
 
   def update_step
-    checkout_address if current_order.address?
+    checkout_address_right? if current_order.address?
   end
 
-  def checkout_address
-    @address_service = AddressService.new(params, current_user)
-    if @address_service.checkout_call
-      true
-    else
-      @billing_form = @address_service.billing
-      @shipping_form = @address_service.shipping
-      false 
-    end
+  def checkout_address_right?
+    @address_service = AddressService.new(params, current_user, current_order)
+    return true if @address_service.checkout_call
+
+    @billing_form = @address_service.billing
+    @shipping_form = @address_service.shipping
+    false
+  end
+
+  def go_to_next_step
+    current_order.delivery! && 'delivery' if current_order.address?
   end
 
   def current_presenter
-    AddressPresenter.new(params: params, current_user: current_user, current_order: current_order).attach_controller(self)
+    if current_order.address?
+      return AddressPresenter.new(params: params, current_order: current_order, show_order: true,
+        step: 'address', billing: billing_form, shipping: shipping_form).attach_controller(self)
+    end
+    return DeliveryPresenter.new(params: params, current_order: current_order, step: 'delivery') if current_order.delivery?
   end
 end

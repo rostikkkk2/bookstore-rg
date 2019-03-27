@@ -25,5 +25,4 @@ class CurrentBookPresenter < Rectify::Presenter
   def show_params_current_book
     "H:#{@current_book.heigth}\" x W: #{@current_book.width}\" x D: #{@current_book.depth}"
   end
-
 end
