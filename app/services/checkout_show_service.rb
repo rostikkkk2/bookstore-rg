@@ -5,19 +5,22 @@ class CheckoutShowService
     @params = params
     @current_order = current_order
     @current_user = current_user
-    current_state
+    go_first_step
   end
 
-  def current_state
-    ## here define what status
+  def go_first_step
     current_order.address! if current_order.cart?
-    current_order.status
   end
 
   def current_presenter
-    if current_order.address?
-      return AddressPresenter.new(params: params, current_order: current_order, show_order: true, step: 'address', billing: AddressForm.new, shipping: AddressForm.new).attach_controller(self)
+    choosen_step = Order.statuses[params[:step]]
+    choose_presenter if choosen_step && choosen_step <= Order.statuses[current_order.status]
+  end
+
+  def choose_presenter
+    case params[:step]
+    when 'address' then AddressPresenter.new(params: params, current_order: current_order).attach_controller(self)
+    when 'delivery' then DeliveryPresenter.new(params: params, current_order: current_order).attach_controller(self)
     end
-    return DeliveryPresenter.new(params: params, current_order: current_order, step: 'delivery') if current_order.delivery?
   end
 end

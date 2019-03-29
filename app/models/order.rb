@@ -14,13 +14,14 @@ class Order < ApplicationRecord
     state :payment
     state :confirmation
     state :completed
+    # state :back_to_address
 
     event :address do
-      transitions from: :cart, to: :address
+      transitions from: [:cart, :delivery], to: :address
     end
 
     event :delivery do
-      transitions from: :address, to: :delivery
+      transitions from: [:address, :payment], to: :delivery
     end
 
     event :payment do

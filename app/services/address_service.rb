@@ -13,7 +13,7 @@ class AddressService
     @form = params[:billing_form] ? @billing : @shipping
     return false unless @form.valid?
 
-    create_or_update_address(@form)
+    create_or_update_settings_address(@form)
   end
 
   def checkout_call
@@ -23,23 +23,22 @@ class AddressService
   end
 
   def create_or_update_checkout_addresses
-    billing_address = current_order.addresses.billing.first
-    shipping_address = current_order.addresses.shipping.first
-
-    billing_address ? @billing.update_address(billing_address) : @billing.create_address
-    shipping_address ? @shipping.update_address(shipping_address) : @shipping.create_address
+    create_or_update_checkout_address(@billing, current_order.addresses.billing)
+    create_or_update_checkout_address(@shipping, current_order.addresses.shipping)
   end
 
   def create_billing_with_hidden_shipping
-    billing_address = current_order.addresses.billing.first
-    billing_address ? @billing.update_address(billing_address) : @billing.create_address
+    create_or_update_checkout_address(@billing, current_order.addresses.billing)
     @billing.address_type = 'shipping'
-
-    shipping_address = current_order.addresses.shipping.first
-    shipping_address ? @billing.update_address(shipping_address) : @billing.create_address
+    create_or_update_checkout_address(@billing, current_order.addresses.shipping)
   end
 
-  def create_or_update_address(form)
+  def create_or_update_checkout_address(form_object, data_address)
+    address = data_address.first
+    address ? form_object.update_address(address) : form_object.create_address
+  end
+
+  def create_or_update_settings_address(form)
     current_address = check_current_address
     current_address ? form.update_address(current_address) : form.create_address
   end
