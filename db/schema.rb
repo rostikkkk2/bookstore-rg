@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_114432) do
+ActiveRecord::Schema.define(version: 2019_03_30_095506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,15 @@ ActiveRecord::Schema.define(version: 2019_03_12_114432) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "deliveries", force: :cascade do |t|
+    t.string "method"
+    t.integer "from_days"
+    t.integer "to_days"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "line_items", force: :cascade do |t|
     t.bigint "book_id"
     t.integer "quantity", default: 0
@@ -123,6 +132,8 @@ ActiveRecord::Schema.define(version: 2019_03_12_114432) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "delivery_id"
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -150,5 +161,6 @@ ActiveRecord::Schema.define(version: 2019_03_12_114432) do
   add_foreign_key "comments", "users"
   add_foreign_key "line_items", "books"
   add_foreign_key "line_items", "orders"
+  add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
 end

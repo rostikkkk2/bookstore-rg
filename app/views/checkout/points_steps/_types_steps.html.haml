@@ -1,0 +1,11 @@
+%h1.general-title-margin Checkout
+%ul.steps.list-inline
+  - Order.statuses.each do |key, value|
+    - if key != Order.statuses.keys.first
+      %li.step{class: "#{'active' if value <= Order.statuses[@presenter.step]}"}
+        %span.step-number
+          = value
+        %span.hidden-xs
+          %a{href: checkout_path(step: key), class: 'step_checkout step-text'}
+            = key.to_s.capitalize
+      %li{class: "#{'step-divider' if key != Order.statuses.keys.last}"}

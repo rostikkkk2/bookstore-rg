@@ -2,10 +2,11 @@ class Order < ApplicationRecord
   include AASM
 
   has_many :line_items
+  belongs_to :delivery, optional: true
   belongs_to :user, optional: true
 
   has_many :addresses, as: :resource, dependent: :destroy
-  enum status: { cart: 0, address: 1, delivery: 2, payment: 3, confirmation: 4, completed: 5 }
+  enum status: { cart: 0, address: 1, delivery: 2, payment: 3, confirm: 4, complete: 5 }
 
   aasm :status, enum: true do
     state :cart, initial: true
@@ -14,14 +15,13 @@ class Order < ApplicationRecord
     state :payment
     state :confirmation
     state :completed
-    # state :back_to_address
 
     event :address do
-      transitions from: [:cart, :delivery], to: :address
+      transitions from: [:cart], to: :address
     end
 
     event :delivery do
-      transitions from: [:address, :payment], to: :delivery
+      transitions from: [:address], to: :delivery
     end
 
     event :payment do

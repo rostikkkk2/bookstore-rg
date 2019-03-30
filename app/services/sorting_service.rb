@@ -1,5 +1,4 @@
 class SortingService < ApplicationController
-
   attr_reader :params, :books
 
   SORT_BOOKS = {
@@ -7,10 +6,9 @@ class SortingService < ApplicationController
     desc_title: ->(instance) { instance.order_by('name DESC') },
     asc_price: ->(instance) { instance.order_by('price ASC') },
     desc_price: ->(instance) { instance.order_by('price DESC') },
-    newest_first: ->(instance) { instance.order_by('id DESC') },
+    newest_first: ->(instance) { instance.order_by('id DESC') }
     # popular_books: ->(instance) { instance.popular_sort },
   }.freeze
-
 
   def initialize(books, params)
     @books = books
@@ -25,6 +23,7 @@ class SortingService < ApplicationController
   def sort_books
     params[:sort_by] = :asc_title unless params[:sort_by]
     return not_fount unless SORT_BOOKS.include?(params[:sort_by].to_sym)
+
     @books_category = SORT_BOOKS[params[:sort_by].to_sym].call(self)
   end
 
@@ -34,7 +33,6 @@ class SortingService < ApplicationController
 
   def select_books_by_category
     books_chosen_category = books.where(category_id: params[:category_id].to_i)
-    return !params[:category_id] ? books : books_chosen_category
+    !params[:category_id] ? books : books_chosen_category
   end
-
 end

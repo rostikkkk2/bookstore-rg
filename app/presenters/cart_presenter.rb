@@ -19,10 +19,14 @@ class CartPresenter < Rectify::Presenter
   end
 
   def order_total_price_with_coupon
-    order_summary_price
+    order_summary_price + delivery_price
   end
 
   def count_same_books(book)
     LineItem.find_by(book_id: book.id, order_id: current_order.id).quantity
+  end
+
+  def delivery_price
+    current_order.delivery_id ? Delivery.find_by(id: current_order.delivery_id).price : 0
   end
 end

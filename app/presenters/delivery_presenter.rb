@@ -5,4 +5,8 @@ class DeliveryPresenter < Rectify::Presenter
   def step
     'delivery'
   end
+
+  def check_exists_delivery(id)
+    return true if current_order.delivery_id == id
+  end
 end

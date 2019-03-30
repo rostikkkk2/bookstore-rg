@@ -43,9 +43,16 @@ def generate_categories
   Category.new(id: 3, name: 'Web disign').save!
 end
 
+def generate_delivery_methods
+  Delivery.new(method: 'Express Delivery', from_days: 1, to_days: 3, price: 35).save!
+  Delivery.new(method: 'Standart Delivery', from_days: 5, to_days: 10, price: 25).save!
+end
+
+
 # generate_categories
-generate_authors_books
 # 15.times { generate_book }
 # 15.times { generate_authors }
 # generate_authors_books
+# generate_delivery_methods
+
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
