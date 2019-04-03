@@ -7,8 +7,19 @@
 .color-red {
   color: red;
 }
+.field_with_errors {
+  .form-group {
+    color: red;
+  }
+}
 .step_checkout {
   text-decoration: none;
+}
+.mt-50 {
+  margin-top: 50px;
+}
+.f-r {
+  float: right;
 }
 .mb-0 {
   margin-bottom: 0 !important;

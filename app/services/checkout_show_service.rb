@@ -22,6 +22,7 @@ class CheckoutShowService
     when 'address' then AddressPresenter.new(params: params, current_order: current_order).attach_controller(self)
     when 'delivery' then DeliveryPresenter.new(params: params, current_order: current_order).attach_controller(self)
     when 'payment' then PaymentPresenter.new(params: params, current_order: current_order).attach_controller(self)
+    when 'confirm' then ConfirmPresenter.new(params: params, current_order: current_order).attach_controller(self)
     end
   end
 end

@@ -7,7 +7,7 @@
           .general-thumb-link-wrap
             = link_to book_path(book, category_id: params[:id]), class: 'thumb-hover-link' do
               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-            = form_tag carts_path, method: :post, class: 'display-ib' do
+            = form_tag line_items_path, method: :post, class: 'display-ib' do
               - if user_signed_in?
                 = hidden_field_tag 'current_user', current_user.id
               = hidden_field_tag 'current_book', book.id

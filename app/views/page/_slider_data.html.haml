@@ -18,7 +18,7 @@
                 - book.authors.each do |author|
                   = author.name
               .general-align
-                = form_tag carts_path, method: :post, class: 'display-ib' do
+                = form_tag line_items_path, method: :post, class: 'display-ib' do
                   - if user_signed_in?
                     = hidden_field_tag 'current_user', current_user.id
                   = hidden_field_tag 'current_book', book.id

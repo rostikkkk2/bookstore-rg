@@ -1,5 +1,4 @@
 class AccountsController < ApplicationController
-
   DELETED_ACCOUNT = 'Your account successfuly deleted'.freeze
   ERROR_DELETED_ACCOUNT = 'Your account was not deleted'.freeze
   WRONG_PASSWORD = 'Wrong password'.freeze

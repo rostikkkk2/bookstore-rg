@@ -6,6 +6,12 @@ class CheckoutUpdateService
     payment: ->(instance) { instance.checkout_payment_right? }
   }.freeze
 
+  CHANGE_STEP = {
+    address: ->(instance) { instance.current_order.delivery! if instance.current_order.address? },
+    delivery: ->(instance) { instance.current_order.payment! if instance.current_order.delivery? },
+    payment: ->(instance) { instance.current_order.confirm! if instance.current_order.payment? }
+  }.freeze
+
   def initialize(params, current_order, current_user)
     @params = params
     @current_order = current_order
@@ -29,18 +35,24 @@ class CheckoutUpdateService
     DeliveryService.new(params, current_order).call
   end
 
+  def checkout_payment_right?
+    credit_card_service = PaymentService.new(params, current_user, current_order)
+    return true if credit_card_service.call
+
+    @form = credit_card_service.form
+    false
+  end
+
   def go_to_next_step
-    if params[:step] == current_order.status
-      return current_order.delivery! && 'delivery' if current_order.address?
-      return current_order.payment! && 'payment' if current_order.delivery?
-    end
+    CHANGE_STEP[params[:step].to_sym].call(self) if params[:step] == current_order.status
+    current_order.status
   end
 
   def current_presenter
     case params[:step]
     when 'address' then AddressPresenter.new(params: params, current_order: current_order, billing_form: billing_form, shipping_form: shipping_form).attach_controller(self)
     when 'delivery' then DeliveryPresenter.new(params: params, current_order: current_order).attach_controller(self)
-    when 'payment' then PaymentPresenter.new(params: params, current_order: current_order).attach_controller(self)
+    when 'payment' then PaymentPresenter.new(params: params, current_order: current_order, form: form).attach_controller(self)
     end
   end
 end

@@ -7,33 +7,34 @@ class Order < ApplicationRecord
 
   has_many :addresses, as: :resource, dependent: :destroy
   enum status: { cart: 0, address: 1, delivery: 2, payment: 3, confirm: 4, complete: 5 }
+  has_one :credit_card
 
   aasm :status, enum: true do
     state :cart, initial: true
     state :address
     state :delivery
     state :payment
-    state :confirmation
-    state :completed
+    state :confirm
+    state :complete
 
     event :address do
-      transitions from: [:cart], to: :address
+      transitions from: :cart, to: :address
     end
 
     event :delivery do
-      transitions from: [:address], to: :delivery
+      transitions from: :address, to: :delivery
     end
 
     event :payment do
       transitions from: :delivery, to: :payment
     end
 
-    event :confirmation do
-      transitions from: :payment, to: :confirmation
+    event :confirm do
+      transitions from: :payment, to: :confirm
     end
 
-    event :completed do
-      transitions from: :confirmation, to: :completed
+    event :complete do
+      transitions from: :confirm, to: :complete
     end
   end
 end

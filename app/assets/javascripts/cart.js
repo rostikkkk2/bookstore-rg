@@ -16,13 +16,13 @@ $(document).on('turbolinks:load', function(){
     if (sign == 'plus') {
       $.ajax({
         type: "PUT",
-        url: "/carts/" + book_id,
+        url: "/line_items/" + book_id,
         data: { quantity_books: count_books, plus: true }
       });
     }else {
       $.ajax({
         type: "PUT",
-        url: "/carts/" + book_id,
+        url: "/line_items/" + book_id,
         data: { quantity_books: count_books, minus: true }
       });
     }
