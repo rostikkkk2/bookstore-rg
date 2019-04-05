@@ -9,12 +9,8 @@ class CartPresenter < Rectify::Presenter
     LineItem.where(order_id: current_order.id)
   end
 
-  def take_book_price_from_item(item)
-    Book.find_by(id: item.book_id).price
-  end
-
   def order_summary_price
-    item_quantities = current_line_items.map { |item| item.quantity * take_book_price_from_item(item) }
+    item_quantities = current_line_items.map { |item| item.quantity * item.book.price }
     item_quantities.sum
   end
 
