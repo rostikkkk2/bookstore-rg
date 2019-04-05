@@ -10,7 +10,7 @@ class LineItemsController < ApplicationController
   end
 
   def create_order(cart_form)
-    return if current_order
+    return if current_order && !current_order.complete?
     return cart_form.create_order if current_user
 
     session[:current_order] = cart_form.create_order

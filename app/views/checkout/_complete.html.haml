@@ -1,0 +1,96 @@
+%main.container.general-main-wrap
+  = render partial: 'checkout/points_steps/types_steps'
+  .text-center.mb-40
+    %h3.general-subtitle Thank You for your Order!
+    %p.fw-300
+      = " An order confirmation has been has been sent to #{@presenter.current_order.user.email}"
+  .row.mb-20
+    .col-sm-6
+      .visible-xs
+        %p.general-order-number.mb-0
+          = "Order #{@presenter.current_order.number}"
+        %p.general-address.mb-30
+          = @presenter.current_order.created_at.to_date
+      - @presenter.current_order.addresses.shipping.each do |address|
+        %p.general-address
+          = address.first_name
+          = address.last_name
+          %br
+          = address.address
+          %br
+          = address.city
+          %br
+          = address.country
+          %br
+          = "Phone #{address.phone}"
+    .col-sm-6.hidden-xs.text-right
+      %p.general-order-number.mb-0
+        = "Order #{@presenter.current_order.number}"
+      %p.general-address.mb-30
+        = @presenter.current_order.created_at.to_date
+  .visible-xs
+    - @presenter.current_order.line_items.each do |item|
+      .general-cart-item.divider-lg
+        .general-img-wrap-table
+          = link_to (image_tag item.book.photo_url(:w210), class: 'cart-img-shadow'), book_path(item.book)
+        %p.title
+          = item.book.name
+        %P.in-grey-600.fw-300
+          = item.book.description
+        %table.table
+          %tr
+            %td
+              %span.in-grey-600 Price
+            %td
+              %span.font-16.in-gold-500
+                = "€#{item.book.price}"
+          %tr
+            %td.vertical-middle
+              %span.in-grey-600 Quantity
+            %td
+              %span
+                = item.quantity
+          %tr
+            %td
+              %span.in-grey-600 SubTotal
+            %td
+              %span.font-16.in-gold-500
+                = "€#{@cart_presenter.order_summary_price}"
+  .hidden-xs.divider-lg.pt-20
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600 Book
+          %th.col-method
+          %th
+            %span.in-grey-600 Price
+          %th
+            %span.in-grey-600 Quantity
+          %th
+            %span.in-grey-600 Total
+      %tbody
+        - @presenter.current_order.line_items.each do |item|
+          %tr
+            %td
+              .general-img-wrap-table
+                = link_to (image_tag item.book.photo_url(:w210), class: 'cart-img-shadow pull-left'), book_path(item.book)
+            %td
+              %p.title
+                = item.book.name
+              %p.in-grey-600.fw-300
+                = item.book.description
+            %td
+              %span.font-16.in-gold-500
+                = "€#{item.book.price}"
+            %td
+              %span.ml-30
+                = item.quantity
+            %td
+              %span.font-16.in-gold-500
+                = "€#{@cart_presenter.order_summary_price}"
+  %row
+    .text-center.general-text-right.col-sm-12.col-md-12.col-xs-12.confirm-subtotal-price
+      = render partial: 'checkout/order_summary/order_price'
+  .text-center
+    = link_to 'Back to Store', root_path, class: 'btn btn-default mb-20'

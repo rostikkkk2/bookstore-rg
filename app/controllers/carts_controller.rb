@@ -3,7 +3,7 @@ class CartsController < ApplicationController
 
   def show
     @cart_presenter = CartPresenter.new(current_order: current_order).attach_controller(self)
-    @books_cart = take_current_books_in_cart if current_order
+    @books_cart = take_current_books_in_cart if current_order && !current_order.complete?
   end
 
   private

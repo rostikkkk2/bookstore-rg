@@ -3,13 +3,15 @@ class CheckoutUpdateService
   TYPES_CHECKOUT = {
     address: ->(instance) { instance.checkout_address_right? },
     delivery: ->(instance) { instance.checkout_delivery_right? },
-    payment: ->(instance) { instance.checkout_payment_right? }
+    payment: ->(instance) { instance.checkout_payment_right? },
+    confirm: ->(instance) { instance.checkout_last_step }
   }.freeze
 
   CHANGE_STEP = {
     address: ->(instance) { instance.current_order.delivery! if instance.current_order.address? },
     delivery: ->(instance) { instance.current_order.payment! if instance.current_order.delivery? },
-    payment: ->(instance) { instance.current_order.confirm! if instance.current_order.payment? }
+    payment: ->(instance) { instance.current_order.confirm! if instance.current_order.payment? },
+    confirm: ->(instance) { instance.current_order.complete! if instance.current_order.confirm? }
   }.freeze
 
   def initialize(params, current_order, current_user)
@@ -41,6 +43,10 @@ class CheckoutUpdateService
 
     @form = credit_card_service.form
     false
+  end
+
+  def checkout_last_step
+    OrderMailer.send_thanks_for_order(current_order).deliver_later
   end
 
   def go_to_next_step

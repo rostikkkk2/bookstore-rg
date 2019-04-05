@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    return Order.find_by(user_id: current_user.id) if user_signed_in?
+    return Order.where(user_id: current_user.id).order(:updated_at).last if user_signed_in?
 
     Order.find_by(id: session[:current_order]['id']) if session[:current_order]
   end

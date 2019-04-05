@@ -7,6 +7,7 @@ class HeaderPresenter < Rectify::Presenter
 
   def count_books_in_cart
     return 0 unless current_order
+    return 0 if current_order.complete?
 
     item_quantities = all_line_items_user.map(&:quantity)
     item_quantities.sum

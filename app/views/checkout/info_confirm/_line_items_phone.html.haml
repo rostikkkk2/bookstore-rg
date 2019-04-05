@@ -1,0 +1,27 @@
+.general-cart-item.divider-lg
+  - @presenter.current_line_items.each do |item|
+    .general-img-wrap-table
+      = link_to (image_tag item.book.photo_url(:w210), class: 'cart-img-shadow'), book_path(item.book)
+    %p.title
+      = item.book.name
+    %P.in-grey-600.fw-300
+      = item.book.description
+    %table.table
+      %tr
+        %td
+          %span.in-grey-600 Price
+        %td
+          %span.font-16.in-gold-500
+            = "€#{item.book.price}"
+      %tr
+        %td.vertical-middle
+          %span.in-grey-600 Quantity
+        %td
+          %span
+            = item.quantity
+      %tr
+        %td
+          %span.in-grey-600 SubTotal
+        %td
+          %span.font-16.in-gold-500
+            = "€#{@cart_presenter.order_summary_price}"

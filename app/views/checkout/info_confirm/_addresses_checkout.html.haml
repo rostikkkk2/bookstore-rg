@@ -1,0 +1,11 @@
+%p.general-address
+  = address.first_name
+  %a.general-edit{href: '/checkout/address'} edit
+  %br
+  = address.address
+  %br
+  = address.city
+  %br
+  = address.country
+  %br
+  = "Phone #{address.phone}"
