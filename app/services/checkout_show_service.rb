@@ -13,14 +13,19 @@ class CheckoutShowService
   end
 
   def current_presenter
-    choosen_step = Order.statuses[params[:step]]
+    return quick_registration_presenter unless current_user
     return show_complete_presenter if current_order.complete?
 
+    choosen_step = Order.statuses[params[:step]]
     choose_presenter if choosen_step && choosen_step <= Order.statuses[current_order.status]
   end
 
+  def quick_registration_presenter
+    QuickRegistrationPresenter.new(params: params, current_order: current_order).attach_controller(self)
+  end
+
   def show_complete_presenter
-    CompletePresenter.new(params: params, current_order: current_order).attach_controller(self) if params[:step] == 'complete'
+    CompletePresenter.new(params: params, current_order: current_order).attach_controller(self)
   end
 
   def choose_presenter

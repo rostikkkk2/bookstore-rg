@@ -1,4 +1,6 @@
 class AddressesController < ApplicationController
+  authorize_resource
+
   def create
     address_service = AddressService.new(params, current_user, current_order)
     return redirect_to new_setting_path if address_service.settings_call

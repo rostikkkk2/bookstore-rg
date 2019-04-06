@@ -1,15 +1,17 @@
 class MergeItemsCartService
-  attr_reader :session_order, :current_user
+  attr_reader :session_order, :current_user, :exist_user_order, :user_order
 
   def initialize(session_order, current_user)
     @session_order = session_order
     @current_user = current_user
+    @exist_user_order = Order.where(user_id: current_user.id).order(:updated_at).last
+    @user_order = exist_user_order if exist_user_order && !exist_user_order.complete?
   end
 
   def call
-    return add_current_order_session_user_id unless Order.find_by(user_id: current_user.id)
+    return change_items_order_id_to_current if user_order
 
-    change_items_order_id_to_current
+    add_current_order_session_user_id
   end
 
   def add_current_order_session_user_id
@@ -26,11 +28,11 @@ class MergeItemsCartService
   end
 
   def find_same_item(line_item)
-    LineItem.find_by(book_id: line_item.book_id, order_id: Order.find_by(user_id: current_user.id).id)
+    LineItem.find_by(book_id: line_item.book_id, order_id: user_order.id)
   end
 
   def change_current_item_order_id(line_item)
-    line_item.order_id = Order.find_by(user_id: current_user.id).id
+    line_item.order_id = user_order.id
     line_item.save
   end
 

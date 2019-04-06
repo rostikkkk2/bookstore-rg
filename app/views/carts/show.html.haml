@@ -59,7 +59,10 @@
                     = "€#{@cart_presenter.order_total_price_with_coupon}"
             %button.btn.btn-default.mb-20.visible-xs-inline-block
               = t('cart.checkout')
-    = link_to t('cart.checkout'), checkout_path(step: :address), class: 'btn btn-default w-190 mb-20 hidden-xs center-block'
+    - if user_signed_in?
+      = link_to t('cart.checkout'), checkout_path(step: :address), class: 'btn btn-default w-190 mb-20 hidden-xs center-block'
+    - else
+      = link_to t('cart.checkout'), checkout_path(step: :quick_registrate), class: 'btn btn-default w-190 mb-20 hidden-xs center-block'
   - else
     %div.mb-30
     %h1.text-center Your cart is empty

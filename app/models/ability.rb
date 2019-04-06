@@ -2,19 +2,20 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
-    user ||= User.new
     can :read, :all
-    if user.present?
+    if user
       can :create, Comment, user_id: user.id
       can :manage, User, id: user.id
-      can %i[create update], Address
+      can %i[read create], Order
+      can %i[create update destroy], LineItem
+      can %i[read create update], [Order, Address, CreditCard], user_id: user.id
+    end
+    cannot :read, Order do |order|
+      order.invisible?
     end
     can %i[create destroy], Order
     can %i[create update destroy], LineItem
     can :update, Book
     cannot %i[read update create], Address
-    # cannot %i[read], Settings
   end
-
 end

@@ -1,7 +1,7 @@
 class SettingsController < ApplicationController
-  def new
-    return redirect_to root_path unless current_user
+  before_action :authenticate_user!
 
+  def new
     @presenter = AddressPresenter.new(current_user: current_user).attach_controller(self)
   end
 end
