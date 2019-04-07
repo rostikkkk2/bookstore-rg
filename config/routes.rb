@@ -10,11 +10,12 @@ Rails.application.routes.draw do
   resources :comments
   resources :orders
   resources :line_items
-  resources :carts
+  resources :carts, path: '/carts/line_items'
   resources :addresses
   resources :settings_emails
   resources :accounts
   resources :settings
+  resources :coupons
   resources :checkout, param: :step
 
   resources :categories do

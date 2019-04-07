@@ -9,13 +9,14 @@ class Ability
       can %i[read create], Order
       can %i[create update destroy], LineItem
       can %i[read create update], [Order, Address, CreditCard], user_id: user.id
+    else
+      cannot :read, Order do |order|
+        order.invisible?
+      end
+      can %i[create destroy], Order
+      can %i[create update destroy], LineItem
+      can :update, Book
+      cannot %i[read update create], Address
     end
-    cannot :read, Order do |order|
-      order.invisible?
-    end
-    can %i[create destroy], Order
-    can %i[create update destroy], LineItem
-    can :update, Book
-    cannot %i[read update create], Address
   end
 end

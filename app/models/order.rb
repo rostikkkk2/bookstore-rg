@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   has_many :line_items
   belongs_to :delivery, optional: true
   belongs_to :user, optional: true
+  has_one :coupon, dependent: :nullify
 
   has_many :addresses, as: :resource, dependent: :destroy
   enum status: { cart: 0, address: 1, delivery: 2, payment: 3, confirm: 4, complete: 5 }

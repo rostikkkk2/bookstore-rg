@@ -9,6 +9,15 @@ class ConfirmService
     @current_order = current_order
   end
 
+  def call
+    use_current_coupon
+    create_secret_key
+  end
+
+  def use_current_coupon
+    current_order.coupon&.update(used: true)
+  end
+
   def create_secret_key
     current_order.update(number: generate_order_secret_number)
   end

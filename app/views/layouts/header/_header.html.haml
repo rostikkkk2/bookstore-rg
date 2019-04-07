@@ -11,7 +11,7 @@
         %span.shop-icon
           %span.shop-quantity 3
     %a.shop-link.pull-right.hidden-xs{href: "#"}
-    = link_to cart_path(1), class: 'shop-link pull-right hidden-xs' do
+    = link_to carts_path, class: 'shop-link pull-right hidden-xs' do
       %span.shop-icon
         %span.shop-quantity
           = @header_presenter.count_books_in_cart

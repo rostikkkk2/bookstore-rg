@@ -46,7 +46,7 @@ class CheckoutUpdateService
   end
 
   def checkout_last_step
-    ConfirmService.new(current_order).create_secret_key
+    ConfirmService.new(current_order).call
     OrderMailer.send_thanks_for_order(current_order).deliver_later
   end
 

@@ -17,14 +17,14 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
-    drop_item_and_empty_order = CartDeleteService.new(current_order, params).call
-    current_order.delete && session.delete(:current_order) if drop_item_and_empty_order
+    CartDeleteService.new(current_order, params).call
+    current_order.delete && session.delete(:current_order) if current_order.line_items.empty?
     redirect_message(DELETE_FROM_CART, :success)
   end
 
   def update
     CartUpdateService.new(params).call
-    respond_to { |format| format.html { redirect_to cart_path } }
+    respond_to { |format| format.html { redirect_to carts_path } }
   end
 
   private

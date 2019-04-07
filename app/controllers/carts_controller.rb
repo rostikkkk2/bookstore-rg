@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def show
+  def index
     @cart_presenter = CartPresenter.new(current_order: current_order).attach_controller(self)
     @books_cart = take_current_books_in_cart if current_order && !current_order.complete?
   end

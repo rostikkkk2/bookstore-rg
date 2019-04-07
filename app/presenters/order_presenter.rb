@@ -6,12 +6,12 @@ class OrderPresenter < Rectify::Presenter
   COUNT_NUMS_CARD_SHOW = 4
 
   def total_price(order)
-    delivery_price = Delivery.find_by(id: order.delivery_id).price
-    order.line_items.map { |item| item.book.price * item.quantity }.join.to_i + delivery_price
+    order.line_items.map { |item| item.book.price * item.quantity }.join.to_i + current_delivery(order).price
   end
 
-  def current_delivery
-    Delivery.find_by(id: current_order.delivery_id).method
+  def current_delivery(order = nil)
+    total_order = order || current_order
+    Delivery.find_by(id: total_order.delivery_id)
   end
 
   def credit_card_number
@@ -23,7 +23,14 @@ class OrderPresenter < Rectify::Presenter
   end
 
   def order_summary_price(order)
-    item_quantities = order.line_items.map { |item| item.quantity * item.book.price }
-    item_quantities.sum + Delivery.find_by(id: order.delivery_id).price
+    take_line_items_prise_from_order(order).sum + current_delivery(order).price - coupon_price(order)
+  end
+
+  def coupon_price(order)
+    order.coupon ? order.coupon.discount : 0
+  end
+
+  def take_line_items_prise_from_order(order)
+    order.line_items.map { |item| item.quantity * item.book.price }
   end
 end

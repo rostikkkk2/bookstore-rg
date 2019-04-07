@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    params[:checkout_signup] ? cart_path(current_user) : super(resource)
+    params[:checkout_signup] ? carts_path : super(resource)
   end
 
   private

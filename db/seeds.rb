@@ -48,11 +48,16 @@ def generate_delivery_methods
   Delivery.new(method: 'Standart Delivery', from_days: 5, to_days: 10, price: 25).save!
 end
 
+def generate_coupons
+  Coupon.new(key: '12345').save
+end
 
-# generate_categories
-# 15.times { generate_book }
-# 15.times { generate_authors }
-# generate_authors_books
-# generate_delivery_methods
 
-# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+generate_categories
+15.times { generate_book }
+15.times { generate_authors }
+generate_authors_books
+generate_delivery_methods
+generate_coupons
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

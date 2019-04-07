@@ -13,7 +13,8 @@
       %p.font-16
         = t('cart.coupon')
     %td
-      %p.font-16 €0.00
+      %p.font-16
+        = "€#{@cart_presenter.coupon_discount}"
   - if @cart_presenter.current_order.delivery_id
     %tr
       %td
