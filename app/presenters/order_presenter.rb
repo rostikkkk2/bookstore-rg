@@ -33,4 +33,12 @@ class OrderPresenter < Rectify::Presenter
   def take_line_items_prise_from_order(order)
     order.line_items.map { |item| item.quantity * item.book.price }
   end
+
+  def current_status_order
+    if params[:sort_order_by] && OrderSortingService::SORT_BY.include?(params[:sort_order_by].to_sym)
+      t("orders.#{params[:sort_order_by].to_sym}")
+    else
+      t('orders.in_progress')
+    end
+  end
 end

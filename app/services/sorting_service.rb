@@ -7,7 +7,6 @@ class SortingService < ApplicationController
     asc_price: ->(instance) { instance.order_by('price ASC') },
     desc_price: ->(instance) { instance.order_by('price DESC') },
     newest_first: ->(instance) { instance.order_by('id DESC') }
-    # popular_books: ->(instance) { instance.popular_sort },
   }.freeze
 
   def initialize(books, params)

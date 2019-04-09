@@ -1,24 +1,28 @@
-- @books_presenter.top_books.each do |book|
-  .col-xs-6.col-sm-3
-    .general-thumb-wrap
-      .thumbnail.general-thumbnail
-        = image_tag (book.photo_url ? book.photo_url(:w210) : 'default.png'), alt: "design-book", class: 'img-shadow general-thumbnail-img'
-        .thumb-hover
-          .general-thumb-link-wrap
-            = link_to book_path(book, category_id: params[:id]), class: 'thumb-hover-link' do
-              %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-            = form_tag line_items_path, method: :post, class: 'display-ib' do
-              - if user_signed_in?
-                = hidden_field_tag 'current_user', current_user.id
-              = hidden_field_tag 'current_book', book.id
-              = hidden_field_tag "count_books", "", value: 1
-              = button_tag :submit, class: 'button-add-to-cart-from-category thumb-hover-link' do
-                %i.fa.fa-shopping-cart.thumb-icon
-    .mb-35
-      .clearfix
-        %p.pull-right.font-16.in-gold-500= "€ #{book.price}"
-        %p.title.mr-55= book.name
-      %span.divider-sm
-      %p.lead.small
-        - book.authors.each do |author|
-          = author.name
+- if !@books_presenter.top_books.empty?
+  .mb-35
+    %h3= t('home_page.best_sellers')
+    .row
+      - @books_presenter.top_books.each do |book|
+        .col-xs-6.col-sm-3
+          .general-thumb-wrap
+            .thumbnail.general-thumbnail
+              = image_tag (book.photo_url ? book.photo_url(:w210) : 'default.png'), alt: "design-book", class: 'img-shadow general-thumbnail-img'
+              .thumb-hover
+                .general-thumb-link-wrap
+                  = link_to book_path(book, category_id: params[:id]), class: 'thumb-hover-link' do
+                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                  = form_tag line_items_path, method: :post, class: 'display-ib' do
+                    - if user_signed_in?
+                      = hidden_field_tag 'current_user', current_user.id
+                    = hidden_field_tag 'current_book', book.id
+                    = hidden_field_tag "count_books", "", value: 1
+                    = button_tag :submit, class: 'button-add-to-cart-from-category thumb-hover-link' do
+                      %i.fa.fa-shopping-cart.thumb-icon
+          .mb-35
+            .clearfix
+              %p.pull-right.font-16.in-gold-500= "€ #{book.price}"
+              %p.title.mr-55= book.name
+            %span.divider-sm
+            %p.lead.small
+              - book.authors.each do |author|
+                = author.name

@@ -3,41 +3,26 @@
     %table.table
       %tr
         %td.col-half
-          %span.in-grey-600 Method
+          %span.in-grey-600
+            = t('checkout.method')
         %td.col-half
           .form-group.radio.mt-0.mb-0
             %label.radio-label
               %input.radio-input{type: "radio", hidden: "true"}
               %span.radio-icon
-              %span.radio-text Delivery Next Day!
+              %span.radio-text
+                = t('checkout.delivery_next_day')
       %tr
         %td
-          %span.in-grey-600 Days
+          %span.in-grey-600
+            = t('checkout.days')
         %td
-          %span.font-16.fw-300 3 to 7 days
+          %span.font-16.fw-300
+            = t('checkout.period_days')
       %tr
         %td
-          %span.in-grey-600 Price
+          %span.in-grey-600
+            = t('checkout.price')
         %td
-          %span.font-16.in-gold-500 €5.00
-  .general-cart-item.divider-lg-bottom.mb-30
-    %table.table
-      %tr
-        %td.col-half
-          %span.in-grey-600 Method
-        %td.col-half
-          .form-group.radio.mt-0.mb-0
-            %label.radio-label
-              %input.radio-input{type: "radio", hidden: "true"}
-              %span.radio-icon
-              %span.radio-text Delivery Next Day!
-      %tr
-        %td
-          %span.in-grey-600 Days
-        %td
-          %span.font-16.fw-300 3 to 7 days
-      %tr
-        %td
-          %span.in-grey-600 Price
-        %td
-          %span.font-16.in-gold-500 €5.00
+          %span.font-16.in-gold-500
+            = t('checkout.five_dollars')

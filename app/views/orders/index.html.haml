@@ -1,70 +1,81 @@
 %main.container.general-main-wrap
-  %h1.mt-0.mb-25 My Orders
-  %p.lead.small.mb-10.visible-xs Sort by
+  %h1.mt-0.mb-25
+    = t('orders.my_orders')
+  %p.lead.small.mb-10.visible-xs
+    = t('orders.sort_by')
   .dropdowns.dropdown.general-order-dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-      Waiting for processing
+      = params[:sort_order_by] ? t("orders.#{params[:sort_order_by].to_sym}") : t('orders.in_progress')
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
-      %li
-        %a{href: "#"} Newest first
-      %li
-        %a{href: "#"} Popular first
-      %li
-        %a{href: "#"} Price: Low to hight
-      %li
-        %a{href: "#"} Price: Low to hight
+      - OrderSortingService::SORT_BY.each do |key, value|
+        %li
+          = link_to t("orders.#{key}"), orders_path(sort_order_by: key)
   .visible-xs
     .general-cart-item.divider-lg-bottom.pt-0
       %table.table
-        - @order_presenter.current_orders.each do |order|
+        - @sort_orders.each do |order|
           %tr
             %td.col-half
-              %span.in-grey-600 Number
+              %span.in-grey-600
+                = t('orders.number')
             %td.col-half
               %span.general-order-number
                 = order.number
           %tr
             %td
-              %span.in-grey-600 Completed at
+              %span.in-grey-600
+              = t('orders.completed_at')
             %td
               %span.in-grey-900.font-16.fw-300
                 = order.created_at.to_date
           %tr
             %td
-              %span.in-grey-600 Status
+              %span.in-grey-600
+                = t('orders.status')
             %td
-              %span.font-16.in-grey-900.fw-300 In Progress
+              %span.font-16.in-grey-900.fw-300
+                = t('orders.in_progress')
           %tr
             %td
-              %span.in-grey-600 Total
+              %span.in-grey-600
+                = t('orders.total')
             %td
               %strong.font-16
                 = "€#{@order_presenter.order_summary_price(order)}"
 
   .hidden-xs.mb-res-50
-    %table.table.table-hover
-      %thead
-        %tr
-          %th
-            %span.in-grey-600 Number
-          %th
-            %span.in-grey-600 Completed at
-          %th
-            %span.in-grey-600 Status
-          %th
-            %span.in-grey-600 Total
-      %tbody
-        - @order_presenter.current_orders.each do |order|
+    - if @sort_orders.empty?
+      %h1
+        = t('orders.there_is_no_orders')
+    - else
+      %table.table.table-hover
+        %thead
           %tr
-            %td
-              %span.general-order-number
-                = link_to order.number, order_path(order)
-            %td
-              %span.in-grey-900.font-16.fw-300
-                = order.created_at.to_date
-            %td
-              %span.font-16.in-grey-900.fw-300 In Progress
-            %td
-              %strong.font-16
-                = "€#{@order_presenter.order_summary_price(order)}"
+            %th
+              %span.in-grey-600
+                = t('orders.number')
+            %th
+              %span.in-grey-600
+                = t('orders.completed_at')
+            %th
+              %span.in-grey-600
+                = t('orders.status')
+            %th
+              %span.in-grey-600
+                = t('orders.total')
+        %tbody
+          - @sort_orders.each do |order|
+            %tr
+              %td
+                %span.general-order-number
+                  = link_to order.number, order_path(order)
+              %td
+                %span.in-grey-900.font-16.fw-300
+                  = order.created_at.to_date
+              %td
+                %span.font-16.in-grey-900.fw-300
+                  = @order_presenter.current_status_order
+              %td
+                %strong.font-16
+                  = "€#{@order_presenter.order_summary_price(order)}"

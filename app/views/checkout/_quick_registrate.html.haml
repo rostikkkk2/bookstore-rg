@@ -2,14 +2,16 @@
   .row
     .col-md-5.mb-40
       .text-center
-        %h3.general-subtitle Returning Customer
+        %h3.general-subtitle
+          = t('checkout.returning_customer')
         %a.general-login-icon{href: "#"}
           - if devise_mapping.omniauthable?
             - resource_class.omniauth_providers.each do |provider|
               = link_to omniauth_authorize_path(resource_name, provider) do
                 %i.fa.fa-facebook-official.facebook-icon
         %p.general-login-text or
-        %p.mb-15.text-left Log In with Password
+        %p.mb-15.text-left
+          = t('checkout.login_with_password')
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .form-group.mb-30
           %label.control-label.input-label{for: "email"}= t('devise.enter_email')
@@ -21,10 +23,11 @@
             = render "devise/shared/link_password"
         .text-center
           %button.btn.btn-default.mb-20
-            = f.submit "Log In with Password", class: 'btn-submit-login-sign-up'
+            = f.submit t('checkout.login_with_password'), class: 'btn-submit-login-sign-up'
     .col-md-5.col-md-offset-1.mb-60
       .text-center
-        %h3.general-subtitle New Customer
+        %h3.general-subtitle
+          = t('checkout.new_customer')
         %a.general-login-icon{href: "#"}
           - if devise_mapping.omniauthable?
             - resource_class.omniauth_providers.each do |provider|
@@ -33,14 +36,17 @@
         %p.general-login-text or
       = form_for(User.new, url: user_registration_path, method: :post) do |f|
         .mb-40
-          %p.mb-5 Quik Register
-          %p.general-info-text.font-12.mb-20 You’ll be able to create password later
+          %p.mb-5
+            = t('checkout.quick_registration')
+          %p.general-info-text.font-12.mb-20
+            = t('checkout.able_to_create_password_late')
           .form-group.mb-30
-            %label.control-label.input-label{for: "email"} Enter Email
-            = f.email_field :email, autofocus: true, autocomplete: "email", id: 'email', class: 'form-control', placeholder: "Enter Email"
+            %label.control-label.input-label{for: "email"}
+              = t('checkout.enter_email')
+            = f.email_field :email, autofocus: true, autocomplete: "email", id: 'email', class: 'form-control', placeholder: t('checkout.enter_email')
             = resource.errors.messages[:email].to_sentence
         .text-center
           .form-group.checkbox.text-center.mb-30
             %button.btn.btn-default.mb-20
               = hidden_field_tag :checkout_signup
-              = f.submit "Sign Up", class: 'btn-submit-login-sign-up'
+              = f.submit t('checkout.sign_up'), class: 'btn-submit-login-sign-up'

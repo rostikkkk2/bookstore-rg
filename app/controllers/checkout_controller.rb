@@ -1,6 +1,4 @@
 class CheckoutController < ApplicationController
-  before_action :authenticate_user!
-
   def show
     checkout_service = CheckoutShowService.new(params, current_order, current_user)
     @cart_presenter = CartPresenter.new(current_order: current_order).attach_controller(self)

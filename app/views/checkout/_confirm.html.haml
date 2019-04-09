@@ -2,23 +2,29 @@
   = render partial: 'checkout/points_steps/types_steps'
   .row.mb-20
     .col-sm-3
-      %h3.general-subtitle Shipping Address
+      %h3.general-subtitle
+        = t('checkout.shippint_address')
       - @presenter.current_order.addresses.shipping.each do |address|
         = render partial: 'checkout/info_confirm/addresses_checkout', locals: {address: address}
     .col-sm-3
-      %h3.general-subtitle Billing Address
+      %h3.general-subtitle
+        = t('checkout.billing_address')
       - @presenter.current_order.addresses.billing.each do |address|
         = render partial: 'checkout/info_confirm/addresses_checkout', locals: {address: address}
     .col-sm-3
-      %h3.general-subtitle Shipments
+      %h3.general-subtitle
+        = t('checkout.shipments')
       %p.general-address
         = @presenter.current_delivery
-        %a.general-edit{href: '/checkout/delivery'} edit
+        %a.general-edit{href: '/checkout/delivery'}
+          = t('checkout.edit')
     .col-sm-3
-      %h3.general-subtitle Payment Information
+      %h3.general-subtitle
+        = t('checkout.payment_information')
       %p.general-address
         = @presenter.credit_card_number
-        %a.general-edit{href: '/checkout/payment'} edit
+        %a.general-edit{href: '/checkout/payment'}
+          = t('checkout.edit')
         %br
         = @presenter.current_order.credit_card.date
   .visible-xs
@@ -28,14 +34,18 @@
       %thead
         %tr
           %th
-            %span.in-grey-600 Book
+            %span.in-grey-600
+              = t('checkout.book')
           %th.col-method
           %th
-            %span.in-grey-600 Price
+            %span.in-grey-600
+              = t('checkout.price')
           %th
-            %span.in-grey-600 Quantity
+            %span.in-grey-600
+              = t('checkout.quantity')
           %th
-            %span.in-grey-600 Total
+            %span.in-grey-600
+              = t('checkout.total')
       %tbody
         - @presenter.current_line_items.each do |item|
           %tr
@@ -55,7 +65,7 @@
                 = item.quantity
             %td
               %span.font-16.in-gold-500
-                = "€#{@cart_presenter.order_summary_price}"
+                = "€#{@cart_presenter.subtotal_prise_book(item.book)}"
   %row
     .text-center.general-text-right.col-sm-12.col-md-12.col-xs-12.confirm-subtotal-price
       = render partial: 'checkout/order_summary/order_price'

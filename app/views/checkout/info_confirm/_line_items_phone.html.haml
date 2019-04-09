@@ -9,19 +9,22 @@
     %table.table
       %tr
         %td
-          %span.in-grey-600 Price
+          %span.in-grey-600
+            = t('checkout.price')
         %td
           %span.font-16.in-gold-500
             = "€#{item.book.price}"
       %tr
         %td.vertical-middle
-          %span.in-grey-600 Quantity
+          %span.in-grey-600
+            = t('checkout.quantity')
         %td
           %span
             = item.quantity
       %tr
         %td
-          %span.in-grey-600 SubTotal
+          %span.in-grey-600
+            = t('checkout.subtotal')
         %td
           %span.font-16.in-gold-500
             = "€#{@cart_presenter.order_summary_price}"

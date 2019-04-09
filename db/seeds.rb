@@ -12,7 +12,6 @@ def generate_book
     price: rand(30.20...99.99).round(2),
     category_id: rand(1..3),
     published_year: 2015,
-    # photo: File.open(File.join(Rails.root, '/public/img/2.jpg')),
     heigth: 6.4,
     width: 0.9,
     depth: 5.0,
@@ -51,7 +50,6 @@ end
 def generate_coupons
   Coupon.new(key: '12345').save
 end
-
 
 generate_categories
 15.times { generate_book }

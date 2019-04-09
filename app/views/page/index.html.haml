@@ -6,7 +6,4 @@
     .mb-res-50
       %p= t('home_page.about_books')
     %button.btn.btn-default= link_to t('home_page.get_started'), books_path, class: 'btn_get_start'
-  .mb-35
-    %h3= t('home_page.best_sellers')
-    .row
-      = render partial: 'page/show_best_books'
+  = render partial: 'page/show_best_books'

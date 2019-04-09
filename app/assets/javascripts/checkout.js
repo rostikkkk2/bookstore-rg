@@ -10,19 +10,9 @@ $(document).on('turbolinks:load', function(){
     }
   });
 
-  // if ($('#hide_shipping_form').checked == null) {
-  //   console.log($('#hide_shipping_form').checked);
-  //   // $('#hide_shipping_form').attr('checked', 'true');
-  //   document.querySelector('#hide_shipping_form').checked = true;
-  //   console.log($('#hide_shipping_form').checked);
-  //
-  // }
-  // if (localStorage.checked == null) {
-  //   console.log(2);
-  //   localStorage.checked == 'false';
-  // }
-
-  document.querySelector('#hide_shipping_form').checked = set_storage_checked();
+  if (window.location.pathname == '/checkout/address') {
+    document.querySelector('#hide_shipping_form').checked = set_storage_checked();
+  }
 
   function set_storage_checked() {
     if (!localStorage.checked || localStorage.checked == 'false') {
@@ -35,5 +25,4 @@ $(document).on('turbolinks:load', function(){
       return true;
     }
   }
-
 });

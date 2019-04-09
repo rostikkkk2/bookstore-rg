@@ -69,6 +69,7 @@
       = link_to t('cart.checkout'), checkout_path(step: :quick_registrate), class: 'btn btn-default w-190 mb-20 hidden-xs center-block'
   - else
     %div.mb-30
-    %h1.text-center Your cart is empty
+    %h1.text-center
+      = t('cart.empty_cart')
     %br
-    = link_to 'Back to store', root_path, class: 'btn btn-default w-190 mb-20 hidden-xs center-block'
+    = link_to t('cart.back_to_store'), root_path, class: 'btn btn-default w-190 mb-20 hidden-xs center-block'

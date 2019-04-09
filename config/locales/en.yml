@@ -20,6 +20,8 @@ en:
     coupon: "Coupon:"
     order_total: "Order Total:"
     checkout: Checkout
+    empty_cart: Your cart is empty
+    back_to_store: Back to store
   footer:
     home: Home
     shop: Shop
@@ -42,7 +44,6 @@ en:
     asc_price: 'Price: Low to hight'
     desc_price: 'Price: Hight to low'
     newest_first: 'Newest first'
-    popular_books: 'Popular first'
   categories:
     title_catalog: Сatalog
     filter_by_category: Filter by category
@@ -101,3 +102,57 @@ en:
     zip: Zip
     country: Country
     phone: Phone
+    remove_account_submit: Please Remove My Account
+    save: Save
+  orders:
+    my_orders: My Orders
+    in_progress: In progress
+    in_delivery: In delivery
+    delivered: Delivered
+    canceled: Canceled
+    sort_by: Sort by
+    number: Number
+    status: Status
+    total: Total
+    in_progress: In Progress
+    completed_at: Completed at
+    there_is_no_orders: There is no orders with this status
+  checkout:
+    method: Method
+    delivery_next_day: Delivery Next Day!
+    days: Days
+    period_days: 3 to 7 days
+    price: Price
+    five_dollars: €5.00
+    edit: edit
+    quantity: Quantity
+    subtotal: SubTotal
+    title: Checkout
+    billing_address: Billing Address
+    shippint_address: Shipping Address
+    all_fields_required: all fields are required
+    use_billing_address: Use Billing Address
+    save_and_continue: Save and Continue
+    delivery: "Delivery:"
+    thank_for_order: Thank You for your Order!
+    send_massage_email_in_complete: An order confirmation has been has been sent to %{email}
+    order_number_complete: Order %{number}
+    phone_complete: Phone %{phone}
+    book: Book
+    total: Total
+    shipments: Shipments
+    payment_information: Payment Information
+    delivery_title: Delivery
+    credit_card_title: Credit Card
+    card_number: Card Number
+    name_on_card: Name on Card
+    mm_yy: MM / YY
+    cvv: CVV
+    cvv_hint: "3-digit security code, usually can be found on the back of your card. American Express card has 4-digit code, located on the front side."
+    returning_customer: Returning Customer
+    login_with_password: Log In with Password
+    new_customer: New Customer
+    quick_registration: Quik Register
+    able_to_create_password_late: "You’ll be able to create password later"
+    enter_email: Enter Email
+    sign_up: Sing Up
