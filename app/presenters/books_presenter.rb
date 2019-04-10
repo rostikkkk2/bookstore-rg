@@ -3,7 +3,7 @@ class BooksPresenter < Rectify::Presenter
   COUNT_TOP_BOOKS = 4
 
   def btn_all_books
-    link_to 'All', books_path, class: "filter-link hover_category_color #{'def-color-chosen-category' unless params[:category_id]}"
+    link_to I18n.t('book_page.btn_all'), books_path, class: "filter-link hover_category_color #{'def-color-chosen-category' unless params[:category_id]}"
   end
 
   def all_books
@@ -39,7 +39,7 @@ class BooksPresenter < Rectify::Presenter
   end
 
   def show_current_category
-    params[:id] ? all_categories.find_by(id: params[:id]).name : 'All books'
+    params[:id] ? all_categories.find_by(id: params[:id]).name : I18n.t('book_page.all_categories')
   end
 
   def show_sort_type

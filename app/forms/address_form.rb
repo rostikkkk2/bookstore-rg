@@ -21,9 +21,9 @@ class AddressForm
 
   validates :first_name, :last_name, :address, :city, :zip, :country, :phone, :address_type, presence: true
   validates :first_name, :last_name, :address, :city, length: { maximum: 30 }
-  validates :first_name, :last_name, :city, format: { with: VALIDATE_NAMES_AND_CITY, message: 'must write with big letter' }
-  validates :zip, length: { maximum: 10 }, format: { with: VALIDATE_ZIP, message: 'wrong number' }
-  validates :phone, length: { minimum: 10, maximum: 15 }, format: { with: VALIDATE_PHONE, message: 'have to start with +' }
+  validates :first_name, :last_name, :city, format: { with: VALIDATE_NAMES_AND_CITY, message: I18n.t('validate.big_letter') }
+  validates :zip, length: { maximum: 10 }, format: { with: VALIDATE_ZIP, message: I18n.t('validate.wrong_number') }
+  validates :phone, length: { minimum: 10, maximum: 15 }, format: { with: VALIDATE_PHONE, message: I18n.t('validate.start_plus') }
 
   def create_address
     new_address = Address.new(

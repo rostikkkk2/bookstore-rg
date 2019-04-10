@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
   authorize_resource
+  STATUS_COMPLETE = 'complete'.freeze
 
   def index
-    current_orders = Order.where(user_id: current_user.id, status: 'complete')
+    current_orders = Order.where(user_id: current_user.id, status: STATUS_COMPLETE)
     @order_presenter = OrderPresenter.new(current_orders: current_orders).attach_controller(self)
     @sort_orders = OrderSortingService.new(params, current_user).call
   end

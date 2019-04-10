@@ -9,10 +9,10 @@ class CreditCardForm
   attribute :order_id, Integer
 
   validates :number, :name, :date, :cvv, :order_id, presence: true
-  validates :number, length: { is: 16 }, numericality: { only_integer: true, message: 'Must be only numbers' }
+  validates :number, length: { is: 16 }, numericality: { only_integer: true, message: I18n.t('validate.only_numbers') }
   validates :name, length: { maximum: 15 }
-  validates :date, format: { with: %r{\A^(0[1-9]|1[0-2])\/?([0-9]{2})$\z}, message: 'should be in MM/YY format and contain only numbers' }
-  validates :cvv, length: { minimum: 3, maximum: 4 }, numericality: { only_integer: true, message: 'Must be only numbers' }
+  validates :date, format: { with: %r{\A^(0[1-9]|1[0-2])\/?([0-9]{2})$\z}, message: I18n.t('validate.mm_yy') }
+  validates :cvv, length: { minimum: 3, maximum: 4 }, numericality: { only_integer: true, message: I18n.t('validate.only_numbers') }
 
   def create_credit_card
     CreditCard.new(number: number, name: name, date: date, cvv: cvv, order_id: order_id).save!

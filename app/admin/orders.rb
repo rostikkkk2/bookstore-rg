@@ -28,9 +28,6 @@ ActiveAdmin.register Order do
       row :created_at
       row :coupon
       row :delivery_id
-
     end
   end
-
-
 end

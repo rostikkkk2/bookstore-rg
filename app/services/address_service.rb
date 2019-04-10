@@ -1,5 +1,7 @@
 class AddressService
   attr_reader :params, :current_user, :current_order, :billing, :shipping
+  SHIPPING_TYPE_ADDRESS = 'shipping'.freeze
+  TYPE_USER_IN_ADDRESS = 'User'.freeze
 
   def initialize(params, current_user, current_order)
     @params = params
@@ -29,7 +31,7 @@ class AddressService
 
   def create_billing_with_hidden_shipping
     create_or_update_checkout_address(@billing, current_order.addresses.billing)
-    @billing.address_type = 'shipping'
+    @billing.address_type = SHIPPING_TYPE_ADDRESS
     create_or_update_checkout_address(@billing, current_order.addresses.shipping)
   end
 
@@ -46,6 +48,6 @@ class AddressService
   private
 
   def check_current_address
-    Address.find_by(resource_id: current_user.id, resource_type: 'User', address_type: params[:address_type])
+    Address.find_by(resource_id: current_user.id, resource_type: TYPE_USER_IN_ADDRESS, address_type: params[:address_type])
   end
 end

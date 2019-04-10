@@ -4,6 +4,9 @@ class AddressPresenter < Rectify::Presenter
   attribute :current_order
   attribute :billing_form
   attribute :shipping_form
+  CLASS_HAS_ERROR = 'has-error'.freeze
+  TYPE_USER_IN_ADDRESS = 'User'.freeze
+  TYPE_ORDER_IN_ADDRESS = 'Order'.freeze
 
   def step
     'address'
@@ -18,7 +21,7 @@ class AddressPresenter < Rectify::Presenter
   end
 
   def add_class_error(type, form)
-    'has-error' unless form.errors[type].empty?
+    CLASS_HAS_ERROR unless form.errors[type].empty?
   end
 
   def exists_address(resource_id, type_address, type_form)
@@ -33,9 +36,9 @@ class AddressPresenter < Rectify::Presenter
   end
 
   def check_current_address(type)
-    return exists_address(current_user.id, 'User', type) if current_user
+    return exists_address(current_user.id, TYPE_USER_IN_ADDRESS, type) if current_user
 
-    exists_address(current_order.id, 'Order', type) || exists_address(current_order.user.id, 'User', type) if current_order
+    exists_address(current_order.id, TYPE_ORDER_IN_ADDRESS, type) || exists_address(current_order.user.id, TYPE_USER_IN_ADDRESS, type) if current_order
   end
 
   def current_country(type)

@@ -1,9 +1,9 @@
 class OrderPresenter < Rectify::Presenter
   attribute :current_orders
   attribute :current_order
-
   SECRET_NUMS_FOR_CARD = '**** **** **** '.freeze
   COUNT_NUMS_CARD_SHOW = 4
+  START_PRICE = 0
 
   def total_price(order)
     order.line_items.map { |item| item.book.price * item.quantity }.join.to_i + current_delivery(order).price
@@ -27,7 +27,7 @@ class OrderPresenter < Rectify::Presenter
   end
 
   def coupon_price(order)
-    order.coupon ? order.coupon.discount : 0
+    order.coupon ? order.coupon.discount : START_PRICE
   end
 
   def take_line_items_prise_from_order(order)

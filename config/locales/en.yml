@@ -50,6 +50,8 @@ en:
     sort_by: Sort by
     all_books: All books
   book_page:
+    btn_all: All
+    all_categories: All books
     description: Description
     year_publishing: Year of publication
     dimensions: Dimensions
@@ -156,3 +158,9 @@ en:
     able_to_create_password_late: "You’ll be able to create password later"
     enter_email: Enter Email
     sign_up: Sing Up
+  validate:
+    big_letter: must write with big letter
+    wrong_number: wrong number
+    start_plus: have to start with +
+    only_numbers: Must be only numbers
+    mm_yy: should be in MM/YY format and contain only numbers
