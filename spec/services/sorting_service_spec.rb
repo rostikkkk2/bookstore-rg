@@ -11,7 +11,6 @@ RSpec.describe SortingService do
   let(:params_asc_price) { { sort_by: :asc_price, category_id: category.id } }
   let(:params_desc_price) { { sort_by: :desc_price, category_id: category.id } }
   let(:params_newest_first) { { sort_by: :newest_first, category_id: category.id } }
-  let(:params_popular_books) { { sort_by: :popular_books, category_id: category.id } }
 
   describe 'sorting books by ask' do
     subject(:service) { described_class.new(all_books, params_asc_title) }
@@ -52,6 +51,4 @@ RSpec.describe SortingService do
       expect(service.call).to eq([book2, book])
     end
   end
-
-
 end
