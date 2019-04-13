@@ -7,7 +7,7 @@ class ChangePasswordService
   end
 
   def call
-    passwords_correct(parse_user_password) ? change_old_password : false
+    change_old_password if passwords_correct(parse_user_password)
   end
 
   def passwords_correct(user_password)

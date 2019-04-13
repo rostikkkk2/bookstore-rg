@@ -106,6 +106,7 @@ en:
     phone: Phone
     remove_account_submit: Please Remove My Account
     save: Save
+    update: Update
   orders:
     my_orders: My Orders
     in_progress: In progress

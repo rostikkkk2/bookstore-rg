@@ -13,6 +13,7 @@ class AccountsController < ApplicationController
   def update
     change_password = ChangePasswordService.new(current_user, params).call
     change_password ? flash[:success] = SUCCESS_CHANGE_PASSWORD : flash[:error] = WRONG_PASSWORD
+    sign_in(current_user, bypass: true)
     redirect_to new_setting_path
   end
 end

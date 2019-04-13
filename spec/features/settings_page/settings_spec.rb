@@ -47,7 +47,6 @@ describe 'Settings page', type: :feature do
     end
   end
 
-
   context 'when shipping' do
     let(:shipping) { create(:address, address_type: 'shipping', resource: user) }
 

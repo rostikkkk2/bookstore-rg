@@ -26,7 +26,7 @@
           = t('settings.confirm_password')
         = text_field_tag "confirm_password", "", class: 'form-control', type: "password", id: 'confirmPassword', placeholder: "Confirm Password"
       .general-text-align
-        = submit_tag t('settings.save'), class: 'btn mb-10'
+        = submit_tag t('settings.update'), class: 'btn mb-10'
   .col-sm-12
     %p.in-gold-500.font-18.mb-25= t('settings.remove_account')
     = form_tag account_path(current_user), method: :delete do
