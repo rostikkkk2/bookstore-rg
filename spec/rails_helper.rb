@@ -10,8 +10,8 @@ require 'capybara/rspec'
 require 'capybara/dsl'
 require 'capybara/rails'
 require 'selenium-webdriver'
+require 'rack_session_access/capybara'
 
-require 'capybara/poltergeist'
 require 'yaml'
 require 'i18n'
 

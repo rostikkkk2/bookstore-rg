@@ -16,14 +16,14 @@
         = t('checkout.shipments')
       %p.general-address
         = @presenter.current_delivery
-        %a.general-edit{href: '/checkout/delivery'}
+        %a.general-edit.step-delivery{href: '/checkout/delivery'}
           = t('checkout.edit')
     .col-sm-3
       %h3.general-subtitle
         = t('checkout.payment_information')
       %p.general-address
         = @presenter.credit_card_number
-        %a.general-edit{href: '/checkout/payment'}
+        %a.general-edit.step-payment{href: '/checkout/payment'}
           = t('checkout.edit')
         %br
         = @presenter.current_order.credit_card.date

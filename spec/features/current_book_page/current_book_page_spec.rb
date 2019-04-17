@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 describe 'Current book page', type: :feature do
-  let(:category_mobile) { create(:category, name: 'Mobile') }
-  let!(:book) { create(:book, category: category_mobile) }
+  let!(:book) { create(:book) }
 
   before do
     visit book_path(book)

@@ -55,7 +55,7 @@ describe 'Settings page', type: :feature do
       expect(page).to have_content "can't be blank, must write with big letter"
     end
 
-    it 'billing address exists' do
+    it 'shipping address exists' do
       shipping
       visit new_setting_path
 
