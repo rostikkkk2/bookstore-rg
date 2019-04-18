@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :category do
-    name { 'Mobile' }
+    name { FFaker::Lorem.word }
   end
 end

@@ -14,26 +14,26 @@ describe 'Comments in book page', type: :feature do
   end
 
   it 'send comment with invalid fields' do
-    click_on('Post')
+    click_on(I18n.t('book_page.comment.post'))
     expect(page).to have_content error_message
   end
 
   it 'send comment with invalid body comment' do
     fill_in 'title', with: '123'
-    click_on('Post')
+    click_on(I18n.t('book_page.comment.post'))
     expect(page).to have_content error_empty_body_message
   end
 
   it 'send comment with invalid title comment' do
     fill_in 'text_comment', with: '123'
-    click_on('Post')
+    click_on(I18n.t('book_page.comment.post'))
     expect(page).to have_content error_empty_title_message
   end
 
   it 'send comment with valid comment' do
     fill_in 'text_comment', with: 'test_title'
     fill_in 'title', with: 'test_body'
-    click_on('Post')
+    click_on(I18n.t('book_page.comment.post'))
     expect(page).to have_content user.email
   end
 end

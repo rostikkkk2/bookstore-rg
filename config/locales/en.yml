@@ -22,6 +22,8 @@ en:
     checkout: Checkout
     empty_cart: Your cart is empty
     back_to_store: Back to store
+    wrong_coupon: wrong coupon
+    used_coupon: you used coupon for this order
   footer:
     home: Home
     shop: Shop
@@ -60,6 +62,7 @@ en:
     hide_read_more: Hide Read More
     add_to_card: Add to Cart
     back_to_result: Back to results
+    back: Back to result
     comment:
       verified_reviewer: Verified Reviewer
       reviews: Reviews
@@ -69,6 +72,8 @@ en:
       review: Review
       post: Post
   devise:
+    sign_up_big: Sign Up 
+    not_auth_for_action: You are not authorized to access this page.
     resend_confirmation: Resend confirmation instructions
     set_new_password: Set new password
     type_new_password: Type a new Password
@@ -104,6 +109,11 @@ en:
     zip: Zip
     country: Country
     phone: Phone
+    wrong_password: Wrong password
+    changed_password: Successfuly changed password
+    update_email: Your email successfuly update
+    invalid_email: Email can't be blank and Email is invalid
+    account_deleted: Your account successfuly deleted
     remove_account_submit: Please Remove My Account
     save: Save
     update: Update
@@ -121,6 +131,8 @@ en:
     completed_at: Completed at
     there_is_no_orders: There is no orders with this status
   checkout:
+    back_to_store: Back to Store
+    place_order: Place Order
     method: Method
     delivery_next_day: Delivery Next Day!
     days: Days
@@ -146,6 +158,10 @@ en:
     shipments: Shipments
     payment_information: Payment Information
     delivery_title: Delivery
+    payment_title: Payment
+    confirm_title: Confirm
+    complete_title: Complete
+    address_title: Address
     credit_card_title: Credit Card
     card_number: Card Number
     name_on_card: Name on Card

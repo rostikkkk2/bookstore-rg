@@ -16,27 +16,27 @@ describe 'Payment card page', type: :feature do
   end
 
   it 'when all fields invalid' do
-    click_on('Save and Continue')
+    click_on(I18n.t('checkout.save_and_continue'))
     expect(page).to have_content error_empty_message
   end
 
   it 'try to go on delivery step' do
-    find('a', class: 'step_checkout', text: 'Address').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.address_title')).click
     expect(page).to have_current_path checkout_path(step: :address)
   end
 
   it 'try to go on delivery step' do
-    find('a', class: 'step_checkout', text: 'Delivery').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.delivery_title')).click
     expect(page).to have_current_path checkout_path(step: :delivery)
   end
 
   it 'try to go on confirm step' do
-    find('a', class: 'step_checkout', text: 'Confirm').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.confirm_title')).click
     expect(page).to have_current_path checkout_path(step: :payment)
   end
 
   it 'try to go on complete step' do
-    find('a', class: 'step_checkout', text: 'Complete').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.complete_title')).click
     expect(page).to have_current_path checkout_path(step: :payment)
   end
 
@@ -45,7 +45,7 @@ describe 'Payment card page', type: :feature do
     fill_in 'credit_card_form[name]', with: valid_attributes[:name]
     fill_in 'credit_card_form[date]', with: valid_attributes[:date]
     fill_in 'credit_card_form[cvv]', with: valid_attributes[:cvv]
-    click_on('Save and Continue')
+    click_on(I18n.t('checkout.save_and_continue'))
     expect(page).to have_current_path checkout_path(step: :confirm)
   end
 end

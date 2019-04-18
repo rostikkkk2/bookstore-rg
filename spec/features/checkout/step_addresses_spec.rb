@@ -8,9 +8,9 @@ describe 'Checkout address step', type: :feature do
   before do
     login_as(order.user, scope: :user)
     visit root_path
-    click_on('Buy Now')
+    click_on(I18n.t('home_page.buy_now'))
     visit carts_path
-    click_on('Checkout')
+    click_on(I18n.t('checkout.title'))
   end
 
   it 'when go to first step checkout' do
@@ -18,7 +18,7 @@ describe 'Checkout address step', type: :feature do
   end
 
   it 'when click on continue all fields invalid' do
-    click_on('Save and Continue')
+    click_on(I18n.t('checkout.save_and_continue'))
     expect(page).to have_content error_empty_message
   end
 
@@ -40,7 +40,7 @@ describe 'Checkout address step', type: :feature do
 
     it 'when billing address exists without shipping' do
       billing
-      click_on('Save and Continue')
+      click_on(I18n.t('checkout.save_and_continue'))
       expect(page).to have_content error_empty_message
     end
   end
@@ -63,28 +63,28 @@ describe 'Checkout address step', type: :feature do
 
     it 'when shipping address exists without billing' do
       shipping
-      click_on('Save and Continue')
+      click_on(I18n.t('checkout.save_and_continue'))
       expect(page).to have_content error_empty_message
     end
   end
 
   it 'try to go on delivery step' do
-    find('a', class: 'step_checkout', text: 'Delivery').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.delivery_title')).click
     expect(page).to have_current_path checkout_path(step: :address)
   end
 
   it 'try to go on payment step' do
-    find('a', class: 'step_checkout', text: 'Payment').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.payment_title')).click
     expect(page).to have_current_path checkout_path(step: :address)
   end
 
   it 'try to go on confirm step' do
-    find('a', class: 'step_checkout', text: 'Confirm').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.confirm_title')).click
     expect(page).to have_current_path checkout_path(step: :address)
   end
 
   it 'try to go on complete step' do
-    find('a', class: 'step_checkout', text: 'Complete').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.complete_title')).click
     expect(page).to have_current_path checkout_path(step: :address)
   end
 
@@ -103,7 +103,7 @@ describe 'Checkout address step', type: :feature do
     fill_in 'billing_form[zip]', with: valid_attributes[:zip]
     first('#billing_form_phone').set valid_attributes[:phone]
 
-    click_on('Save and Continue')
+    click_on(I18n.t('checkout.save_and_continue'))
     expect(page).to have_current_path checkout_path(step: :delivery)
   end
 
@@ -116,7 +116,7 @@ describe 'Checkout address step', type: :feature do
     first('#billing_form_city').set valid_attributes[:city]
     fill_in 'billing_form[zip]', with: valid_attributes[:zip]
     first('#billing_form_phone').set valid_attributes[:phone]
-    click_on('Save and Continue')
+    click_on(I18n.t('checkout.save_and_continue'))
     expect(page).to have_current_path checkout_path(step: :delivery)
   end
 end

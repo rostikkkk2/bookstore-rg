@@ -26,13 +26,13 @@ describe 'Current book page', type: :feature do
 
   it 'when click on read more' do
     find('a', id: 'btn_read_more', text: 'Read More').click
-    expect(page).to have_selector 'a', text: 'Hide Read More'
+    expect(page).to have_selector 'a', text: I18n.t('book_page.hide_read_more')
   end
 
   it 'when click to button back and show category page' do
     visit books_path
     visit book_path(book)
-    find('a', class: 'general-back-link', text: 'Back to result').click
+    find('a', class: 'general-back-link', text: I18n.t('book_page.back')).click
     expect(page).to have_current_path books_path
   end
 end

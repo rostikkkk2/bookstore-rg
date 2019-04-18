@@ -16,27 +16,27 @@ describe 'Complete page in checkout', type: :feature do
   end
 
   it 'try to go on address step' do
-    find('a', class: 'step_checkout', text: 'Address').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.address_title')).click
     expect(page).to have_content order.user.email
   end
 
   it 'try to go on delivery step' do
-    find('a', class: 'step_checkout', text: 'Delivery').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.delivery_title')).click
     expect(page).to have_content order.user.email
   end
 
   it 'try to go on payment step' do
-    find('a', class: 'step_checkout', text: 'Payment').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.payment_title')).click
     expect(page).to have_content order.user.email
   end
 
   it 'try to go on confirm step' do
-    find('a', class: 'step_checkout', text: 'Confirm').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.confirm_title')).click
     expect(page).to have_content order.user.email
   end
 
   it 'back to storage' do
-    click_on('Back to Store')
+    click_on(I18n.t('checkout.back_to_store'))
     expect(page).to have_current_path root_path
   end
 end

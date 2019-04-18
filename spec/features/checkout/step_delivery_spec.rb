@@ -14,27 +14,27 @@ describe 'Checkout address step', type: :feature do
   end
 
   it 'try to go on address step' do
-    find('a', class: 'step_checkout', text: 'Address').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.address_title')).click
     expect(page).to have_current_path checkout_path(step: :address)
   end
 
   it 'try to go on payment step' do
-    find('a', class: 'step_checkout', text: 'Payment').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.payment_title')).click
     expect(page).to have_current_path checkout_path(step: :delivery)
   end
 
   it 'try to go on confirm step' do
-    find('a', class: 'step_checkout', text: 'Confirm').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.confirm_title')).click
     expect(page).to have_current_path checkout_path(step: :delivery)
   end
 
   it 'try to go on complete step' do
-    find('a', class: 'step_checkout', text: 'Complete').click
+    find('a', class: 'step_checkout', text: I18n.t('checkout.complete_title')).click
     expect(page).to have_current_path checkout_path(step: :delivery)
   end
 
   it 'click submit with checked delivery method' do
-    click_on('Save and Continue')
+    click_on(I18n.t('checkout.save_and_continue'))
     expect(page).to have_current_path checkout_path(step: :payment)
   end
 end

@@ -8,7 +8,7 @@ FactoryBot.define do
     heigth { 6.4 }
     width { 0.9 }
     depth { 5.0 }
-    material { 'Hardcove, glossy paper' }
+    material { FFaker::Lorem.word }
 
     category
   end

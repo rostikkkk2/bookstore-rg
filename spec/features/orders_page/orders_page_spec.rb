@@ -10,7 +10,7 @@ describe 'Orders page', type: :feature do
   end
 
   it 'show orders page' do
-    expect(page).to have_content 'My Orders'
+    expect(page).to have_content I18n.t('orders.my_orders')
     expect(page).to have_content order.number
   end
 

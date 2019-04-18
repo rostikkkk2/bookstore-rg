@@ -7,7 +7,7 @@ describe 'Cart page', type: :feature do
 
   before do
     visit root_path
-    click_button('Buy Now')
+    click_button(I18n.t('home_page.buy_now'))
     visit carts_path
   end
 
@@ -19,7 +19,7 @@ describe 'Cart page', type: :feature do
 
   it 'when delete book form cart' do
     find('button', class: 'general-cart-close', text: '×').click
-    expect(page).to have_content 'Your cart is empty'
+    expect(page).to have_content I18n.t('cart.empty_cart')
   end
 
   context 'when increment and decrement quantity book' do
@@ -43,8 +43,8 @@ describe 'Cart page', type: :feature do
   end
 
   it 'when click on apply coupon with empty field' do
-    click_button('Apply Coupon')
-    expect(page).to have_selector 'div', text: 'wrong coupon'
+    click_button(I18n.t('cart.apply_coupon'))
+    expect(page).to have_selector 'div', text: I18n.t('cart.wrong_coupon')
   end
 
   it 'when click on cover book' do
@@ -53,13 +53,13 @@ describe 'Cart page', type: :feature do
   end
 
   it 'when not signed in user click on checkout button' do
-    find('a', text: 'Checkout').click
+    find('a', text: I18n.t('cart.checkout')).click
     expect(page).to have_current_path checkout_path(step: :quick_registrate)
   end
 
   it 'when use right coupon' do
     first('#coupon').set coupon.key
-    click_button('Apply Coupon')
-    expect(page).to have_content 'you used coupon for this order'
+    click_button(I18n.t('cart.apply_coupon'))
+    expect(page).to have_content I18n.t('cart.used_coupon')
   end
 end

@@ -11,7 +11,7 @@ describe 'Settings page', type: :feature do
 
   it 'when go to settings page' do
     expect(page).to have_current_path new_setting_path
-    expect(page).to have_selector 'h1', text: 'Settings'
+    expect(page).to have_selector 'h1', text: I18n.t('settings.title')
   end
 
   context 'when billing' do

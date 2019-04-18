@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Catalog page', type: :feature do
-  let(:category_mobile) { create(:category, name: 'Mobile') }
+  let(:category_mobile) { create(:category, name: FFaker::Lorem.word) }
   let!(:book) { create(:book, category: category_mobile) }
 
   before do

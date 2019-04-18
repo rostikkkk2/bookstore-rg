@@ -40,27 +40,27 @@ describe 'Confirm checkout step', type: :feature do
   end
 
   it 'when click on edit billing' do
-    first('a', class: 'step-address', text: 'edit').click
+    first('a', class: 'step-address', text: I18n.t('checkout.edit')).click
     expect(page).to have_current_path checkout_path(step: :address)
   end
 
   it 'when click on edit shipping' do
-    all('a', class: 'step-address', text: 'edit').last.click
+    all('a', class: 'step-address', text: I18n.t('checkout.edit')).last.click
     expect(page).to have_current_path checkout_path(step: :address)
   end
 
   it 'when click on edit delivery' do
-    find('a', class: 'step-delivery', text: 'edit').click
+    find('a', class: 'step-delivery', text: I18n.t('checkout.edit')).click
     expect(page).to have_current_path checkout_path(step: :delivery)
   end
 
   it 'when click on edit payment' do
-    find('a', class: 'step-payment', text: 'edit').click
+    find('a', class: 'step-payment', text: I18n.t('checkout.edit')).click
     expect(page).to have_current_path checkout_path(step: :payment)
   end
 
   it 'go to complete step' do
-    click_on('Place Order')
+    click_on(I18n.t('checkout.place_order'))
     expect(page).to have_current_path checkout_path(step: :complete)
   end
 end
