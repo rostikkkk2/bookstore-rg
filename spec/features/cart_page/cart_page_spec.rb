@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Cart page', type: :feature do
   let(:category_mobile) { create(:category, name: 'Mobile') }
   let!(:book) { create(:book, category: category_mobile) }
+  let!(:coupon) { create(:coupon) }
 
   before do
     visit root_path
@@ -54,5 +55,11 @@ describe 'Cart page', type: :feature do
   it 'when not signed in user click on checkout button' do
     find('a', text: 'Checkout').click
     expect(page).to have_current_path checkout_path(step: :quick_registrate)
+  end
+
+  it 'when use right coupon' do
+    first('#coupon').set coupon.key
+    click_button('Apply Coupon')
+    expect(page).to have_content 'you used coupon for this order'
   end
 end

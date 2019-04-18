@@ -55,6 +55,7 @@ group :test do
   gem 'rack_session_access', '~> 0.2.0'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  gem 'shoulda-matchers'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

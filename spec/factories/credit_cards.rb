@@ -4,6 +4,5 @@ FactoryBot.define do
     name { 'universal' }
     date { '12/21' }
     cvv { Array.new(3) { [rand(1..9)] }.join }
-
   end
 end

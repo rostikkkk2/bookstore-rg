@@ -7,7 +7,5 @@ FactoryBot.define do
     zip { '1234' }
     country { FFaker::Address.country }
     phone { '+380333333333' }
-    address_type { nil }
-    resource { nil }
   end
 end

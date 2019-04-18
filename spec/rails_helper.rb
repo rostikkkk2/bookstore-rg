@@ -11,6 +11,8 @@ require 'capybara/dsl'
 require 'capybara/rails'
 require 'selenium-webdriver'
 require 'rack_session_access/capybara'
+require 'devise'
+require 'cancan/matchers'
 
 require 'yaml'
 require 'i18n'
@@ -28,6 +30,9 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryBot::Syntax::Methods
   config.include Warden::Test::Helpers
+  config.include Shoulda::Matchers::ActiveModel, type: :model
+  config.include Shoulda::Matchers::ActiveRecord, type: :model
+  config.include Shoulda::Matchers::ActionController
 
   config.use_transactional_fixtures = true
   Capybara.default_driver = :selenium_chrome
