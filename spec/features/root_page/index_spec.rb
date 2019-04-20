@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Home page', type: :feature do
   let(:category_all_books) { create(:category, name: 'All books') }
-  let(:category_mobile) { create(:category, name: FFaker::Lorem.word) }
+  let(:category_mobile) { create(:category) }
   let!(:book) { create(:book, category: category_mobile) }
 
   before do

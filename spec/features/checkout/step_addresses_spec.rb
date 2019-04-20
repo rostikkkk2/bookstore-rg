@@ -23,7 +23,7 @@ describe 'Checkout address step', type: :feature do
   end
 
   context 'when billing' do
-    let(:billing) { create(:address, address_type: 'billing', resource: order.user) }
+    let(:billing) { order.user.addresses.create(attributes_for(:address, :billing)) }
 
     it 'billing address exists' do
       billing
@@ -46,7 +46,7 @@ describe 'Checkout address step', type: :feature do
   end
 
   context 'when shipping' do
-    let(:shipping) { create(:address, address_type: 'shipping', resource: order.user) }
+    let(:shipping) { order.user.addresses.create(attributes_for(:address, :shipping)) }
 
     it 'shipping address exists' do
       shipping

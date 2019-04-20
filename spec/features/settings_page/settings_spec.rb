@@ -15,7 +15,7 @@ describe 'Settings page', type: :feature do
   end
 
   context 'when billing' do
-    let(:billing) { create(:address, address_type: 'billing', resource: user) }
+    let(:billing) { user.addresses.create(attributes_for(:address, :billing)) }
 
     it 'when save billing address with empty fields' do
       first('input[type=submit]').click
@@ -48,7 +48,7 @@ describe 'Settings page', type: :feature do
   end
 
   context 'when shipping' do
-    let(:shipping) { create(:address, address_type: 'shipping', resource: user) }
+    let(:shipping) { user.addresses.create(attributes_for(:address, :shipping)) }
 
     it 'when save billing address with empty fields' do
       all('input[type=submit]').last.click

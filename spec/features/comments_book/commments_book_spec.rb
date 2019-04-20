@@ -2,8 +2,7 @@ require 'rails_helper'
 
 describe 'Comments in book page', type: :feature do
   let!(:user) { create(:user) }
-  let(:new_category) { create(:category, name: 'Mobile') }
-  let!(:book) { create(:book, category: new_category) }
+  let!(:book) { create(:book) }
   let(:error_message) { "Title can't be blank and Text comment can't be blank" }
   let(:error_empty_body_message) { "Text comment can't be blank" }
   let(:error_empty_title_message) { "Title can't be blank" }

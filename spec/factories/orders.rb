@@ -18,8 +18,8 @@ FactoryBot.define do
 
     trait :payment_step do
       after(:create) do |order|
-        create(:address, address_type: 'billing', resource: order)
-        create(:address, address_type: 'shipping', resource: order)
+        order.addresses.create!(attributes_for(:address, :billing))
+        order.addresses.create!(attributes_for(:address, :shipping))
       end
 
       status { Order.statuses[:payment] }
@@ -27,8 +27,8 @@ FactoryBot.define do
 
     trait :confirm_step do
       after(:create) do |order|
-        create(:address, address_type: 'billing', resource: order)
-        create(:address, address_type: 'shipping', resource: order)
+        order.addresses.create!(attributes_for(:address, :billing))
+        order.addresses.create!(attributes_for(:address, :shipping))
         create(:credit_card, order_id: order.id)
       end
 
@@ -37,12 +37,24 @@ FactoryBot.define do
 
     trait :complete_step do
       after(:create) do |order|
-        create(:address, address_type: 'billing', resource: order)
-        create(:address, address_type: 'shipping', resource: order)
+        order.addresses.create!(attributes_for(:address, :billing))
+        order.addresses.create!(attributes_for(:address, :shipping))
         create(:credit_card, order_id: order.id)
       end
 
       status { Order.statuses[:complete] }
+    end
+
+    trait :in_delivery_step do
+      status { Order.statuses[:in_delivery] }
+    end
+
+    trait :delivered_step do
+      status { Order.statuses[:delivered] }
+    end
+
+    trait :canceled_step do
+      status { Order.statuses[:canceled] }
     end
   end
 end

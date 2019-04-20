@@ -7,5 +7,13 @@ FactoryBot.define do
     zip { '1234' }
     country { FFaker::Address.country }
     phone { '+380333333333' }
+
+    trait :billing do
+      address_type { Address.address_types[:billing] }
+    end
+
+    trait :shipping do
+      address_type { Address.address_types[:shipping] }
+    end
   end
 end

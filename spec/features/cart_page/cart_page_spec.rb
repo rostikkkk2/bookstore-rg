@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 describe 'Cart page', type: :feature do
-  let(:category_mobile) { create(:category, name: 'Mobile') }
-  let!(:book) { create(:book, category: category_mobile) }
+  let!(:book) { create(:book) }
   let!(:coupon) { create(:coupon) }
 
   before do

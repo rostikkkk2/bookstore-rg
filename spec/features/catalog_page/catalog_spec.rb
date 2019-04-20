@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 describe 'Catalog page', type: :feature do
-  let(:category_mobile) { create(:category, name: FFaker::Lorem.word) }
-  let!(:book) { create(:book, category: category_mobile) }
+  let!(:book) { create(:book) }
 
   before do
     visit(books_path)
@@ -21,7 +20,7 @@ describe 'Catalog page', type: :feature do
   end
 
   it 'go to mobile category' do
-    find('a', class: 'filter-link', text: category_mobile.name).click
-    expect(page).to have_current_path category_books_path(category_mobile.id)
+    find('a', class: 'filter-link', text: book.category.name).click
+    expect(page).to have_current_path category_books_path(book.category.id)
   end
 end
