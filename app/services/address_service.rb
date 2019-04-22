@@ -1,6 +1,5 @@
 class AddressService
   attr_reader :params, :current_user, :current_order, :billing, :shipping
-  SHIPPING_TYPE_ADDRESS = 'shipping'.freeze
   TYPE_USER_IN_ADDRESS = 'User'.freeze
 
   def initialize(params, current_user, current_order)
@@ -31,7 +30,7 @@ class AddressService
 
   def create_billing_with_hidden_shipping
     create_or_update_checkout_address(@billing, current_order.addresses.billing)
-    @billing.address_type = SHIPPING_TYPE_ADDRESS
+    @billing.address_type = Address.address_types.keys.last
     create_or_update_checkout_address(@billing, current_order.addresses.shipping)
   end
 

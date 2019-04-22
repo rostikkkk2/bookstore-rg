@@ -5,7 +5,6 @@ require File.expand_path('../../config/environment', __FILE__)
 
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
-
 require 'capybara/rspec'
 require 'capybara/dsl'
 require 'capybara/rails'
@@ -13,7 +12,6 @@ require 'selenium-webdriver'
 require 'rack_session_access/capybara'
 require 'devise'
 require 'cancan/matchers'
-
 require 'yaml'
 require 'i18n'
 
@@ -33,6 +31,8 @@ RSpec.configure do |config|
   config.include Shoulda::Matchers::ActiveModel, type: :model
   config.include Shoulda::Matchers::ActiveRecord, type: :model
   config.include Shoulda::Matchers::ActionController
+  config.extend ControllerMacros, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.use_transactional_fixtures = true
   Capybara.default_driver = :selenium_chrome

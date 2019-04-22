@@ -23,5 +23,4 @@ class CartUpdateService
   def update_column(new_quantity, line_item)
     line_item.update_column(:quantity, new_quantity) if new_quantity.positive?
   end
-
 end
