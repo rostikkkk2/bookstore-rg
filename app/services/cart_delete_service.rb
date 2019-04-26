@@ -12,7 +12,7 @@ class CartDeleteService
   end
 
   def delete_item
-    LineItem.find_by(book_id: params[:book_to_destroy].to_i, order_id: current_order.id).delete
+    LineItem.find_by(book_id: params[:id].to_i, order_id: current_order.id).delete
   end
 
   def delete_coupon_from_order

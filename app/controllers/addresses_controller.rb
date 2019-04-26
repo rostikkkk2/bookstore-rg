@@ -9,8 +9,12 @@ class AddressesController < ApplicationController
   end
 
   def render_with_presenter(address_service)
-    @presenter = AddressPresenter.new(params: params, current_user: current_user,
-                                      billing_form: address_service.billing, shipping_form: address_service.shipping).attach_controller(self)
+    @presenter = AddressPresenter.new(
+      params: params,
+      current_user: current_user,
+      billing_form: address_service.billing,
+      shipping_form: address_service.shipping
+    )
     render template: 'settings/new'
   end
 end

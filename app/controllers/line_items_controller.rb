@@ -30,7 +30,8 @@ class LineItemsController < ApplicationController
   private
 
   def redirect_message(message, type)
-    redirect_to request.referrer
+    # redirect_to request.referrer
+    redirect_back(fallback_location: root_path)
     flash[type] = message
   end
 

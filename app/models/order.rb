@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   include AASM
 
-  has_many :line_items
+  has_many :line_items, dependent: :destroy
   belongs_to :delivery, optional: true
   belongs_to :user, optional: true
   has_one :coupon, dependent: :nullify
@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   has_many :addresses, as: :resource, dependent: :destroy
   enum status: { cart: 0, address: 1, delivery: 2, payment: 3, confirm: 4, complete: 5,
                  in_delivery: 6, delivered: 7, canceled: 8 }
-  has_one :credit_card
+  has_one :credit_card, dependent: :destroy
 
   aasm :status, enum: true do
     state :cart, initial: true
