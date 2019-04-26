@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   belongs_to :delivery, optional: true
   belongs_to :user, optional: true
   has_one :coupon, dependent: :nullify
+  has_many :books, through: :line_items
 
   scope :in_progress, -> { Order.where(status: 'complete') }
   scope :in_delivery, -> { Order.where(status: 'in_delivery') }

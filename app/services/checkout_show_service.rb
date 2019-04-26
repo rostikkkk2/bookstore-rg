@@ -21,19 +21,19 @@ class CheckoutShowService
   end
 
   def quick_registration_presenter
-    QuickRegistrationPresenter.new(params: params, current_order: current_order).attach_controller(self)
+    QuickRegistrationPresenter.new(params: params, current_order: current_order)
   end
 
   def show_complete_presenter
-    CompletePresenter.new(params: params, current_order: current_order).attach_controller(self)
+    CompletePresenter.new(params: params, current_order: current_order)
   end
 
   def choose_presenter
     case params[:step]
-    when 'address' then AddressPresenter.new(params: params, current_order: current_order).attach_controller(self)
-    when 'delivery' then DeliveryPresenter.new(params: params, current_order: current_order).attach_controller(self)
-    when 'payment' then PaymentPresenter.new(params: params, current_order: current_order).attach_controller(self)
-    when 'confirm' then ConfirmPresenter.new(params: params, current_order: current_order).attach_controller(self)
+    when 'address' then AddressPresenter.new(params: params, current_order: current_order)
+    when 'delivery' then DeliveryPresenter.new(params: params, current_order: current_order)
+    when 'payment' then PaymentPresenter.new(params: params, current_order: current_order)
+    when 'confirm' then ConfirmPresenter.new(params: params, current_order: current_order)
     end
   end
 end

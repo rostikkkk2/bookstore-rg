@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   end
 
   def home_page
-    @header_presenter = HeaderPresenter.new(current_order: current_order).attach_controller(self)
+    @header_presenter = HeaderPresenter.new(current_order: current_order)
     @books_presenter = BooksPresenter.new.attach_controller(self)
   end
 
@@ -16,15 +16,15 @@ class ApplicationController < ActionController::Base
   end
 
   def check_order_on_merge
-    return unless user_signed_in? && session[:current_order]
+    return unless user_signed_in? && session[:current_order_id]
 
-    MergeItemsCartService.new(session[:current_order], current_user).call
-    session.delete(:current_order)
+    MergeItemsCartService.new(Order.find_by(id: session[:current_order_id]), current_user).call
+    session.delete(:current_order_id)
   end
 
   def current_order
     return Order.where(user_id: current_user.id).order(:updated_at).last if user_signed_in?
 
-    Order.find_by(id: session[:current_order]['id']) if session[:current_order]
+    Order.find_by(id: session[:current_order_id]) if session[:current_order_id]
   end
 end

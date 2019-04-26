@@ -1,6 +1,7 @@
 class OrderPresenter < Rectify::Presenter
   attribute :current_orders
   attribute :current_order
+  attribute :params
   SECRET_NUMS_FOR_CARD = '**** **** **** '.freeze
   COUNT_NUMS_CARD_SHOW = 4
   START_PRICE = 0

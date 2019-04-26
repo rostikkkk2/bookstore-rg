@@ -5,9 +5,9 @@ class BooksController < ApplicationController
   COUNT_PAGE_BOOKS = 12
 
   def show
-    @current_book = Book.all.find_by(id: params[:id].to_i)
-    @comment_presenter = CommentPresenter.new(current_book: @current_book).attach_controller(self)
-    @current_book_presenter = CurrentBookPresenter.new(current_book: @current_book).attach_controller(self)
+    @current_book = Book.find_by(id: params[:id].to_i)
+    @comment_presenter = CommentPresenter.new(current_book: @current_book)
+    @current_book_presenter = CurrentBookPresenter.new(current_book: @current_book)
   end
 
   def index

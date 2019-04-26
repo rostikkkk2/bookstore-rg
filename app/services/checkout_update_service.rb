@@ -25,8 +25,8 @@ class CheckoutUpdateService
   end
 
   def checkout_address_right?
-    address_service = AddressService.new(params, current_user, current_order)
-    return true if address_service.checkout_call
+    address_service = AddressCheckoutService.new(params, current_user, current_order)
+    return true if address_service.call
 
     @billing_form = address_service.billing
     @shipping_form = address_service.shipping
@@ -55,11 +55,15 @@ class CheckoutUpdateService
     current_order.status
   end
 
+  def cart_presenter
+    CartPresenter.new(current_order: current_order)
+  end
+
   def current_presenter
     case params[:step]
-    when 'address' then AddressPresenter.new(params: params, current_order: current_order, billing_form: billing_form, shipping_form: shipping_form).attach_controller(self)
-    when 'delivery' then DeliveryPresenter.new(params: params, current_order: current_order).attach_controller(self)
-    when 'payment' then PaymentPresenter.new(params: params, current_order: current_order, form: form).attach_controller(self)
+    when 'address' then AddressPresenter.new(params: params, current_order: current_order, billing_form: billing_form, shipping_form: shipping_form)
+    when 'delivery' then DeliveryPresenter.new(params: params, current_order: current_order)
+    when 'payment' then PaymentPresenter.new(params: params, current_order: current_order, form: form)
     end
   end
 end

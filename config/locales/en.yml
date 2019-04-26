@@ -72,7 +72,7 @@ en:
       review: Review
       post: Post
   devise:
-    sign_up_big: Sign Up 
+    sign_up_big: Sign Up
     not_auth_for_action: You are not authorized to access this page.
     resend_confirmation: Resend confirmation instructions
     set_new_password: Set new password
@@ -181,3 +181,13 @@ en:
     start_plus: have to start with +
     only_numbers: Must be only numbers
     mm_yy: should be in MM/YY format and contain only numbers
+  controllers:
+    deleted_account: Your account successfuly deleted
+    error_deleted_account: Your account was not deleted
+    wrong_password: Wrong password
+    changed_password: Successfuly changed password
+    wrong_coupon: wrong coupon
+    added_in_cart: Added in cart
+    deleted_from_cart: Successfuly delete book from cart
+    status_complete: complete
+    updated_email: Your email successfuly updated

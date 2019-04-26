@@ -7,12 +7,12 @@
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         %div
-          = @books_presenter.btn_all_books
+          = link_to I18n.t('book_page.btn_all'), books_path, class: "filter-link hover_category_color #{'def-color-chosen-category' unless params[:category_id]}"
           %span.category-count-books.badge= @books_presenter.all_books.count
       - @books_presenter.all_categories.each do |category|
         %li.mr-35
           %div
-            = @books_presenter.btn_categories(category)
+            = link_to category.name, category_books_path(category), class: "filter-link hover_category_color #{'def-color-chosen-category' if params[:category_id].to_i == category.id}"
             %span.category-count-books.badge= @books_presenter.count_books_category(category)
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10= t('categories.filter_by_category')

@@ -2,19 +2,10 @@ class AddressesController < ApplicationController
   authorize_resource
 
   def create
-    address_service = AddressService.new(params, current_user, current_order)
-    return redirect_to new_setting_path if address_service.settings_call
+    address_service = AddressSettingsService.new(params, current_user, current_order)
+    return redirect_to new_setting_path if address_service.call
 
-    render_with_presenter(address_service)
-  end
-
-  def render_with_presenter(address_service)
-    @presenter = AddressPresenter.new(
-      params: params,
-      current_user: current_user,
-      billing_form: address_service.billing,
-      shipping_form: address_service.shipping
-    )
+    @presenter = address_service.presenter
     render template: 'settings/new'
   end
 end

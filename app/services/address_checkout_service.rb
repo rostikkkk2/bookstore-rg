@@ -1,0 +1,23 @@
+class AddressCheckoutService < AddressBaseService
+  def call
+    return create_billing_with_hidden_shipping if @billing.valid? && params[:hidden_shipping_form]
+
+    create_or_update_checkout_addresses & true if @billing.valid? & @shipping.valid?
+  end
+
+  def create_or_update_checkout_addresses
+    create_or_update_address(@billing, current_order.addresses.billing)
+    create_or_update_address(@shipping, current_order.addresses.shipping)
+  end
+
+  def create_billing_with_hidden_shipping
+    create_or_update_address(@billing, current_order.addresses.billing)
+    @billing.address_type = Address.address_types.keys.last
+    create_or_update_address(@billing, current_order.addresses.shipping)
+  end
+
+  def create_or_update_address(form_object, data_address)
+    address = data_address.first
+    address ? form_object.update_address(address) : form_object.create_address
+  end
+end

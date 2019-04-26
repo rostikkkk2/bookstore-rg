@@ -10,7 +10,7 @@ RSpec.describe SettingsEmailsController, type: :controller do
 
     it 'success' do
       put :update, params: { user_id: user.id, email: user.email, id: user.id }
-      is_expected.to set_flash[:success].to SettingsEmailsController::SUCCESS_UPDATE_EMAIL_MESSAGE
+      is_expected.to set_flash[:success]
       is_expected.to redirect_to(new_setting_path)
     end
 

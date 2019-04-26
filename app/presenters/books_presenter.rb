@@ -2,10 +2,6 @@ class BooksPresenter < Rectify::Presenter
   COUNT_NEW_BOOKS = 3
   COUNT_TOP_BOOKS = 4
 
-  def btn_all_books
-    link_to I18n.t('book_page.btn_all'), books_path, class: "filter-link hover_category_color #{'def-color-chosen-category' unless params[:category_id]}"
-  end
-
   def all_books
     Book.all
   end
@@ -24,10 +20,6 @@ class BooksPresenter < Rectify::Presenter
       order.line_items.each { |item| top_books[item.book] = item.book.id }
     end
     top_books.group_by.map { |key, _| key }.first(COUNT_TOP_BOOKS)
-  end
-
-  def btn_categories(category)
-    link_to category.name, category_books_path(category), class: "filter-link hover_category_color #{'def-color-chosen-category' if params[:category_id].to_i == category.id}"
   end
 
   def count_books_category(category)
