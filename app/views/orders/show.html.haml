@@ -1,11 +1,11 @@
 %main.container.general-main-wrap
   %h1.general-title-margin
-    = "Order #{@order_presenter.current_order.number}"
+    = "Order #{order.number}"
   .row.mb-20
     .col-sm-3
       %h3.general-subtitle
         = t('checkout.shippint_address')
-      - @order_presenter.current_order.addresses.shipping.each do |address|
+      - order.addresses.shipping.each do |address|
         %p.general-address
           = address.first_name
           %br
@@ -19,7 +19,7 @@
     .col-sm-3
       %h3.general-subtitle
         = t('checkout.billing_address')
-      - @order_presenter.current_order.addresses.billing.each do |address|
+      - order.addresses.billing.each do |address|
         %p.general-address
           = address.first_name
           %br
@@ -34,17 +34,17 @@
       %h3.general-subtitle
         = t('checkout.shipments')
       %p.general-address
-        = @order_presenter.current_delivery.method
+        = order.delivery.method
     .col-sm-3
       %h3.general-subtitle
         = t('checkout.payment_information')
       %p.general-address
-        = @order_presenter.credit_card_number
+        = OrderDecorator::SECRET_NUMS_FOR_CARD + order.lash_four_nums_card
         %br
-        = @order_presenter.current_order.credit_card.date
+        = order.credit_card.date
   .visible-xs
     .general-cart-item.divider-lg
-      - @order_presenter.current_order.line_items.each do |item|
+      - order.line_items.each do |item|
         .general-img-wrap-table
           = link_to (image_tag item.book.photo_url(:w210), class: 'cart-img-shadow'), book_path(item.book)
         %p.title
@@ -91,7 +91,7 @@
             %span.in-grey-600
               = t('checkout.total')
       %tbody
-        - @order_presenter.current_order.line_items.each do |item|
+        - order.line_items.each do |item|
           %tr
             %td
               .general-img-wrap-table

@@ -57,7 +57,7 @@ describe 'Quick registrate', type: :feature do
   it 'when click on sign up with exists email' do
     all('#email').last.set user.email
     click_on(I18n.t('checkout.sign_up'))
-    expect(page).to have_content 'email exists'
+    expect(page).to have_content 'has already been taken'
   end
 
   it 'when click on sign up with right email' do

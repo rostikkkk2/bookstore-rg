@@ -43,7 +43,6 @@
             %td
               %strong.font-16
                 = "€#{@order_presenter.order_summary_price(order)}"
-
   .hidden-xs.mb-res-50
     - if @sort_orders.empty?
       %h1
@@ -75,7 +74,7 @@
                   = order.created_at.to_date
               %td
                 %span.font-16.in-grey-900.fw-300
-                  = @order_presenter.current_status_order
+                  = @order_presenter.current_status_order || t('orders.in_progress')
               %td
                 %strong.font-16
                   = "€#{@order_presenter.order_summary_price(order)}"

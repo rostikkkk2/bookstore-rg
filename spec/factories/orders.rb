@@ -13,7 +13,7 @@ FactoryBot.define do
     end
 
     trait :delivery_step do
-      status { Order.statuses[:delivery] }
+      status { Order.statuses[:fill_delivery] }
     end
 
     trait :payment_step do

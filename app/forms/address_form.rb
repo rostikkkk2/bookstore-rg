@@ -24,31 +24,4 @@ class AddressForm
   validates :first_name, :last_name, :city, format: { with: VALIDATE_NAMES_AND_CITY, message: I18n.t('validate.big_letter') }
   validates :zip, length: { maximum: 10 }, format: { with: VALIDATE_ZIP, message: I18n.t('validate.wrong_number') }
   validates :phone, length: { minimum: 10, maximum: 15 }, format: { with: VALIDATE_PHONE, message: I18n.t('validate.start_plus') }
-
-  def create_address
-    new_address = Address.new(
-      first_name: first_name,
-      last_name: last_name,
-      address: address,
-      city: city,
-      zip: zip,
-      country: country,
-      phone: phone,
-      address_type: address_type
-    )
-    new_address.resource = Order.find_by(id: order_id) || User.find_by(id: user_id)
-    new_address.save
-  end
-
-  def update_address(current_address)
-    current_address.update(
-      first_name: first_name,
-      last_name: last_name,
-      address: address,
-      city: city,
-      zip: zip,
-      country: country,
-      phone: phone
-    )
-  end
 end

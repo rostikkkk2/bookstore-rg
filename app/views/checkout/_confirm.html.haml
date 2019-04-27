@@ -15,14 +15,14 @@
       %h3.general-subtitle
         = t('checkout.shipments')
       %p.general-address
-        = @presenter.current_delivery
-        %a.general-edit.step-delivery{href: '/checkout/delivery'}
+        = @presenter.current_order.delivery.method
+        %a.general-edit.step-delivery{href: '/checkout/fill_delivery'}
           = t('checkout.edit')
     .col-sm-3
       %h3.general-subtitle
         = t('checkout.payment_information')
       %p.general-address
-        = @presenter.credit_card_number
+        = ConfirmPresenter::SECRET_NUMS_FOR_CARD + @presenter.lash_four_nums_card
         %a.general-edit.step-payment{href: '/checkout/payment'}
           = t('checkout.edit')
         %br
@@ -47,7 +47,7 @@
             %span.in-grey-600
               = t('checkout.total')
       %tbody
-        - @presenter.current_line_items.each do |item|
+        - @presenter.current_order.line_items.each do |item|
           %tr
             %td
               .general-img-wrap-table

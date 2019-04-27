@@ -2,16 +2,16 @@ class CheckoutUpdateService
   attr_reader :params, :current_order, :current_user, :billing_form, :shipping_form, :form
   TYPES_CHECKOUT = {
     address: ->(instance) { instance.checkout_address_right? },
-    delivery: ->(instance) { instance.checkout_delivery_right? },
+    fill_delivery: ->(instance) { instance.checkout_delivery_right? },
     payment: ->(instance) { instance.checkout_payment_right? },
     confirm: ->(instance) { instance.checkout_last_step }
   }.freeze
 
   CHANGE_STEP = {
-    address: ->(instance) { instance.current_order.delivery! if instance.current_order.address? },
-    delivery: ->(instance) { instance.current_order.payment! if instance.current_order.delivery? },
-    payment: ->(instance) { instance.current_order.confirm! if instance.current_order.payment? },
-    confirm: ->(instance) { instance.current_order.complete! if instance.current_order.confirm? }
+    address: ->(order) { Order.checkout_address(order) },
+    fill_delivery: ->(order) { Order.checkout_fill_delivery(order) },
+    payment: ->(order) { Order.checkout_payment(order) },
+    confirm: ->(order) { Order.checkout_confirm(order) }
   }.freeze
 
   def initialize(params, current_order, current_user)
@@ -51,7 +51,7 @@ class CheckoutUpdateService
   end
 
   def go_to_next_step
-    CHANGE_STEP[params[:step].to_sym].call(self) if params[:step] == current_order.status
+    CHANGE_STEP[params[:step].to_sym].call(current_order) if params[:step] == current_order.status
     current_order.status
   end
 
@@ -62,7 +62,7 @@ class CheckoutUpdateService
   def current_presenter
     case params[:step]
     when 'address' then AddressPresenter.new(params: params, current_order: current_order, billing_form: billing_form, shipping_form: shipping_form)
-    when 'delivery' then DeliveryPresenter.new(params: params, current_order: current_order)
+    when 'fill_delivery' then DeliveryPresenter.new(params: params, current_order: current_order)
     when 'payment' then PaymentPresenter.new(params: params, current_order: current_order, form: form)
     end
   end

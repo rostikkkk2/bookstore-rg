@@ -1,6 +1,5 @@
 class CartPresenter < Rectify::Presenter
   attribute :current_order
-
   START_PRICE = 0
 
   def subtotal_prise_book(book)
@@ -8,8 +7,7 @@ class CartPresenter < Rectify::Presenter
   end
 
   def order_summary_price
-    item_quantities = current_order.line_items.map { |item| item.quantity * item.book.price }
-    item_quantities.sum
+    current_order.line_items.map { |item| item.quantity * item.book.price }.sum
   end
 
   def order_total_price_with_coupon
@@ -25,6 +23,6 @@ class CartPresenter < Rectify::Presenter
   end
 
   def delivery_price
-    current_order.delivery_id ? Delivery.find_by(id: current_order.delivery_id).price : START_PRICE
+    current_order.delivery_id ? current_order.delivery.price : START_PRICE
   end
 end

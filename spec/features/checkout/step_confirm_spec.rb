@@ -51,7 +51,7 @@ describe 'Confirm checkout step', type: :feature do
 
   it 'when click on edit delivery' do
     find('a', class: 'step-delivery', text: I18n.t('checkout.edit')).click
-    expect(page).to have_current_path checkout_path(step: :delivery)
+    expect(page).to have_current_path checkout_path(step: :fill_delivery)
   end
 
   it 'when click on edit payment' do

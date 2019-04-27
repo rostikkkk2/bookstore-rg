@@ -3,7 +3,7 @@ class DeliveryPresenter < Rectify::Presenter
   attribute :current_order
 
   def step
-    'delivery'
+    'fill_delivery'
   end
 
   def check_exists_delivery(id)

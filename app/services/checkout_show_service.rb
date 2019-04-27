@@ -29,11 +29,12 @@ class CheckoutShowService
   end
 
   def choose_presenter
-    case params[:step]
-    when 'address' then AddressPresenter.new(params: params, current_order: current_order)
-    when 'delivery' then DeliveryPresenter.new(params: params, current_order: current_order)
-    when 'payment' then PaymentPresenter.new(params: params, current_order: current_order)
-    when 'confirm' then ConfirmPresenter.new(params: params, current_order: current_order)
-    end
+    presenter_class = {
+      address: AddressPresenter,
+      fill_delivery: DeliveryPresenter,
+      payment: PaymentPresenter,
+      confirm: ConfirmPresenter
+    }[params[:step].to_sym]
+    presenter_class.new(params: params, current_order: current_order)
   end
 end

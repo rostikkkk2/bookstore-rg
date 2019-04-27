@@ -18,6 +18,7 @@ class AddressCheckoutService < AddressBaseService
 
   def create_or_update_address(form_object, data_address)
     address = data_address.first
-    address ? form_object.update_address(address) : form_object.create_address
+    @form = form_object
+    address ? update_address(address) : create_address
   end
 end

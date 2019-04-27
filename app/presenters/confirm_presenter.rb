@@ -9,18 +9,6 @@ class ConfirmPresenter < Rectify::Presenter
     'confirm'
   end
 
-  def current_delivery
-    Delivery.find_by(id: current_order.delivery_id).method
-  end
-
-  def credit_card_number
-    SECRET_NUMS_FOR_CARD + lash_four_nums_card
-  end
-
-  def current_line_items
-    current_order.line_items
-  end
-
   def lash_four_nums_card
     current_order.credit_card.number.chars.last(COUNT_NUMS_CARD_SHOW).join
   end

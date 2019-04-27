@@ -8,5 +8,5 @@
           = value
         %span.hidden-xs
           %a{href: checkout_path(step: key), class: 'step_checkout step-text'}
-            = key.to_s.capitalize
+            = key.include?('_') ? key.split('_').last.capitalize : key.to_s.capitalize
       %li{class: "#{'step-divider' if value < Order.statuses[:complete]}"}

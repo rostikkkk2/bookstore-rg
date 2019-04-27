@@ -1,8 +1,7 @@
 class LineItemsController < ApplicationController
   def create
-    cart_form = CartForm.new(params_request)
-    cart_service = CartCreateService.new(current_user, cart_form, params)
-    session[:current_order_id] = cart_form.create_order.id unless cart_service.create_order?(current_order)
+    cart_service = CartCreateService.new(current_user, params_request, params)
+    session[:current_order_id] = cart_service.create_order.id unless cart_service.check_create_order?(current_order)
     cart_service.call(current_order)
     redirect_message(I18n.t('controllers.added_in_cart'), :success)
   end

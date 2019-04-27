@@ -27,7 +27,7 @@ describe 'Payment card page', type: :feature do
 
   it 'try to go on delivery step' do
     find('a', class: 'step_checkout', text: I18n.t('checkout.delivery_title')).click
-    expect(page).to have_current_path checkout_path(step: :delivery)
+    expect(page).to have_current_path checkout_path(step: :fill_delivery)
   end
 
   it 'try to go on confirm step' do

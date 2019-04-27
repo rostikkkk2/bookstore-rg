@@ -20,7 +20,7 @@ RSpec.describe Order, type: :model do
   context 'with enum statuses' do
     it { expect(Order.statuses[:cart]).to eq 0 }
     it { expect(Order.statuses[:address]).to eq 1 }
-    it { expect(Order.statuses[:delivery]).to eq 2 }
+    it { expect(Order.statuses[:fill_delivery]).to eq 2 }
     it { expect(Order.statuses[:payment]).to eq 3 }
     it { expect(Order.statuses[:confirm]).to eq 4 }
     it { expect(Order.statuses[:complete]).to eq 5 }

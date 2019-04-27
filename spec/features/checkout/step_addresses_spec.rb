@@ -104,7 +104,7 @@ describe 'Checkout address step', type: :feature do
     first('#billing_form_phone').set valid_attributes[:phone]
 
     click_on(I18n.t('checkout.save_and_continue'))
-    expect(page).to have_current_path checkout_path(step: :delivery)
+    expect(page).to have_current_path checkout_path(step: :fill_delivery)
   end
 
   it 'when use one billing with hidden shipping' do
@@ -117,6 +117,6 @@ describe 'Checkout address step', type: :feature do
     fill_in 'billing_form[zip]', with: valid_attributes[:zip]
     first('#billing_form_phone').set valid_attributes[:phone]
     click_on(I18n.t('checkout.save_and_continue'))
-    expect(page).to have_current_path checkout_path(step: :delivery)
+    expect(page).to have_current_path checkout_path(step: :fill_delivery)
   end
 end

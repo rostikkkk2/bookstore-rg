@@ -1,5 +1,5 @@
 .general-cart-item.divider-lg
-  - @presenter.current_line_items.each do |item|
+  - @presenter.current_order.line_items.each do |item|
     .general-img-wrap-table
       = link_to (image_tag item.book.photo_url(:w210), class: 'cart-img-shadow'), book_path(item.book)
     %p.title

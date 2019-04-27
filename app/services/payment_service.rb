@@ -13,7 +13,15 @@ class PaymentService
   end
 
   def create_or_update_card
-    current_order.credit_card ? form.update_credit_card : form.create_credit_card
+    current_order.credit_card ? update_credit_card : create_credit_card
+  end
+
+  def create_credit_card
+    CreditCard.new(form.attributes).save
+  end
+
+  def update_credit_card
+    current_order.credit_card.update(form.attributes.without(:order_id))
   end
 
   def credit_card_params
