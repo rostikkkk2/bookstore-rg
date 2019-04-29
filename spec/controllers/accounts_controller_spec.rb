@@ -8,24 +8,22 @@ RSpec.describe AccountsController, type: :controller do
     it 'success' do
       delete :destroy, params: { id: user.id }
       allow(subject).to receive(:current_user).and_return(user)
-      allow(User).to receive(:find_by).and_return(user)
       is_expected.to set_flash[:success]
       is_expected.to redirect_to root_path
     end
 
-    # context 'failed delete account' do
-    #
-    #   before do
-    #     allow(subject).to receive(:current_user).and_return([])
-    #   end
-    #
-    #   it 'failed' do
-    #     delete :destroy, params: { id: '' }
-    #     # allow(:current_user.destroy).to eq(false)
-    #     is_expected.to set_flash[:error]
-    #     is_expected.to redirect_to root_path
-    #   end
-    # end
+    context 'failed delete account' do
+
+      before do
+        allow(subject).to receive(:current_user).and_return(nil)
+      end
+
+      it 'failed' do
+        delete :destroy, params: { id: '' }
+        is_expected.to set_flash[:error]
+        is_expected.to redirect_to root_path
+      end
+    end
   end
 
   describe 'PUT #update' do
