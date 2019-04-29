@@ -21,4 +21,8 @@ class AddressCheckoutService < AddressBaseService
     @form = form_object
     address ? update_address(address) : create_address
   end
+
+  def presenter
+    AddressPresenter.new(params: params, current_order: current_order, billing_form: billing, shipping_form: shipping)
+  end
 end

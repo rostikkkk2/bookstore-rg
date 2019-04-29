@@ -9,10 +9,10 @@ class CheckoutController < ApplicationController
 
   def update
     checkout_service = CheckoutUpdateService.new(params, current_order, current_user)
-    return redirect_to checkout_path(step: checkout_service.go_to_next_step) if checkout_service.update_step
+    return redirect_to checkout_path(step: checkout_service.go_to_next_step) if checkout_service.call
 
     @cart_presenter = checkout_service.cart_presenter
-    @presenter = checkout_service.current_presenter
+    @presenter = checkout_service.presenter
     render :show
   end
 end

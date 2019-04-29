@@ -5,7 +5,9 @@ class ConfirmService
   LENGTH_SECRET_NUMBER = 13
   RANGE_SECRET_NUMBER = (0..9).freeze
 
-  def initialize(current_order)
+  def initialize(params, current_user, current_order)
+    @params = params
+    @current_user = current_user
     @current_order = current_order
   end
 

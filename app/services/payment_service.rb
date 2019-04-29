@@ -27,4 +27,8 @@ class PaymentService
   def credit_card_params
     params[:credit_card_form]&.permit!
   end
+
+  def presenter
+    PaymentPresenter.new(params: params, current_order: current_order, form: form)
+  end
 end

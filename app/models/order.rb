@@ -7,11 +7,6 @@ class Order < ApplicationRecord
   has_one :coupon, dependent: :nullify
   has_many :books, through: :line_items
 
-  scope :checkout_address, ->(order) { order.fill_delivery! if order.address? }
-  scope :checkout_fill_delivery, ->(order) { order.payment! if order.fill_delivery? }
-  scope :checkout_payment, ->(order) { order.confirm! if order.payment? }
-  scope :checkout_confirm, ->(order) { order.complete! if order.confirm? }
-
   scope :in_progress, -> { Order.where(status: 'complete') }
   scope :in_delivery, -> { Order.where(status: 'in_delivery') }
   scope :delivered, -> { Order.where(status: 'delivered') }

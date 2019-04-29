@@ -14,7 +14,7 @@ class OrderSortingService
   end
 
   def call
-    if params[:sort_order_by] && SORT_BY.include?(params[:sort_order_by].to_sym)
+    if params[:sort_order_by] && SORT_BY.key?(params[:sort_order_by].to_sym)
       SORT_BY[params[:sort_order_by].to_sym].call(self)
     else
       SORT_BY[:in_progress].call(self)
