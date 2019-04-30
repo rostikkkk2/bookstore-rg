@@ -1,0 +1,31 @@
+.cvv-hint {
+  font-size: 12px;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.cvv-hint .cvv-hint-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  position: absolute;
+  z-index: 1;
+}
+
+.cvv-hint:hover .cvv-hint-text {
+  visibility: visible;
+}
+
+.confirm-subtotal-price {
+  table {
+    float: right;
+  }
+  .in-gold-500 {
+    margin-right: 50px;
+  }
+}
