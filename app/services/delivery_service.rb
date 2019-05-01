@@ -8,7 +8,7 @@ class DeliveryService
   end
 
   def call
-    current_order.update(delivery_id: params[:delivery_id])
+    current_order&.update(delivery_id: params[:delivery_id])
   end
 
   def presenter

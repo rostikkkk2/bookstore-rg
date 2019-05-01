@@ -3,7 +3,6 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      # specify the version you desire here
       - image: circleci/ruby:2.5.3-node-browsers
         environment:
           RAILS_ENV: test
@@ -76,8 +75,7 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Set up DB
-          command: bundle exec rake db:create db:schema:load --trace
-            # bundle exec rake db:structure:load
+          command: bin/rails db:schema:load --trace
       - run:
           name: run tests
           command: |
