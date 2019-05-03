@@ -17,11 +17,11 @@ class ConfirmService
   end
 
   def use_current_coupon
-    current_order.coupon&.update(used: true)
+    current_order&.coupon&.update(used: true)
   end
 
   def create_secret_key
-    current_order.update(number: generate_order_secret_number)
+    current_order&.update(number: generate_order_secret_number)
   end
 
   def generate_order_secret_number
