@@ -2,10 +2,7 @@ class PaymentPresenter < Rectify::Presenter
   attribute :params
   attribute :current_order
   attribute :form
-
-  def step
-    'payment'
-  end
+  STEP = :payment
 
   def payment_card
     form || CreditCardForm.new

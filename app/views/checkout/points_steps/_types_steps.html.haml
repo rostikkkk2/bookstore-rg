@@ -3,7 +3,7 @@
 %ul.steps.list-inline
   - Order.statuses.each do |key, value|
     - if key != Order.statuses.keys.first && value <= Order.statuses[:complete]
-      %li.step{class: "#{'active' if value <= Order.statuses[@presenter.step]}"}
+      %li.step{class: "#{'active' if value <= Order.statuses[@presenter.class::STEP]}"}
         %span.step-number
           = value
         %span.hidden-xs

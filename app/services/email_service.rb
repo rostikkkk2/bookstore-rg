@@ -1,8 +1,7 @@
 class EmailService
-  attr_reader :email_form, :params, :current_user
+  attr_reader :email_form, :current_user
 
-  def initialize(params, current_user)
-    @params = params
+  def initialize(params_email, current_user)
     @current_user = current_user
     @email_form = EmailForm.new(params_email)
   end
@@ -13,11 +12,5 @@ class EmailService
 
   def update_email
     current_user.update(email_form.attributes.without(:user_id))
-  end
-
-  private
-
-  def params_email
-    params.permit(:email, :user_id)
   end
 end

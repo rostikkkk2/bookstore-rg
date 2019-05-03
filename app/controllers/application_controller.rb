@@ -1,30 +1,20 @@
 class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  before_action :home_page, :check_order_on_merge
+  before_action :header_presenter
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, alert: exception.message
   end
 
-  def home_page
+  def header_presenter
     @header_presenter = HeaderPresenter.new(current_order: current_order)
-    @books_presenter = BooksPresenter.new.attach_controller(self)
   end
 
   def not_fount
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404
   end
 
-  def check_order_on_merge
-    return unless user_signed_in? && session[:current_order_id]
-
-    MergeItemsCartService.new(Order.find_by(id: session[:current_order_id]), current_user).call
-    session.delete(:current_order_id)
-  end
-
   def current_order
-    return Order.where(user_id: current_user.id).order(:updated_at).last if user_signed_in?
-
-    Order.find_by(id: session[:current_order_id]) if session[:current_order_id]
+    Order.find_by(id: cookies[:current_order_id]) if cookies[:current_order_id]
   end
 end

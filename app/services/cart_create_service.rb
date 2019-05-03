@@ -12,12 +12,6 @@ class CartCreateService
     create_item
   end
 
-  def check_create_order?(order)
-    return true if order && !order.complete?
-
-    create_order if current_user
-  end
-
   def create_item
     current_exist_item ? increment_quantity_book(current_exist_item) : save_item
   end
@@ -36,7 +30,7 @@ class CartCreateService
   end
 
   def create_order
-    new_order ||= Order.new(user_id: current_user&.id)
+    new_order ||= Order.new
     new_order.save
     new_order
   end

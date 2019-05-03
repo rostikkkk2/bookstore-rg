@@ -4,10 +4,7 @@ class ConfirmPresenter < Rectify::Presenter
 
   SECRET_NUMS_FOR_CARD = '**** **** **** '.freeze
   COUNT_NUMS_CARD_SHOW = 4
-
-  def step
-    'confirm'
-  end
+  STEP = :confirm
 
   def lash_four_nums_card
     current_order.credit_card.number.chars.last(COUNT_NUMS_CARD_SHOW).join

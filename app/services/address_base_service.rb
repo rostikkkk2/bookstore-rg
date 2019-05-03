@@ -5,8 +5,8 @@ class AddressBaseService
     @params = params
     @current_user = current_user
     @current_order = current_order
-    @billing = AddressForm.new(params[:billing_form]&.permit!)
-    @shipping = AddressForm.new(params[:shipping_form]&.permit!)
+    @billing = AddressForm.new(params[:billing_form])
+    @shipping = AddressForm.new(params[:shipping_form])
   end
 
   def create_address

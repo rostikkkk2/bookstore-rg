@@ -5,17 +5,21 @@ class CheckoutShowService
     @params = params
     @current_order = current_order
     @current_user = current_user
-    go_first_step
   end
 
   def go_first_step
-    current_order.address! if current_order.cart?
+    current_order.address! & current_order.update(user_id: current_user.id)
   end
 
   def current_presenter
     return quick_registration_presenter unless current_user
     return show_complete_presenter if current_order.complete?
 
+    go_first_step if current_order.cart?
+    choose_current_step
+  end
+
+  def choose_current_step
     choosen_step = Order.statuses[params[:step]]
     choose_presenter if choosen_step && choosen_step <= Order.statuses[current_order.status]
   end

@@ -14,6 +14,7 @@ require 'devise'
 require 'cancan/matchers'
 require 'yaml'
 require 'i18n'
+require 'capybara/poltergeist'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
@@ -40,4 +41,10 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
+
+  Capybara.register_driver :poltergeist_debug do |app|
+    Capybara::Poltergeist::Driver.new(app, inspector: true)
+  end
+
+  Capybara.javascript_driver = :poltergeist_debug
 end

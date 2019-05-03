@@ -3,10 +3,13 @@ require 'rails_helper'
 describe 'Confirm checkout step', type: :feature do
   let(:delivery_method) { create(:delivery, method: FFaker::Lorem.word) }
   let!(:order) { create(:order, :confirm_step, delivery_id: delivery_method.id) }
+  let(:add_order_id_to_cookies) { Capybara.current_session.driver.browser.manage.add_cookie(name: :current_order_id, value: "#{order.id}") }
   let(:billing_object) { order.addresses.billing.first }
   let(:shipping_object) { order.addresses.shipping.first }
 
   before do
+    visit root_path
+    add_order_id_to_cookies
     login_as(order.user, scope: :user)
     visit checkout_path(step: :confirm)
   end

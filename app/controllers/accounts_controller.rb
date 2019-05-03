@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   def destroy
     if current_user&.destroy
-      session.delete(:current_order_id)
+      cookies.delete(:current_order_id)
       flash[:success] = I18n.t('controllers.deleted_account')
     else
       flash[:error] = I18n.t('controllers.error_deleted_account')

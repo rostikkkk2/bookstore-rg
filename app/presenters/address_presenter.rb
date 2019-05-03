@@ -7,10 +7,7 @@ class AddressPresenter < Rectify::Presenter
   CLASS_HAS_ERROR = 'has-error'.freeze
   TYPE_USER_IN_ADDRESS = 'User'.freeze
   TYPE_ORDER_IN_ADDRESS = 'Order'.freeze
-
-  def step
-    'address'
-  end
+  STEP = :address
 
   def billing
     billing_form || AddressForm.new

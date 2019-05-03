@@ -5,7 +5,7 @@ class PaymentService
     @params = params
     @current_order = current_order
     @current_user = current_user
-    @form = CreditCardForm.new(credit_card_params)
+    @form = CreditCardForm.new(params[:credit_card_form])
   end
 
   def call
@@ -22,10 +22,6 @@ class PaymentService
 
   def update_credit_card
     current_order.credit_card.update(form.attributes.without(:order_id))
-  end
-
-  def credit_card_params
-    params[:credit_card_form]&.permit!
   end
 
   def presenter
