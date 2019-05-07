@@ -1,20 +1,20 @@
 .mb-80
   %h3.in-gold-500.mb-25
-    = @comment_presenter.count_comments
+    = t('book_page.comment.reviews')
   - @comment_presenter.all_comments.each do |comment|
     .general-message-wrap.divider-lg
       .clearfix
         %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
-          = @comment_presenter.first_letter_email_user(comment)
+          = comment.user.email.first
         .ml-70
           %div
             .general-message-date.hidden-xs
-              = @comment_presenter.date(comment)
+              = comment.created_at.to_date
             .max-300
               .general-message-verified
                 = @comment_presenter.is_verified?(comment)
               .general-message-name
-                = @comment_presenter.name_email_user(comment)
+                = comment.user.email
           .mb-15
             - CommentPresenter::COUNT_STARS.times do |star|
               %i.fa.fa-star{class: @comment_presenter.check_star(star, comment)}

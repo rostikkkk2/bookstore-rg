@@ -1,7 +1,9 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action only: [:create]
+  before_action only: :create
 
   def create
+    # service = UserRegistrationService.new(params)
+    # return service.call if email_taken_in_quick_signup?
     return checkout_registrate_user if email_taken_in_quick_signup?
 
     super

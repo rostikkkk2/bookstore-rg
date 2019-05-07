@@ -12,12 +12,8 @@ class ConfirmService
   end
 
   def call
-    use_current_coupon
+    OrderMailer.send_thanks_for_order(current_order).deliver_later
     create_secret_key
-  end
-
-  def use_current_coupon
-    current_order&.coupon&.update(used: true)
   end
 
   def create_secret_key

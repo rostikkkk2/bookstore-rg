@@ -19,7 +19,7 @@ ActiveAdmin.register Book do
     column :category
 
     column :price do |book|
-      "€#{book.price}"
+      I18n.t('admin.price_book', price: book.price)
     end
     actions
   end
@@ -45,13 +45,13 @@ ActiveAdmin.register Book do
       row :material
 
       row :price do |book|
-        "€#{book.price}"
+        I18n.t('admin.price_book', price: book.price)
       end
     end
   end
 
   form(html: { multipart: true }) do |f|
-    f.inputs 'Add/Edit Article' do
+    f.inputs I18n.t('admin.add_edit_article') do
       f.input :category, as: :radio
       f.input :name
       f.input :authors, as: :check_boxes
@@ -63,7 +63,7 @@ ActiveAdmin.register Book do
       f.input :depth
       f.input :material
 
-      f.inputs "Upload book cover" do
+      f.inputs I18n.t('admin.upload_book_cover') do
         f.input :photo, required: true, as: :file
       end
     end

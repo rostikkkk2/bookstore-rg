@@ -1,5 +1,5 @@
 class PageController < ApplicationController
   def index
-    @books_presenter = BooksPresenter.new.attach_controller(self)
+    @books_presenter = BooksPresenter.new(params: params)
   end
 end

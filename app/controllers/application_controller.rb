@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    Order.find_by(id: cookies[:current_order_id]) if cookies[:current_order_id]
+    Order.find_by(id: cookies[:current_order_id])
   end
 end

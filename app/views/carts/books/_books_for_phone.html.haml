@@ -13,7 +13,7 @@
             = t('cart.price')
         %td
           %span.font-16.in-gold-500
-            = "€#{book.price}"
+            = I18n.t('cart.current_price', price: book.price)
       %tr
         %td.vertical-middle
           %span.in-grey-600

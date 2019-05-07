@@ -6,6 +6,7 @@ RSpec.describe Order, type: :model do
     it { is_expected.to have_db_column(:number).of_type(:string) }
     it { is_expected.to have_db_index(:user_id) }
     it { is_expected.to have_db_index(:delivery_id) }
+    it { is_expected.to have_db_index(:coupon_id) }
   end
 
   context 'with assosiations' do
@@ -13,7 +14,7 @@ RSpec.describe Order, type: :model do
     it { is_expected.to have_many(:addresses) }
     it { is_expected.to belong_to(:delivery).without_validating_presence }
     it { is_expected.to belong_to(:user).without_validating_presence }
-    it { is_expected.to have_one(:coupon) }
+    it { is_expected.to belong_to(:coupon).without_validating_presence }
     it { is_expected.to have_one(:credit_card) }
   end
 

@@ -4,13 +4,13 @@ class Order < ApplicationRecord
   has_many :line_items, dependent: :destroy
   belongs_to :delivery, optional: true
   belongs_to :user, optional: true
-  has_one :coupon, dependent: :nullify
+  belongs_to :coupon, optional: true
   has_many :books, through: :line_items
 
-  scope :in_progress, -> { Order.where(status: 'complete') }
-  scope :in_delivery, -> { Order.where(status: 'in_delivery') }
-  scope :delivered, -> { Order.where(status: 'delivered') }
-  scope :canceled, -> { Order.where(status: 'canceled') }
+  scope :in_progress, -> { Order.complete }
+  scope :in_delivery, -> { Order.in_delivery }
+  scope :delivered, -> { Order.delivered }
+  scope :canceled, -> { Order.canceled }
 
   has_many :addresses, as: :resource, dependent: :destroy
   enum status: { cart: 0, address: 1, fill_delivery: 2, payment: 3, confirm: 4, complete: 5,

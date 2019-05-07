@@ -12,9 +12,8 @@ class CommentService
   private
 
   def create_comment
-    comment = Comment.new(comment_form.attributes.without(:current_book, :current_user))
-    comment.user_id = comment_form.current_user
-    comment.book_id = comment_form.current_book
-    comment.save
+    attributes = comment_form.attributes.without(:current_book, :current_user).merge(user_id: comment_form.current_user,
+                                                                                     book_id: comment_form.current_book)
+    Comment.create(attributes)
   end
 end

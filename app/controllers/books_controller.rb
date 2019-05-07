@@ -12,7 +12,7 @@ class BooksController < ApplicationController
 
   def index
     @sorted_books = SortingService.new(Book.all, params).call
-    @books_presenter = BooksPresenter.new.attach_controller(self)
+    @books_presenter = BooksPresenter.new(params: params)
     @pagy, @books_category = pagy(@sorted_books, items: COUNT_PAGE_BOOKS)
   end
 end

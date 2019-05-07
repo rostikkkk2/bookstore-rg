@@ -59,13 +59,13 @@
                 = item.book.description
             %td
               %span.font-16.in-gold-500
-                = "€#{item.book.price}"
+                = I18n.t('checkout.item_book_price', price: item.book.price)
             %td
               %span.ml-30
                 = item.quantity
             %td
               %span.font-16.in-gold-500
-                = "€#{@cart_presenter.subtotal_prise_book(item.book)}"
+                = I18n.t('checkout.item_book_price', price: @cart_presenter.subtotal_prise_book(item.book))
   %row
     .text-center.general-text-right.col-sm-12.col-md-12.col-xs-12.confirm-subtotal-price
       = render partial: 'checkout/order_summary/order_price'

@@ -8,7 +8,7 @@ class CheckoutShowService
   end
 
   def go_first_step
-    current_order.address! & current_order.update(user_id: current_user.id)
+    current_order.address! && current_order.update(user_id: current_user.id)
   end
 
   def current_presenter

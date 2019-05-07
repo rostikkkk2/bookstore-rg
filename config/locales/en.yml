@@ -1,4 +1,14 @@
 en:
+  admin:
+    price_book: "€%{price}"
+    add_edit_article: 'Add/Edit Article'
+    upload_book_cover: Upload book cover
+    users_count: "Users count: %{count}"
+    books_count: "Books count: %{count}"
+    orders_count: "Orders count: %{count}"
+    authors_count: "Authors count: %{count}"
+    comments_count: "Comments count: %{count}"
+    categories_count: "Categories count: %{count}"
   header:
     title: Bookstore
     home: Home
@@ -8,6 +18,7 @@ en:
     log_in: Log in
     sign_up: Sign up
   cart:
+    current_price: "€%{price}"
     title_cart: Cart
     pruduct: Product
     price: Price
@@ -131,6 +142,7 @@ en:
     completed_at: Completed at
     there_is_no_orders: There is no orders with this status
   checkout:
+    item_book_price: "€%{price}"
     back_to_store: Back to Store
     place_order: Place Order
     method: Method

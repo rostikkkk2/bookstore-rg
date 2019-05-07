@@ -25,23 +25,21 @@ class CartCreateService
     book.save
   end
 
+  def create_order?(order)
+    !order || order.complete?
+  end
+
   def save_item
     create_line_item if cart_form.valid?
   end
 
   def create_order
-    new_order ||= Order.new
-    new_order.save
-    new_order
+    Order.create
   end
 
   private
 
   def create_line_item
-    LineItem.new(
-      book_id: cart_form.current_book,
-      order_id: current_order.id,
-      quantity: cart_form.count_books
-    ).save
+    current_order.line_items.create(book_id: cart_form.current_book, quantity: cart_form.count_books)
   end
 end

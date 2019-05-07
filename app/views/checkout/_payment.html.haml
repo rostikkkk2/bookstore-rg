@@ -6,14 +6,14 @@
     defaults: { input_html: { class: 'form-control' }, label_html: { class: 'control-label input-label' } }) do |f|
     .form-group{class: "#{@presenter.check_exists_errors(:number)}"}
       = f.input :order_id, :as => :hidden, :input_html => { :value => @presenter.current_order.id }
-      = f.input :number, label: t('checkout.card_number'), placeholder: t('checkout.card_number'), input_html: { maxlength: 16, value: @presenter.current_card(:number) || f.object.number }
+      = f.input :number, label: t('checkout.card_number'), placeholder: t('checkout.card_number'), input_html: { maxlength: 16, value: @presenter.current_card&.number || f.object.number }
     .row
       .col-sm-6
         .form-group{class: "#{@presenter.check_exists_errors(:name)}"}
-          = f.input :name, label: t('checkout.name_on_card'), placeholder: t('checkout.name_on_card'), input_html: { minlength: 5, value: @presenter.current_card(:name) || f.object.name }
+          = f.input :name, label: t('checkout.name_on_card'), placeholder: t('checkout.name_on_card'), input_html: { minlength: 5, value: @presenter.current_card&.name || f.object.name }
       .col-sm-3
         .form-group{class: "#{@presenter.check_exists_errors(:date)}"}
-          = f.input :date, label: t('checkout.mm_yy'), placeholder: t('checkout.mm_yy'), input_html: { maxlength: 5, value: @presenter.current_card(:date) || f.object.date }
+          = f.input :date, label: t('checkout.mm_yy'), placeholder: t('checkout.mm_yy'), input_html: { maxlength: 5, value: @presenter.current_card&.date || f.object.date }
       .col-sm-3
         .form-group.relative{class: "#{@presenter.check_exists_errors(:cvv)}"}
           = f.input :cvv, as: :password, label: t('checkout.cvv'), placeholder: t('checkout.cvv'), type: 'password', input_html: { maxlength: 4, value: f.object.cvv }

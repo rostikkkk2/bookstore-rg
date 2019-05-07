@@ -13,7 +13,8 @@
         %li.mr-35
           %div
             = link_to category.name, category_books_path(category), class: "filter-link hover_category_color #{'def-color-chosen-category' if params[:category_id].to_i == category.id}"
-            %span.category-count-books.badge= @books_presenter.count_books_category(category)
+            %span.category-count-books.badge
+              = category.books.count
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10= t('categories.filter_by_category')
     .dropdown

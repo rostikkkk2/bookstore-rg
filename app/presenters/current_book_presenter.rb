@@ -11,7 +11,7 @@ class CurrentBookPresenter < Rectify::Presenter
   end
 
   def show_all_description_text
-    current_book.description[0..current_book.description.length]
+    current_book.description
   end
 
   def show_current_img_or_default(size)
@@ -23,6 +23,6 @@ class CurrentBookPresenter < Rectify::Presenter
   end
 
   def show_params_current_book
-    "H:#{@current_book.heigth}\" x W: #{@current_book.width}\" x D: #{@current_book.depth}"
+    "H:#{current_book.heigth}\" x W: #{current_book.width}\" x D: #{current_book.depth}"
   end
 end

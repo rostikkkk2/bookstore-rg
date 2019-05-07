@@ -7,7 +7,7 @@ class CartPresenter < Rectify::Presenter
   end
 
   def order_summary_price
-    current_order.line_items.map { |item| item.quantity * item.book.price }.sum
+    current_order.line_items.sum { |item| item.quantity * item.book.price }
   end
 
   def order_total_price_with_coupon
@@ -19,7 +19,7 @@ class CartPresenter < Rectify::Presenter
   end
 
   def count_same_books(book)
-    current_order.line_items.find_by(book_id: book.id).quantity
+    current_order.line_items.find_by(book: book).quantity
   end
 
   def delivery_price

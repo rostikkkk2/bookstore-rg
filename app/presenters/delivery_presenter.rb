@@ -4,6 +4,6 @@ class DeliveryPresenter < Rectify::Presenter
   STEP = :fill_delivery
 
   def check_exists_delivery(id)
-    return true if current_order.delivery_id == id
+    current_order.delivery_id == id
   end
 end

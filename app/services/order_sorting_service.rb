@@ -22,6 +22,6 @@ class OrderSortingService
   end
 
   def order_by(by)
-    Order.where(user_id: current_user.id, status: by)
+    OrderDecorator.decorate_collection(Order.where(user_id: current_user.id, status: by))
   end
 end

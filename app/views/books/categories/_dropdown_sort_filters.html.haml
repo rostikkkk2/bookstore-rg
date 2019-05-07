@@ -4,4 +4,4 @@
 %ul.dropdown-menu
   - SortingService::SORT_BOOKS.each do |key, value|
     %li
-      = @books_presenter.sort_books(key)
+      = link_to t("sort_books.#{key}"), params[:category_id] ? category_books_path(sort_by: key) : books_path(sort_by: key)

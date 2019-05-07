@@ -32,6 +32,6 @@ class SortingService < ApplicationController
 
   def select_books_by_category
     books_chosen_category = books.where(category_id: params[:category_id].to_i)
-    !params[:category_id] ? books : books_chosen_category
+    books_chosen_category.presence || books
   end
 end

@@ -1,15 +1,15 @@
 class LineItemsController < ApplicationController
   def create
-    cart_service = CartCreateService.new(current_user, params_request, params)
-    cookies[:current_order_id] = cart_service.create_order.id if !current_order || current_order.complete?
-    cart_service.call(current_order)
+    service = CartCreateService.new(current_user, params_request, params)
+    cookies[:current_order_id] = service.create_order.id if service.create_order?(current_order)
+    service.call(current_order)
     redirect_message(I18n.t('controllers.added_in_cart'), :success)
   end
 
   def destroy
-    cart_service = CartDeleteService.new(current_order, params)
-    cart_service.call
-    cookies.delete(:current_order_id) if cart_service.delete_order?
+    service = CartDeleteService.new(current_order, params)
+    service.call
+    cookies.delete(:current_order_id) if service.delete_order?
     redirect_message(I18n.t('controllers.deleted_from_cart'), :success)
   end
 
