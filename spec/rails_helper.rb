@@ -1,5 +1,12 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
+require 'simplecov'
+
+SimpleCov.start do
+  add_filter '/spec/'
+  minimum_coverage 95
+  add_filter 'app/admin'
+end
 
 require File.expand_path('../../config/environment', __FILE__)
 

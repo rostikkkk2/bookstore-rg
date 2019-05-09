@@ -5,9 +5,7 @@ describe 'Home page', type: :feature do
   let(:category_mobile) { create(:category) }
   let!(:book) { create(:book, category: category_mobile) }
 
-  before do
-    visit(root_path)
-  end
+  before { visit(root_path) }
 
   it 'located on home page' do
     expect(page).to have_current_path root_path

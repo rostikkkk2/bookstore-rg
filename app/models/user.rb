@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_many :addresses, as: :resource, dependent: :destroy
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook]
 

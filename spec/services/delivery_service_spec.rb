@@ -11,6 +11,7 @@ RSpec.describe DeliveryService do
 
     it do
       expect(service.call).to eq(true)
+      expect(order.delivery_id).to eq(delivery.id)
     end
   end
 
@@ -19,6 +20,7 @@ RSpec.describe DeliveryService do
 
     it do
       expect(service.call).to eq(nil)
+      expect(order.delivery_id).to eq(nil)
     end
   end
 end

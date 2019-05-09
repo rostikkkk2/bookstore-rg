@@ -2,8 +2,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action only: :create
 
   def create
-    # service = UserRegistrationService.new(params)
-    # return service.call if email_taken_in_quick_signup?
     return checkout_registrate_user if email_taken_in_quick_signup?
 
     super
@@ -12,6 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def checkout_registrate_user
     secret_password_token
     build_resource(sign_up_params)
+    resource.skip_confirmation!
     resource.save ? authenticate_user : redirect_to(user_session_path, notice: 'email exists')
   end
 

@@ -4,9 +4,9 @@
       .mb-20
         = @current_book_presenter.show_current_img_or_default(:w550)
       .images.clearfix
-        - 3.times do
+        - @current_book_presenter.current_book.book_images.each do |book_image|
           %a.img-link
-            = @current_book_presenter.show_current_img_or_default(:w170)
+            = image_tag book_image.photo_url(:w170), class: 'img-responsive'
   .col-sm-6
     %h1.mt-res-0= @current_book.name
     %p.lead.small

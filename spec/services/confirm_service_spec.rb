@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ConfirmService do
   let(:user) { create(:user) }
-  let(:order) { create(:order) }
+  let(:order) { create(:order, :payment_step) }
 
   describe 'confirm success' do
     let(:params) { { user_id: user.id } }
@@ -10,6 +10,7 @@ RSpec.describe ConfirmService do
 
     it do
       expect(service.call).to eq(true)
+      expect(order.number).not_to eq(nil)
     end
   end
 
@@ -19,6 +20,7 @@ RSpec.describe ConfirmService do
 
     it do
       expect(service.call).to eq(nil)
+      expect(order.status).to eq(:payment.to_s)
     end
   end
 end

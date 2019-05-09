@@ -17,15 +17,8 @@ class BooksPresenter < Rectify::Presenter
   end
 
   def top_books
-    # top_books = {}
-    # Order.joins(:line_items, :books).where("book_id == id")
-    # LineItem.joins(:books).where("books.id == line_items.book_id")
-    top_books = Book.joins(:line_items)
-    # Order.all.each do |order|
-    #   order.line_items.each { |item| top_books[item.book] = item.book.id }
-    # end
-    # p top_books.group_by.map { |key, _| key }
-    top_books.group_by.map { |key, _| key }.first(COUNT_TOP_BOOKS)
+    top_books = Book.joins(:orders).group(:id).count.sort_by { |_, value| -value }
+    top_books.map { |book| Book.find_by(id: book.first) }.first(COUNT_TOP_BOOKS)
   end
 
   def show_sort_type

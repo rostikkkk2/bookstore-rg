@@ -9,6 +9,7 @@ RSpec.describe CartDeleteService do
     subject(:service) { described_class.new(current_order, params_success) }
 
     it do
+      expect(Order.all).to eq([])
       expect(service.call).to eq(current_order.line_items.first)
     end
   end
@@ -18,6 +19,7 @@ RSpec.describe CartDeleteService do
     subject(:service) { described_class.new(current_order, params_failed) }
 
     it do
+      expect(Order.all).to eq([current_order])
       expect(service.call).to eq(nil)
     end
   end

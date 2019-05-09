@@ -6,7 +6,7 @@ def generate_user
 end
 
 def generate_book
-  user = Book.new(
+  book = Book.new(
     name: FFaker::Book.title,
     description: FFaker::Book.description(6),
     price: rand(30.20...99.99).round(2),
@@ -18,9 +18,10 @@ def generate_book
     material: 'Hardcove, glossy paper'
   )
   File.open("public/img/#{rand(1..14)}.jpg") do |f|
-    user.photo = f
+    book.photo = f
   end
-  user.save!
+
+  book.save!
 end
 
 def generate_authors
@@ -51,11 +52,24 @@ def generate_coupons
   Coupon.new(key: '12345').save
 end
 
+def generate_book_images
+  Book.all.each do |book|
+    3.times do
+      image = BookImage.new(book_id: book.id)
+      File.open("public/img/#{rand(1..14)}.jpg") do |f|
+        image.photo = f
+      end
+      image.save
+    end
+  end
+end
+
 generate_categories
 15.times { generate_book }
 15.times { generate_authors }
 generate_authors_books
 generate_delivery_methods
 generate_coupons
+generate_book_images
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

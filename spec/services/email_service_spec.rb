@@ -9,6 +9,7 @@ RSpec.describe EmailService do
 
     it do
       expect(service.save).to eq(true)
+      expect(user.email).to eq(params[:email])
     end
   end
 
@@ -18,6 +19,7 @@ RSpec.describe EmailService do
 
     it do
       expect(service.save).to eq(nil)
+      expect(user.email).not_to eq(params[:email])
     end
   end
 end

@@ -5,7 +5,6 @@ RSpec.describe BooksController, type: :controller do
 
   describe 'GET #show' do
     before do
-      allow(Book).to receive(:find_by).and_return(book)
       get :show, params: { id: book.id }
     end
 

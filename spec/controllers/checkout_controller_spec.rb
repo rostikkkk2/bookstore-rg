@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CheckoutController, type: :controller do
   let(:user) { create(:user) }
-  let(:order) { create(:order, user_id: user.id) }
+  let(:order) { create(:order, user: user) }
 
   before do
     sign_in user
@@ -22,7 +22,12 @@ RSpec.describe CheckoutController, type: :controller do
 
   describe 'PUT #update' do
     before do
-      put :update, params: { step: :payment, credit_card_form: {order_id: 1, number: "3333333333333333", name: "universal", date: "12/21", cvv: 333} }
+      put :update, params: { step: :payment, credit_card_form:
+                             { order_id: 1,
+                               number: '3333333333333333',
+                               name: 'universal',
+                               date: '12/21',
+                               cvv: 333 } }
     end
 
     it 'success' do

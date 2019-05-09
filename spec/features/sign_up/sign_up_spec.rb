@@ -46,8 +46,7 @@ describe 'Sign up page', type: :feature do
     fill_in 'user[password]', with: valid_attributes[:password]
     fill_in 'user[password_confirmation]', with: valid_attributes[:password]
     click_on(I18n.t('devise.sign_up_big'))
-    expect(page).to have_selector 'a', text: 'My account'
-    expect(page).to have_current_path root_path
+    expect(page).to have_content I18n.t('devise.send_confirm_message')
   end
 
   it 'when click to log in' do

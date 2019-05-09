@@ -33,6 +33,6 @@ describe 'Comments in book page', type: :feature do
     fill_in 'text_comment', with: 'test_title'
     fill_in 'title', with: 'test_body'
     click_on(I18n.t('book_page.comment.post'))
-    expect(page).to have_content user.email
+    expect(page).to have_content I18n.t('book_page.comment.success_add_comment')
   end
 end

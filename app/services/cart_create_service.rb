@@ -1,5 +1,5 @@
 class CartCreateService
-  attr_reader :current_order, :cart_form, :params, :current_user
+  attr_reader :order, :cart_form, :params, :current_user
 
   def initialize(current_user, params_request, params)
     @current_user = current_user
@@ -8,7 +8,7 @@ class CartCreateService
   end
 
   def call(current_order)
-    @current_order = current_order
+    @order = current_order
     create_item
   end
 
@@ -17,16 +17,12 @@ class CartCreateService
   end
 
   def current_exist_item
-    current_order.line_items.find_by(book_id: params[:current_book].to_i)
+    order.line_items.find_by(book_id: params[:current_book].to_i)
   end
 
   def increment_quantity_book(book)
     book.quantity += params[:count_books].to_i
     book.save
-  end
-
-  def create_order?(order)
-    !order || order.complete?
   end
 
   def save_item
@@ -40,6 +36,6 @@ class CartCreateService
   private
 
   def create_line_item
-    current_order.line_items.create(book_id: cart_form.current_book, quantity: cart_form.count_books)
+    order.line_items.create(book_id: cart_form.current_book, quantity: cart_form.count_books)
   end
 end

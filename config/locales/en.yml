@@ -1,5 +1,9 @@
 en:
   admin:
+    change_on_in_delivery: Change on in_delivery
+    change_on_delivered: Change on delivered
+    change_on_canceled: Change on canceled
+    error: Error
     price_book: "€%{price}"
     add_edit_article: 'Add/Edit Article'
     upload_book_cover: Upload book cover
@@ -75,6 +79,7 @@ en:
     back_to_result: Back to results
     back: Back to result
     comment:
+      success_add_comment: Success add comment, but admin must confirm your comment
       verified_reviewer: Verified Reviewer
       reviews: Reviews
       write_a_review: Write a Review
@@ -83,6 +88,7 @@ en:
       review: Review
       post: Post
   devise:
+    send_confirm_message: A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.
     sign_up_big: Sign Up
     not_auth_for_action: You are not authorized to access this page.
     resend_confirmation: Resend confirmation instructions

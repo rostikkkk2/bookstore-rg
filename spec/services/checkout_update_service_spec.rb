@@ -8,7 +8,7 @@ RSpec.describe CheckoutUpdateService do
     step: "address",
     billing_form: {
       address_type: :billing,
-      user_id: user.id,
+      order_id: order.id,
       first_name: valid_inputs[:first_name],
       last_name: valid_inputs[:last_name],
       address: valid_inputs[:address],
@@ -25,6 +25,9 @@ RSpec.describe CheckoutUpdateService do
 
     it do
       expect(service.call).to eq(true)
+      expect(order.addresses.billing.first.first_name).to eq(valid_params_for_address[:billing_form][:first_name])
+      expect(order.addresses.billing.first.last_name).to eq(valid_params_for_address[:billing_form][:last_name])
+      expect(order.addresses.billing.first.phone).to eq(valid_params_for_address[:billing_form][:phone])
     end
   end
 

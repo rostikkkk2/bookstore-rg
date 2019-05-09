@@ -20,8 +20,7 @@ class SortingService < ApplicationController
   end
 
   def sort_books
-    params[:sort_by] = :asc_title unless params[:sort_by]
-    return not_fount unless SORT_BOOKS.include?(params[:sort_by].to_sym)
+    params[:sort_by] = :asc_title unless SORT_BOOKS.include?(params[:sort_by]&.to_sym)
 
     @books_category = SORT_BOOKS[params[:sort_by].to_sym].call(self)
   end

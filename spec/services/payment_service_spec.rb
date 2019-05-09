@@ -10,6 +10,7 @@ RSpec.describe PaymentService do
 
     it do
       expect(service.call).to eq(true)
+      expect(CreditCard.first.order_id).to eq(order.id)
     end
   end
 
@@ -19,6 +20,7 @@ RSpec.describe PaymentService do
 
     it do
       expect(service.call).to eq(nil)
+      expect(CreditCard.all).to eq([])
     end
   end
 end

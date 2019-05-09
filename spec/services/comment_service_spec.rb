@@ -8,10 +8,12 @@ RSpec.describe CommentService do
 
   describe 'create comment' do
     context 'when success' do
+      let(:count_comment_after_create) { 1 }
       subject(:service) { described_class.new(comments_form_params) }
 
       it do
-        # expect(service.save_comment).to eq(true)
+        service.save_comment
+        expect(Comment.count).to eq(count_comment_after_create)
       end
     end
 
@@ -20,6 +22,7 @@ RSpec.describe CommentService do
 
       it do
         expect(service.save_comment).to eq(nil)
+        expect(Comment.all).to eq([])
       end
     end
   end

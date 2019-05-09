@@ -7,6 +7,7 @@ gem 'aasm', '~> 5.0', '>= 5.0.1'
 gem 'activeadmin'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
+gem 'bcrypt'
 gem 'cancancan', '~> 2.0'
 gem 'carrierwave', '~> 1.0'
 gem 'coffee-rails', '~> 4.2'

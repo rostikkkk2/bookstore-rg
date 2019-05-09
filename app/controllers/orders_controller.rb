@@ -6,9 +6,10 @@ class OrdersController < ApplicationController
   end
 
   def show
-    return redirect_to orders_path unless params[:id]
+    find_order = Order.find_by(id: params[:id])
+    return redirect_to orders_path unless find_order
 
-    @order = Order.find_by(id: params[:id]).decorate
+    @order = find_order.decorate
     @cart_presenter = CartPresenter.new(current_order: @order)
   end
 end

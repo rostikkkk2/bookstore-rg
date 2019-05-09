@@ -5,7 +5,7 @@ RSpec.describe SettingsEmailsController, type: :controller do
 
   before { allow(controller).to receive(:current_user).and_return(user) }
 
-  describe 'PUT #update' do
+  context 'PUT #update' do
     login_user
 
     it 'success' do
