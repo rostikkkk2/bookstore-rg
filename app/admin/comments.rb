@@ -1,4 +1,4 @@
-ActiveAdmin.register Comment, as: "BookComment" do
+ActiveAdmin.register Comment, as: 'BookComment' do
   permit_params :title, :text_comment, :rating, :is_verified, :user_id, :book_id
 
   index do

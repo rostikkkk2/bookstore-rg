@@ -8,14 +8,17 @@ RSpec.describe AddressCheckoutService do
   let(:valid_phone) { '+594962858055' }
   let(:valid_city) { 'French Guiana' }
   let(:order) { create(:order, user_id: user.id) }
-  let(:valid_billing_and_shipping) { {
-    billing_form: { address_type: :billing, order_id: order.id, first_name: valid_name, last_name: valid_name, address: valid_city, city: valid_city, zip: valid_zip, country: valid_city, phone: valid_phone },
-    shipping_form: { address_type: :shipping, order_id: order.id, first_name: valid_name, last_name: valid_name, address: valid_city, city: valid_city, zip: valid_zip, country: valid_city, phone: valid_phone }
-  } }
+  let(:valid_billing_and_shipping) do
+    {
+      billing_form: { address_type: :billing, order_id: order.id, first_name: valid_name, last_name: valid_name, address: valid_city, city: valid_city, zip: valid_zip, country: valid_city, phone: valid_phone },
+      shipping_form: { address_type: :shipping, order_id: order.id, first_name: valid_name, last_name: valid_name, address: valid_city, city: valid_city, zip: valid_zip, country: valid_city, phone: valid_phone }
+    }
+  end
 
   describe 'create checkout addresses success' do
-    let(:count_after_create) { 2 }
     subject(:service) { described_class.new(valid_billing_and_shipping, user, order) }
+
+    let(:count_after_create) { 2 }
 
     it 'valid new address' do
       expect(service.call).to eq(true)
@@ -24,8 +27,9 @@ RSpec.describe AddressCheckoutService do
   end
 
   describe 'create checkout addresses failed' do
-    let(:invalid_billing_and_shipping) { { billing_form: {}, shipping_form: {} } }
     subject(:service) { described_class.new(invalid_billing_and_shipping, user, order) }
+
+    let(:invalid_billing_and_shipping) { { billing_form: {}, shipping_form: {} } }
 
     it 'invalid new address' do
       expect(order.addresses).to eq([])
@@ -34,11 +38,15 @@ RSpec.describe AddressCheckoutService do
   end
 
   describe 'create checkout addresses with hidden shipping form success' do
-    let(:valid_billing_and_hidden_shipping) { {
-      billing_form: { address_type: :billing, order_id: order.id, first_name: valid_name, last_name: valid_name, address: valid_city, city: valid_city, zip: valid_zip, country: valid_city, phone: valid_phone },
-      hidden_shipping_form: true
-    } }
     subject(:service) { described_class.new(valid_billing_and_hidden_shipping, user, order) }
+
+    let(:valid_billing_and_hidden_shipping) do
+      {
+        billing_form: { address_type: :billing, order_id: order.id, first_name: valid_name, last_name: valid_name, address: valid_city, city: valid_city, zip: valid_zip, country: valid_city, phone: valid_phone },
+        hidden_shipping_form: true
+      }
+    end
+
     let(:count_after_create) { 2 }
 
     it 'valid new address' do
@@ -50,8 +58,9 @@ RSpec.describe AddressCheckoutService do
   end
 
   describe 'create checkout addresses with hidden shipping form failed' do
-    let(:invalid_billing_and_hidden_shipping) { { billing_form: {}, hidden_shipping_form: true } }
     subject(:service) { described_class.new(invalid_billing_and_hidden_shipping, user, order) }
+
+    let(:invalid_billing_and_hidden_shipping) { { billing_form: {}, hidden_shipping_form: true } }
 
     it 'valid new address' do
       expect(order.addresses).to eq([])

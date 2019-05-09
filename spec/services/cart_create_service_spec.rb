@@ -7,8 +7,9 @@ RSpec.describe CartCreateService do
   let(:params) { { current_book: book.id, count_books: 1 } }
 
   describe 'item create success' do
-    let(:params_form) { { current_book: book.id, count_books: 1 } }
     subject(:service) { described_class.new(current_user, params_form, params) }
+
+    let(:params_form) { { current_book: book.id, count_books: 1 } }
 
     it do
       service.call(order)
@@ -17,8 +18,9 @@ RSpec.describe CartCreateService do
   end
 
   describe 'item create failed' do
-    let(:order_items) { 1 }
     subject(:service) { described_class.new(current_user, nil, params) }
+
+    let(:order_items) { 1 }
 
     it do
       expect(service.call(order)).to eq(nil)

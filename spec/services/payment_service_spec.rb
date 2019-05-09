@@ -5,8 +5,9 @@ RSpec.describe PaymentService do
   let(:order) { create(:order, user_id: user.id) }
 
   describe 'create card success' do
-    let(:params) { { credit_card_form: { order_id: order.id, number: "3333333333333333", name: "universal", date: "12/21", cvv: 333 } } }
     subject(:service) { described_class.new(params, user, order) }
+
+    let(:params) { { credit_card_form: { order_id: order.id, number: '3333333333333333', name: 'universal', date: '12/21', cvv: 333 } } }
 
     it do
       expect(service.call).to eq(true)
@@ -15,8 +16,9 @@ RSpec.describe PaymentService do
   end
 
   describe 'create card failed' do
-    let(:params) { { credit_card_form: { order_id: order.id, number: '', name: '', date: '' } } }
     subject(:service) { described_class.new(params, user, order) }
+
+    let(:params) { { credit_card_form: { order_id: order.id, number: '', name: '', date: '' } } }
 
     it do
       expect(service.call).to eq(nil)

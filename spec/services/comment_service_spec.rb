@@ -8,8 +8,9 @@ RSpec.describe CommentService do
 
   describe 'create comment' do
     context 'when success' do
-      let(:count_comment_after_create) { 1 }
       subject(:service) { described_class.new(comments_form_params) }
+
+      let(:count_comment_after_create) { 1 }
 
       it do
         service.save_comment

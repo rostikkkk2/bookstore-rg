@@ -4,7 +4,7 @@ describe 'Checkout address step', type: :feature do
   let!(:order) { create(:order, :address_step) }
   let!(:error_empty_message) { "can't be blank" }
   let(:valid_attributes) { attributes_for(:address) }
-  let(:add_order_id_to_cookies) { Capybara.current_session.driver.browser.manage.add_cookie(name: :current_order_id, value: "#{order.id}") }
+  let(:add_order_id_to_cookies) { Capybara.current_session.driver.browser.manage.add_cookie(name: :current_order_id, value: order.id.to_s) }
 
   before do
     login_as(order.user, scope: :user)

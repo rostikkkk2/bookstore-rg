@@ -4,8 +4,9 @@ RSpec.describe EmailService do
   let(:user) { create(:user) }
 
   describe 'update email success' do
-    let(:params) { { email: 'test@gmail.com', user_id: user.id } }
     subject(:service) { described_class.new(params, user) }
+
+    let(:params) { { email: 'test@gmail.com', user_id: user.id } }
 
     it do
       expect(service.save).to eq(true)
@@ -14,8 +15,9 @@ RSpec.describe EmailService do
   end
 
   describe 'update email failed' do
-    let(:params) { { email: '', user_id: user.id } }
     subject(:service) { described_class.new(params, user) }
+
+    let(:params) { { email: '', user_id: user.id } }
 
     it do
       expect(service.save).to eq(nil)

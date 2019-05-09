@@ -5,8 +5,9 @@ RSpec.describe ConfirmService do
   let(:order) { create(:order, :payment_step) }
 
   describe 'confirm success' do
-    let(:params) { { user_id: user.id } }
     subject(:service) { described_class.new(params, user, order) }
+
+    let(:params) { { user_id: user.id } }
 
     it do
       expect(service.call).to eq(true)
@@ -15,8 +16,9 @@ RSpec.describe ConfirmService do
   end
 
   describe 'confirm failed' do
-    let(:params) { { user_id: user.id } }
     subject(:service) { described_class.new(params, user, nil) }
+
+    let(:params) { { user_id: user.id } }
 
     it do
       expect(service.call).to eq(nil)

@@ -31,7 +31,7 @@ end
 def generate_authors_books
   books = Book.all
   authors = Author.all
-  authors_id = authors.map { |author| author.id }
+  authors_id = authors.map(&:id)
   books.each do |book|
     BookAuthor.create(book_id: book.id, author_id: authors_id[rand(authors_id.length)])
   end

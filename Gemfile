@@ -40,7 +40,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'simplecov'
   gem 'pry-rails'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
@@ -60,4 +60,4 @@ group :test do
   gem 'shoulda-matchers'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

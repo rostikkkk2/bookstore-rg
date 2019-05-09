@@ -27,7 +27,7 @@ describe 'Home page', type: :feature do
     expect(page).to have_current_path category_books_path(category_mobile.id)
   end
 
-  it "redirect to current book page after click name book in slider" do
+  it 'redirect to current book page after click name book in slider' do
     click_link(book.name)
     expect(page).to have_current_path book_path(book.id)
   end

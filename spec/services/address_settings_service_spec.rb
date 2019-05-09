@@ -10,17 +10,20 @@ RSpec.describe AddressSettingsService do
   let(:order) { create(:order, user_id: user.id) }
 
   describe 'create settings address success' do
-    let(:count_address_after_create) { 1 }
-    let(:valid_address_params_billing) { { billing_form: { address_type: :billing,
-                                                           user_id: user.id,
-                                                           first_name: valid_name,
-                                                           last_name: valid_name,
-                                                           address: valid_city,
-                                                           city: valid_city,
-                                                           zip: valid_zip,
-                                                           country: valid_city,
-                                                           phone: valid_phone } } }
     subject(:service) { described_class.new(valid_address_params_billing, user, order) }
+
+    let(:count_address_after_create) { 1 }
+    let(:valid_address_params_billing) do
+      { billing_form: { address_type: :billing,
+                        user_id: user.id,
+                        first_name: valid_name,
+                        last_name: valid_name,
+                        address: valid_city,
+                        city: valid_city,
+                        zip: valid_zip,
+                        country: valid_city,
+                        phone: valid_phone } }
+    end
 
     it 'valid new address' do
       expect(service.call).to eq(true)
@@ -29,8 +32,9 @@ RSpec.describe AddressSettingsService do
   end
 
   describe 'create settings address failed' do
-    let(:invalid_address_params_billing) { { billing_form: {} } }
     subject(:service) { described_class.new(invalid_address_params_billing, user, order) }
+
+    let(:invalid_address_params_billing) { { billing_form: {} } }
 
     it 'invalid new address' do
       expect(service.call).to eq(false)

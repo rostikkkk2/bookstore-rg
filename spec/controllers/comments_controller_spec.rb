@@ -10,12 +10,12 @@ RSpec.describe CommentsController, type: :controller do
 
     it 'success' do
       post :create, params: { title: valid_attributes[:title], text_comment: valid_attributes[:description], current_user: user.id, current_book: book.id }
-      is_expected.to redirect_to book_path(book.id)
+      expect(subject).to redirect_to book_path(book.id)
     end
 
     it 'failed' do
       post :create, params: { title: '', text_comment: '', current_user: user.id, current_book: book.id }
-      is_expected.to set_flash[:error]
+      expect(subject).to set_flash[:error]
     end
   end
 end
