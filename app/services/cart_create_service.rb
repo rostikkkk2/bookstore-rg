@@ -8,7 +8,7 @@ class CartCreateService
   end
 
   def call(current_order)
-    @order = current_order
+    @order = current_order || Order.create
     create_item
   end
 
@@ -27,10 +27,6 @@ class CartCreateService
 
   def save_item
     create_line_item if cart_form.valid?
-  end
-
-  def create_order
-    Order.create
   end
 
   private

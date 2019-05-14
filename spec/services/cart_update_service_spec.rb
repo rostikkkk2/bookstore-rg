@@ -10,9 +10,8 @@ RSpec.describe CartUpdateService do
     let(:final_quantity_item) { 2 }
     let(:params) { { quantity_books: 1, plus: true, id: order.line_items.first.id } }
 
-    it do
-      expect(service.call).to eq(true)
-      expect(order.line_items.first.quantity).to eq(final_quantity_item)
+    it 'update item' do
+      expect { service.call }.to change { order.line_items.first.quantity }.from(params[:quantity_books]).to(final_quantity_item)
     end
   end
 
@@ -23,7 +22,7 @@ RSpec.describe CartUpdateService do
     let(:item) { create(:line_item, order_id: order.id, quantity: -5) }
     let(:params) { { id: item.id } }
 
-    it do
+    it 'not update item' do
       expect(service.call).to eq(nil)
       expect(order.line_items.first.quantity).to eq(final_quantity_item)
     end

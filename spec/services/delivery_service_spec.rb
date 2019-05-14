@@ -9,16 +9,15 @@ RSpec.describe DeliveryService do
   describe 'add delivery id to order success' do
     subject(:service) { described_class.new(params, user, order) }
 
-    it do
-      expect(service.call).to eq(true)
-      expect(order.delivery_id).to eq(delivery.id)
+    it 'when add delivery id success' do
+      expect { service.call }.to change { order.reload.delivery_id }.from(nil).to(delivery.id)
     end
   end
 
   describe 'add delivery id to order success' do
     subject(:service) { described_class.new(params, user, nil) }
 
-    it do
+    it 'when not add delivery id' do
       expect(service.call).to eq(nil)
       expect(order.delivery_id).to eq(nil)
     end

@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2019_05_09_085758) do
     t.string "title"
     t.text "text_comment"
     t.integer "rating", default: 0
+    t.integer "status", default: 0
     t.boolean "is_verified", default: false
     t.bigint "user_id"
     t.bigint "book_id"

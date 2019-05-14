@@ -1,5 +1,8 @@
 en:
   admin:
+    approve: approve
+    reject: reject
+    destroy: delete
     change_on_in_delivery: Change on in_delivery
     change_on_delivered: Change on delivered
     change_on_canceled: Change on canceled

@@ -1,8 +1,8 @@
 class LineItemsController < ApplicationController
   def create
     service = CartCreateService.new(current_user, params_request, params)
-    cookies[:current_order_id] = service.create_order.id unless current_order
     service.call(current_order)
+    cookies[:current_order_id] = service.order.id unless current_order
     redirect_message(I18n.t('controllers.added_in_cart'), :success)
   end
 

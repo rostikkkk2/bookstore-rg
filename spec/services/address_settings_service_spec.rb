@@ -26,8 +26,7 @@ RSpec.describe AddressSettingsService do
     end
 
     it 'valid new address' do
-      expect(service.call).to eq(true)
-      expect(user.addresses.billing.count).to eq(count_address_after_create)
+      expect { service.call }.to change(user.addresses.billing, :count).from(0).to(count_address_after_create)
     end
   end
 

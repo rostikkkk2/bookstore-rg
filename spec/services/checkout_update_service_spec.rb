@@ -24,12 +24,14 @@ RSpec.describe CheckoutUpdateService do
 
   describe 'address checkout service success' do
     subject(:service) { described_class.new(valid_params_for_address, order, user) }
+    let!(:address) { order.addresses.create!(attributes_for(:address, :billing)) }
 
-    it do
-      expect(service.call).to eq(true)
-      expect(order.addresses.billing.first.first_name).to eq(valid_params_for_address[:billing_form][:first_name])
-      expect(order.addresses.billing.first.last_name).to eq(valid_params_for_address[:billing_form][:last_name])
-      expect(order.addresses.billing.first.phone).to eq(valid_params_for_address[:billing_form][:phone])
+    it 'when address update' do
+      expect { service.call }.to change { address.reload.first_name }.from(address.first_name)
+        .to(valid_params_for_address[:billing_form][:first_name]).and change { address.reload.last_name }
+        .from(address.reload.last_name).to(valid_params_for_address[:billing_form][:last_name])
+        .and change { address.reload.address }.from(address.reload.address).to(valid_params_for_address[:billing_form][:address])
+        .and change { address.reload.city }.from(address.reload.city).to(valid_params_for_address[:billing_form][:city])
     end
   end
 
@@ -38,7 +40,7 @@ RSpec.describe CheckoutUpdateService do
 
     let(:invalid_params_for_address) { { step: 'address', billing_form: {}, hidden_shipping_form: true } }
 
-    it do
+    it 'when address failed' do
       expect(service.call).to eq(false)
     end
   end

@@ -21,8 +21,9 @@ RSpec.describe AddressCheckoutService do
     let(:count_after_create) { 2 }
 
     it 'valid new address' do
-      expect(service.call).to eq(true)
-      expect(order.addresses.count).to eq(count_after_create)
+      expect { service.call }.to change(order.addresses, :count).from(0).to(count_after_create)
+      expect(order.addresses.billing.first.first_name).to eq(order.addresses.shipping.first.first_name)
+      expect(order.addresses.billing.first.phone).to eq(order.addresses.shipping.first.phone)
     end
   end
 
@@ -50,10 +51,7 @@ RSpec.describe AddressCheckoutService do
     let(:count_after_create) { 2 }
 
     it 'valid new address' do
-      expect(service.call).to eq(true)
-      expect(order.addresses.billing.first.first_name).to eq(order.addresses.shipping.first.first_name)
-      expect(order.addresses.billing.first.phone).to eq(order.addresses.shipping.first.phone)
-      expect(Address.count).to eq(count_after_create)
+      expect { service.call }.to change(Address, :count).from(0).to(count_after_create)
     end
   end
 

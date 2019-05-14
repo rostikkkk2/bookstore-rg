@@ -2,7 +2,7 @@
   %h3.in-gold-500.mb-25
     = t('book_page.comment.reviews')
   - @comment_presenter.all_comments.each do |comment|
-    - if comment.is_verified
+    - if comment.approved?
       .general-message-wrap.divider-lg
         .clearfix
           %span.img-circle.logo-size.inlide-block.pull-left.logo-empty

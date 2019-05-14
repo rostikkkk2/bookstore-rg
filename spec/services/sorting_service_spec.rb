@@ -15,7 +15,7 @@ RSpec.describe SortingService do
   describe 'sorting books by ask' do
     subject(:service) { described_class.new(all_books, params_asc_title) }
 
-    it do
+    it 'by ask' do
       expect(service.call).to eq([book, book2])
     end
   end
@@ -23,7 +23,7 @@ RSpec.describe SortingService do
   describe 'sorting books by desc' do
     subject(:service) { described_class.new(all_books, params_desc_title) }
 
-    it do
+    it 'by desc' do
       expect(service.call).to eq([book2, book])
     end
   end
@@ -31,7 +31,7 @@ RSpec.describe SortingService do
   describe 'sorting books price by asc' do
     subject(:service) { described_class.new(all_books, params_asc_price) }
 
-    it do
+    it 'by asc' do
       expect(service.call).to eq([book2, book])
     end
   end
@@ -39,7 +39,7 @@ RSpec.describe SortingService do
   describe 'sorting books price by desc' do
     subject(:service) { described_class.new(all_books, params_desc_price) }
 
-    it do
+    it 'by desc' do
       expect(service.call).to eq([book, book2])
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe SortingService do
   describe 'sorting books by newest' do
     subject(:service) { described_class.new(all_books, params_newest_first) }
 
-    it do
+    it 'by newest' do
       expect(service.call).to eq([book2, book])
     end
   end

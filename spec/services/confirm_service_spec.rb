@@ -9,7 +9,7 @@ RSpec.describe ConfirmService do
 
     let(:params) { { user_id: user.id } }
 
-    it do
+    it 'when checkout confirm success' do
       expect(service.call).to eq(true)
       expect(order.number).not_to eq(nil)
     end
@@ -20,7 +20,7 @@ RSpec.describe ConfirmService do
 
     let(:params) { { user_id: user.id } }
 
-    it do
+    it 'when checkout confirm failed' do
       expect(service.call).to eq(nil)
       expect(order.status).to eq(:payment.to_s)
     end

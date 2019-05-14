@@ -16,7 +16,7 @@ RSpec.describe OrderSortingService do
   describe 'sorting orders by in_progress' do
     subject(:service) { described_class.new(params_sort_in_progress, user) }
 
-    it do
+    it 'when by in_progress' do
       expect(service.call).to eq([order1])
     end
   end
@@ -24,7 +24,7 @@ RSpec.describe OrderSortingService do
   describe 'sorting orders by in_delivery' do
     subject(:service) { described_class.new(params_sort_in_delivery, user) }
 
-    it do
+    it 'when by in_delivery' do
       expect(service.call).to eq([order2])
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe OrderSortingService do
   describe 'sorting orders by delivered' do
     subject(:service) { described_class.new(params_sort_delivered, user) }
 
-    it do
+    it 'when by delivered' do
       expect(service.call).to eq([order3])
     end
   end
@@ -40,7 +40,7 @@ RSpec.describe OrderSortingService do
   describe 'sorting orders by canceled' do
     subject(:service) { described_class.new(params_sort_canceled, user) }
 
-    it do
+    it 'when by canceled' do
       expect(service.call).to eq([order4])
     end
   end
@@ -48,7 +48,7 @@ RSpec.describe OrderSortingService do
   describe 'sorting orders do not sorted' do
     subject(:service) { described_class.new(params_without_sort, user) }
 
-    it do
+    it 'when do not sorted' do
       expect(service.call).to eq([order1])
     end
   end
