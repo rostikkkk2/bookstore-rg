@@ -1,0 +1,9 @@
+%main.container
+  = render partial: 'page/slider_data'
+.container
+  .jumbotron.text-center.mb-0
+    %h2.h1= t('home_page.welcome')
+    .mb-res-50
+      %p= t('home_page.about_books')
+    %button.btn.btn-default= link_to t('home_page.get_started'), books_path, class: 'btn_get_start'
+  = render partial: 'page/show_best_books'

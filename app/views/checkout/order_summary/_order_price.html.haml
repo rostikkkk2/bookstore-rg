@@ -1,0 +1,32 @@
+%p.in-gold-500.font-18
+  = t('cart.order_summary')
+%table.general-summary-table
+  %tr
+    %td
+      %p.font-16
+        = t('cart.subtotal_order')
+    %td
+      %p.font-16
+        = "€#{@cart_presenter.order_summary_price}"
+  %tr
+    %td
+      %p.font-16
+        = t('cart.coupon')
+    %td
+      %p.font-16
+        = "€#{@cart_presenter.coupon_discount}"
+  - if @cart_presenter.current_order.delivery_id
+    %tr
+      %td
+        %p.font-16
+          = t('checkout.delivery')
+      %td
+        %p.font-16
+          = "€#{@cart_presenter.delivery_price}"
+  %tr
+    %td
+      %strong.font-18
+        = t('cart.order_total')
+    %td
+      %strong.font-18
+        = "€#{@cart_presenter.order_total_price_with_coupon}"

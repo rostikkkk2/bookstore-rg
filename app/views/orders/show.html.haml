@@ -1,0 +1,115 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    = "Order #{@order.number}"
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.shippint_address')
+      - @order.addresses.shipping.each do |address|
+        %p.general-address
+          = address.first_name
+          %br
+          = address.address
+          %br
+          = address.city
+          %br
+          = address.country
+          %br
+          = "Phone #{address.phone}"
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.billing_address')
+      - @order.addresses.billing.each do |address|
+        %p.general-address
+          = address.first_name
+          %br
+          = address.address
+          %br
+          = address.city
+          %br
+          = address.country
+          %br
+          = "Phone #{address.phone}"
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.shipments')
+      %p.general-address
+        = @order.delivery.method
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.payment_information')
+      %p.general-address
+        = OrderDecorator::SECRET_NUMS_FOR_CARD + @order.lash_four_nums_card
+        %br
+        = @order.credit_card.date
+  .visible-xs
+    .general-cart-item.divider-lg
+      - @order.line_items.each do |item|
+        .general-img-wrap-table
+          = link_to (image_tag item.book.photo_url(:w210), class: 'cart-img-shadow'), book_path(item.book)
+        %p.title
+          = item.book.name
+        %P.in-grey-600.fw-300
+          = item.book.description
+        %table.table
+          %tr
+            %td
+              %span.in-grey-600
+                = t('checkout.price')
+            %td
+              %span.font-16.in-gold-500
+                = "€#{item.book.price}"
+          %tr
+            %td.vertical-middle
+              %span.in-grey-600
+                = t('checkout.quantity')
+            %td
+              %span
+                = item.quantity
+          %tr
+            %td
+              %span.in-grey-600
+                = t('checkout.subtotal')
+            %td
+              %span.font-16.in-gold-500
+                = "€#{@cart_presenter.subtotal_prise_book(item.book)}"
+  .hidden-xs.divider-lg.pt-20
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600
+              = t('checkout.book')
+          %th.col-method
+          %th
+            %span.in-grey-600
+              = t('checkout.price')
+          %th
+            %span.in-grey-600
+              = t('checkout.quantity')
+          %th
+            %span.in-grey-600
+              = t('checkout.total')
+      %tbody
+        - @order.line_items.each do |item|
+          %tr
+            %td
+              .general-img-wrap-table
+                = link_to (image_tag item.book.photo_url(:w210), class: 'cart-img-shadow pull-left'), book_path(item.book)
+            %td
+              %p.title
+                = item.book.name
+              %p.in-grey-600.fw-300
+                = item.book.description
+            %td
+              %span.font-16.in-gold-500
+                = "€#{item.book.price}"
+            %td
+              %span.ml-30
+                = item.quantity
+            %td
+              %span.font-16.in-gold-500
+                = "€#{@cart_presenter.subtotal_prise_book(item.book)}"
+  %row
+    .text-center.general-text-right.col-sm-12.col-md-12.col-xs-12.confirm-subtotal-price
+      = render partial: 'checkout/order_summary/order_price'

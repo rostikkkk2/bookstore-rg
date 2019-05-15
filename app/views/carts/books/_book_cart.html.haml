@@ -1,0 +1,26 @@
+- @cart_books.order(:id).each do |book|
+  %tr
+    %td
+      .general-img-wrap-table
+        = link_to @books_presenter.show_img_or_default(:w210, book), book_path(book)
+    %td
+      %p.title
+        = link_to book.name, book_path(book)
+    %td
+      %span.font-16.in-gold-500
+        = "€#{book.price}"
+    %td
+      .input-group
+        %a.input-link.b-n.minus-book-cart#minus_book_cart
+          %i.fa.fa-minus.line-height-40
+        %input.form-control.quantity-input.cart-book-quantity{type: "text", value: "#{@cart_presenter.count_same_books(book)}"}
+        %input.book-cart-id{type: "hidden", value: "#{LineItem.find_by(order_id: @cart_presenter.current_order.id, book_id: book.id).id}"}
+        %a.input-link.b-n.plus-book-cart#plus_book_cart
+          %i.fa.fa-plus.line-height-40
+    %td
+      %span.font-16.in-gold-500
+        = "€#{@cart_presenter.subtotal_prise_book(book)}"
+    %td
+      = form_tag line_item_path(book.id), method: :delete do
+        = button_tag(type: "submit", class: 'close general-cart-close', 'aria-label': "Close") do
+          %span{'aria-hidden': "true"} &times;

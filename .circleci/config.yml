@@ -1,0 +1,92 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/ruby:2.5.3-node-browsers
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+      - image: circleci/postgres:9.6-alpine
+        environment:
+          POSTGRES_USER: rostik
+          POSTGRES_PASSWORD: rostik
+          POSTGRES_DB: test_bookstore
+          DATABASE_URL: "postgres://ubuntu@localhost:5432/test_bookstore"
+    steps:
+      - checkout
+
+      - type: cache-restore
+        name: Restore bundle cache
+        key: myapp-bundle-{{ checksum "Gemfile.lock" }}
+
+      - type: cache-restore
+        name: Restore yarn cache
+        key: myapp-yarn-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Bundle Install
+          command: bin/bundle install --path vendor/bundle
+
+      - run:
+          name: Yarn Install
+          command: yarn install
+
+      - type: cache-save
+        name: Store bundle cache
+        key: myapp-bundle-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      - type: cache-save
+        name: Store yarn cache
+        key: myapp-yarn-{{ checksum "yarn.lock" }}
+        paths:
+          - ~/.yarn-cache
+
+      - run:
+          name: Install Chrome
+          command: |
+            sudo apt-get install libxss1 libappindicator1 libindicator7
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i ./google-chrome*.deb
+            sudo apt-get install -f
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Wait for Postgres to start
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Set up DB
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --format progress \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            $TEST_FILES
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results

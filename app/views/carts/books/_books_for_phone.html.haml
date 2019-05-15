@@ -1,0 +1,34 @@
+- @cart_books.order(:id).each do |book|
+  .general-cart-item.divider-lg-bottom.mb-30
+    %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
+      %span{'aria-hidden': "true"} &times;
+    .general-img-wrap-table
+      = link_to @books_presenter.show_img_or_default(:w210, book), book_path(book)
+    %p.title
+      = link_to book.name, book_path(book)
+    %table.table
+      %tr
+        %td
+          %span.in-grey-600
+            = t('cart.price')
+        %td
+          %span.font-16.in-gold-500
+            = I18n.t('cart.current_price', price: book.price)
+      %tr
+        %td.vertical-middle
+          %span.in-grey-600
+            = t('cart.quantity')
+        %td
+          .input-group
+            %a.input-link{href: "#"}
+              %i.fa.fa-minus.line-heaght-40
+            %input.form-control.quantity-input{type: "text", value: "#{@cart_presenter.count_same_books(book)}"}
+            %a.input-link{href: "#"}
+              %i.fa.fa-plus.line-heaght-40
+      %tr
+        %td
+          %span.in-grey-600
+            = t('cart.subtotal')
+        %td
+          %span.font-16.in-gold-500
+            = @cart_presenter.subtotal_prise_book(book)

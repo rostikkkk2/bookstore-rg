@@ -1,0 +1,12 @@
+%p.general-address
+  = address.first_name
+  %a.general-edit.step-address{href: '/checkout/address'}
+    = t('checkout.edit')
+  %br
+  = address.address
+  %br
+  = address.city
+  %br
+  = address.country
+  %br
+  = t('checkout.phone_complete', phone: address.phone)

@@ -1,0 +1,9 @@
+%body
+  %main.container
+    = link_to url_for(:back), class: 'general-back-link' do
+      %i.fa.fa-long-arrow-left.mr-15
+      = t('book_page.back_to_result')
+    = render partial: 'books/book'
+    - if user_signed_in?
+      = render partial: 'books/comments/comment_form'
+    = render partial: 'books/comments/users_comments'

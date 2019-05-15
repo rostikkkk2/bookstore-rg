@@ -1,0 +1,5 @@
+= form_for address_form, as: "#{address_type}_form", url: addresses_path, method: :post do |f|
+  = hidden_field_tag "address_type", address_type
+  = render partial: 'addresses/inputs_form', locals: {f: f, address_type: address_type, address_form: address_form, order_form: false}
+  .text-center.general-text-align
+    = submit_tag 'Save', class: 'btn'

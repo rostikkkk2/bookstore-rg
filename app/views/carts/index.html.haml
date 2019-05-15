@@ -1,0 +1,75 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    = t('cart.title_cart')
+  - if @cart_presenter.current_order && !@cart_presenter.current_order.complete?
+    .visible-xs
+      = render partial: 'carts/books/books_for_phone'
+    .hidden-xs
+      %table.table.table-hover
+        %tr.no-hover
+          %th.col-pic.pl-0
+            %span.in-grey-600
+              = t('cart.pruduct')
+          %th.col-title
+          %th.col-price
+            %span.in-grey-600
+              = t('cart.price')
+          %th.col-quantity
+            %span.in-grey-600
+              = t('cart.quantity')
+          %th.col-total
+            %span.in-grey-600
+              = t('cart.subtotal')
+          %th.col-close
+        = render partial: 'carts/books/book_cart'
+    .general-order-wrap
+      .row
+        .col-sm-4
+          - if @cart_presenter.current_order && @cart_presenter.current_order.coupon
+            %div.input-group.general-input-group
+              you used coupon for this order
+          - else
+            = form_tag coupon_path(@cart_presenter.current_order), method: :put, class: 'input-group general-input-group' do
+              %label.input-label
+                = t('cart.enter_coupon_code')
+              = text_field_tag :coupon, '', placeholder: "Enter Your Coupon Code ", class: 'form-control mb-30'
+              %div
+                = submit_tag t('cart.apply_coupon'), class: 'btn btn-primary mr-5 mb-15'
+        .col-sm-8
+          .res-mr-200.text-center.general-text-right
+            %p.in-gold-500.font-18
+              = t('cart.order_summary')
+            %table.general-summary-table.general-summary-table-right.general-text-right
+              %tr
+                %td
+                  %p.font-16
+                    = t('cart.subtotal_order')
+                %td
+                  %p.font-16
+                    = "€#{@cart_presenter.order_summary_price}"
+              %tr
+                %td
+                  %p.font-16
+                    = t('cart.coupon')
+                %td
+                  %p.font-16
+                    = "€#{@cart_presenter.coupon_discount}"
+              %tr
+                %td
+                  %strong.font-18
+                    = t('cart.order_total')
+                %td
+                  %strong.font-18
+                    = "€#{@cart_presenter.order_total_price_with_coupon}"
+            %button.btn.btn-default.mb-20.visible-xs-inline-block
+              = t('cart.checkout')
+    - if user_signed_in?
+      = link_to t('cart.checkout'), checkout_path(step: :address), class: 'btn btn-default w-190 mb-20 hidden-xs center-block'
+    - else
+      = link_to t('cart.checkout'), checkout_path(step: :quick_registrate), class: 'btn btn-default w-190 mb-20 hidden-xs center-block'
+  - else
+    %div.mb-30
+    %h1.text-center
+      = t('cart.empty_cart')
+    %br
+    = link_to t('cart.back_to_store'), root_path, class: 'btn btn-default w-190 mb-20 hidden-xs center-block'

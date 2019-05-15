@@ -1,0 +1,38 @@
+= f.hidden_field :address_type, value: address_type
+- if order_form
+  = f.hidden_field :order_id, value: @presenter.current_order.id
+- else
+  = f.hidden_field :user_id, value: current_user.id
+.form-group{class: "#{@presenter.add_class_error(:first_name, address_form)}"}
+  %label.control-label.input-label= t('settings.first_name')
+  = f.text_field :first_name, class: 'form-control', placeholder: "First Name", value: @presenter.current_value(:first_name, address_type, address_form)
+  %span.color-red= address_form.errors[:first_name].join(', ')
+
+.form-group{class: "#{@presenter.add_class_error(:last_name, address_form)}"}
+  %label.control-label.input-label= t('settings.last_name')
+  = f.text_field :last_name, class: 'form-control', placeholder: "Last Name", value: @presenter.current_value(:last_name, address_type, address_form)
+  %span.color-red= address_form.errors[:last_name].join(', ')
+
+.form-group{class: "#{@presenter.add_class_error(:address, address_form)}"}
+  %label.control-label.input-label= t('settings.address')
+  = f.text_field :address, class: 'form-control', placeholder: "Address", value: @presenter.current_value(:address, address_type, address_form)
+  %span.color-red= address_form.errors[:address].join(', ')
+
+.form-group{class: "#{@presenter.add_class_error(:city, address_form)}"}
+  %label.control-label.input-label= t('settings.city')
+  = f.text_field :city, class: 'form-control', placeholder: "City", value: @presenter.current_value(:city, address_type, address_form)
+  %span.color-red= address_form.errors[:city].join(', ')
+
+.form-group{class: "#{@presenter.add_class_error(:zip, address_form)}"}
+  %label.control-label.input-label{for: "zip"}= t('settings.zip')
+  = f.text_field :zip, id: 'zip', class: 'form-control', placeholder: "Zip", value: @presenter.current_value(:zip, address_type, address_form)
+  %span.color-red= address_form.errors[:zip].join(', ')
+
+.form-group.input-select-country
+  %label.control-label.input-label= t('settings.country')
+  = f.select :country, options_for_select(@presenter.current_country(address_type))
+
+.form-group.mb-60{class: "#{@presenter.add_class_error(:phone, address_form)}"}
+  %label.control-label.input-label= t('settings.phone')
+  = f.phone_field :phone, placeholder: "Example +355 66 123 4567", class: 'form-control', value: @presenter.current_value(:phone, address_type, address_form)
+  %span.color-red= address_form.errors[:phone].join(', ')

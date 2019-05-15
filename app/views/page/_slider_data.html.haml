@@ -1,0 +1,32 @@
+#slider.carousel.slide{'data-ride': "carousel"}
+  %ol.carousel-indicators
+    %li.active{'data-target': "#slider", 'data-slide-to': "0"}
+    %li{'data-target': "#slider", 'data-slide-to': "1"}
+    %li{'data-target': "#slider", 'data-slide-to': "2"}
+  .carousel-inner{role: "listbox"}
+    - @books_presenter.new_books_slider.each_with_index do |book, index|
+      .item{:class => "#{'active' if index == 0}"}
+        .row
+          .col-sm-5
+            .general-img-wrap
+              = link_to image_tag(book.photo_url ? book.photo_url(:w210) : 'default.png', alt: "design-book", class: 'img-shadow general-thumbnail-img'), book_path(book)
+          .col-sm-7
+            .mb-60
+              %h1.book-name= link_to book.name, book_path(book)
+              %p.lead= book.description
+              %p.lead.small
+                - book.authors.each do |author|
+                  = author.name
+              .general-align
+                = form_tag line_items_path, method: :post, class: 'display-ib' do
+                  - if user_signed_in?
+                    = hidden_field_tag 'current_user', current_user.id
+                  = hidden_field_tag 'current_book', book.id
+                  = hidden_field_tag "count_books", "", value: 1
+                  = submit_tag t('home_page.buy_now'), class: 'btn btn-primary btn-buy-now-slider'
+  %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
+    %span.icon-prev{'aria-hidden': "true"}
+    %span.sr-only= t('home_page.previous')
+  %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
+    %span.icon-next{'aria-hidden': "true"}
+    %span.sr-only= t('home_page.next')

@@ -1,0 +1,7 @@
+%a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+  = @books_presenter.show_sort_type
+  %i.fa.fa-angle-down.dropdown-icon.pull-right
+%ul.dropdown-menu
+  - SortingService::SORT_BOOKS.each do |key, value|
+    %li
+      = link_to t("sort_books.#{key}"), params[:category_id] ? category_books_path(sort_by: key) : books_path(sort_by: key)

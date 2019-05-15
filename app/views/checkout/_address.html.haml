@@ -1,0 +1,29 @@
+%main.container
+  = render partial: 'checkout/points_steps/types_steps'
+  = form_for @presenter.billing, url: checkout_path, method: :put, class: 'res-mb-100' do |form|
+    .row
+      .col-md-5
+        %h3.general-subtitle
+          = t('checkout.billing_address')
+        %p.general-info-text
+          = t('checkout.all_fields_required')
+        = fields_for :billing_form, @presenter.billing do |f|
+          = render partial: 'addresses/inputs_form', locals: {f: f,address_form: @presenter.billing, address_type: 'billing', order_form: true}
+      .col-md-5.col-md-offset-1
+        %h3.general-subtitle
+          = t('checkout.shippint_address')
+        %p.general-info-text.invisible
+          = t('checkout.all_fields_required')
+        %div.shipping-form
+          = fields_for :shipping_form, @presenter.shipping do |f|
+            = render partial: 'addresses/inputs_form', locals: {f: f, address_form: @presenter.shipping, address_type: 'shipping', order_form: true}
+        .form-group.checkbox
+          %label.checkbox-label
+            %input.checkbox-input.check-box-shipping{type: "checkbox", hidden: "true", name: 'hidden_shipping_form', id: 'hide_shipping_form'}
+            %span.checkbox-icon
+              %i.fa.fa-check
+            %span.checkbox-text
+              = t('checkout.use_billing_address')
+    .general-text-align.mb-60
+      = render partial: 'checkout/order_summary/order_price'
+      = form.submit t('checkout.save_and_continue'), class: 'btn center-block mb-20'

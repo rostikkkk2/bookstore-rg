@@ -1,0 +1,39 @@
+%main.container.general-main-wrap
+  = render partial: 'checkout/points_steps/types_steps'
+  %h3.general-subtitle
+    = t('checkout.delivery_title')
+  = render partial: 'checkout/delivery_forms/for_phone'
+  = form_tag checkout_path, method: :put do
+    .hidden-xs.mb-res-50
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-method
+              %span.in-grey-600.ml-40
+                = t('checkout.method')
+            %th
+              %span.in-grey-600
+                = t('checkout.days')
+            %th
+              %span.in-grey-600
+                = t('checkout.price')
+        %tbody
+          - Delivery.all.each_with_index do |delivery, index|
+            %tr
+              %td
+                .form-group.radio.mt-0.mb-0
+                  %label.radio-label
+                    = radio_button_tag :delivery_id, delivery.id, @presenter.check_exists_delivery(delivery.id) || index.zero?, class: 'radio-input', hidden: true
+                    %span.radio-icon
+                    %span.radio-text
+                      = delivery.method
+              %td
+                %span
+                  = "from #{delivery.from_days} to #{delivery.to_days} days"
+              %td
+                %span.font-16.in-gold-500
+                  = "€#{delivery.price}"
+    .general-text-align
+      = render partial: 'checkout/order_summary/order_price'
+    .text-center
+      = submit_tag t('checkout.save_and_continue'), class: 'btn btn-default mb-20'

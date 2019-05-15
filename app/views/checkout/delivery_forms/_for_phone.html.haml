@@ -1,0 +1,28 @@
+.visible-xs
+  .general-cart-item.divider-lg-bottom
+    %table.table
+      %tr
+        %td.col-half
+          %span.in-grey-600
+            = t('checkout.method')
+        %td.col-half
+          .form-group.radio.mt-0.mb-0
+            %label.radio-label
+              %input.radio-input{type: "radio", hidden: "true"}
+              %span.radio-icon
+              %span.radio-text
+                = t('checkout.delivery_next_day')
+      %tr
+        %td
+          %span.in-grey-600
+            = t('checkout.days')
+        %td
+          %span.font-16.fw-300
+            = t('checkout.period_days')
+      %tr
+        %td
+          %span.in-grey-600
+            = t('checkout.price')
+        %td
+          %span.font-16.in-gold-500
+            = t('checkout.five_dollars')

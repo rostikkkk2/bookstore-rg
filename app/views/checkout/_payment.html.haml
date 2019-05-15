@@ -1,0 +1,27 @@
+%main.container.mb-res-50
+  = render partial: 'checkout/points_steps/types_steps'
+  %h3.general-subtitle
+    = t('checkout.credit_card_title')
+  = simple_form_for(@presenter.payment_card, url: checkout_path, validate: true, method: :put, html: { class: 'max-600 mb-80 field_with_errors' },
+    defaults: { input_html: { class: 'form-control' }, label_html: { class: 'control-label input-label' } }) do |f|
+    .form-group{class: "#{@presenter.check_exists_errors(:number)}"}
+      = f.input :order_id, :as => :hidden, :input_html => { :value => @presenter.current_order.id }
+      = f.input :number, label: t('checkout.card_number'), placeholder: t('checkout.card_number'), input_html: { maxlength: 16, value: @presenter.current_card&.number || f.object.number }
+    .row
+      .col-sm-6
+        .form-group{class: "#{@presenter.check_exists_errors(:name)}"}
+          = f.input :name, label: t('checkout.name_on_card'), placeholder: t('checkout.name_on_card'), input_html: { minlength: 5, value: @presenter.current_card&.name || f.object.name }
+      .col-sm-3
+        .form-group{class: "#{@presenter.check_exists_errors(:date)}"}
+          = f.input :date, label: t('checkout.mm_yy'), placeholder: t('checkout.mm_yy'), input_html: { maxlength: 5, value: @presenter.current_card&.date || f.object.date }
+      .col-sm-3
+        .form-group.relative{class: "#{@presenter.check_exists_errors(:cvv)}"}
+          = f.input :cvv, as: :password, label: t('checkout.cvv'), placeholder: t('checkout.cvv'), type: 'password', input_html: { maxlength: 4, value: f.object.cvv }
+          %span.cvv-hint
+            %i.fa.fa-question-circle.general-form-help
+            %span.cvv-hint-text
+              = t('checkout.cvv_hint')
+    .general-text-align.mt-50
+      = render partial: 'checkout/order_summary/order_price'
+    .text-center
+      = f.button :submit, t('checkout.save_and_continue'), class: 'btn btn-default mb-80 f-r'
